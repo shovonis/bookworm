@@ -1,0 +1,64 @@
+﻿BookWorm 
+A book sharing System
+By
+Rifatul Islam Shovon
+M Shakhawat Hossain Safat
+Introduction
+It might be hard to find people who don’t love to read books. After finishing a books whether it’s academic or non-academic some of us want to make a collection while others want to sell/exchange. But it’s really hard to get a good price of the books or get a good book in exchange.
+Bookworm will be a platform for the people who want to exchange/sell/purchase from other users at ease. Searching and finding books will be much easier. Users will also be able to maintain their wish list of books and System will automatically suggest books to them. It will help users to get their expected books and enrich their collections.
+Scope
+The target users of the bookworm are all who love to read books and want to exchange/sell/purchase books.The system will help them to find books according to their wishlist and geographical region.  Bookworm will provide a meaningful communication between the book lovers.
+
+Users and their roles 
+This section will describe users, important features of “Bookworm” and  use cases of the system. 
+
+Anonymous user
+Anonymous users will be able to search books in book worm
+Can see registered users reputation point
+Register to get full featured access
+
+Registered user
+Can create a wishlist of books
+Can offer books for sell/exchange
+Can send exchange/purchase request on a book.
+User who have purchased/exchanged books can rate(reputation point) up/down other registered users
+Use cases of the system
+Search/Browse: An anonymous user can search and browse books. Anonymous user will also be able to see the reputation point of the other users.
+
+Registration : Anonymous user will be able get registered to get full featured access.
+
+Wishlist : Registered users will be able to add books to their wishlist which they want to exchange/purchase from other users. 
+
+Offerlist : Users will be able to add books to their offerlist that they are willing to exchange/sell. Books will be added with quality status set by the user. Exchangers/Buyers will get idea about the quality of the books by the quality status.
+
+Purchase/Exchange request : Buyers/Exchangers will be able to send purchase/exchange request for a particular book offered by the users. On approval of the request they will get full contact information.
+
+Request Approval : User may deny or accept a request from buyers/exchanger. If user accept a request then the system will assume that the deal is on process and will suggest the user to close the post within next 7 days otherwise the system will automatically close the post. Within these 7 days user will be able to cancel the approval and make the post live again.
+
+Reputation Point : Each user will be associated with a reputation point rated by other users based on the quality of the books offered and delivered. Negatively rated users will not be able to rate other users.
+
+Books Recommendation : System will automatically recommend books to a user according to the closest match between Wishlist and Offerlist. (Closest match will be prioritized based on geographical area)  
+
+Technology
+Spring MVC 4.0
+Spring Security
+JPA 2.0
+Hibernate
+EhCache
+Dandelion
+JSP
+Thymeleaf
+Sitemesh
+Bootstrap
+
+Build Tools
+Gradle 1.12
+
+Web Server
+Tomcat 7.0
+
+Database
+MySQL
+
+
+
