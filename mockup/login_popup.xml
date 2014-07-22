@@ -62,7 +62,7 @@
         <text>forgot%20your%20password%20%3F</text>
       </controlProperties>
     </control>
-    <control controlID="87" controlTypeID="com.balsamiq.mockups::Button" x="926" y="254" w="-1" h="-1" measuredW="49" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::Button" x="936" y="254" w="-1" h="-1" measuredW="49" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <text>login</text>
       </controlProperties>
