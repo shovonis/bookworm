@@ -1,0 +1,111 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1033" measuredH="599" mockupW="886" mockupH="583">
+  <controls>
+    <control controlID="177" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="147" y="16" w="886" h="583" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <color>14540253</color>
+        <text>BookWorm%0Ahttp%3A//www.bookworm.com/profile/id</text>
+      </controlProperties>
+    </control>
+    <control controlID="225" controlTypeID="__group__" x="162" y="172" w="849" h="370" measuredW="849" measuredH="370" zOrder="1" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="__group__" x="0" y="0" w="849" h="370" measuredW="849" measuredH="370" zOrder="0" locked="false" isInGroup="225">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="849" h="370" measuredW="150" measuredH="159" zOrder="0" locked="false" isInGroup="0">
+              <controlProperties>
+                <selectedIndex>2</selectedIndex>
+                <text>Offered%20BookList%0AWishList%0APersonal%20Information</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="227" controlTypeID="com.balsamiq.mockups::Canvas" x="147" y="89" w="886" h="30" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="234" controlTypeID="__group__" x="150" y="91" w="878" h="26" measuredW="878" measuredH="26" zOrder="3" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="__group__" x="0" y="0" w="878" h="26" measuredW="878" measuredH="26" zOrder="0" locked="false" isInGroup="234">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::LinkBar" x="0" y="4" w="-1" h="-1" measuredW="878" measuredH="19" zOrder="0" locked="false" isInGroup="0">
+              <controlProperties>
+                <color>545684</color>
+                <text>BookWorm%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Profile%2C%20Home%2C%20Notification%2C%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20</text>
+                <underline>false</underline>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::SearchBox" x="69" y="1" w="488" h="-1" measuredW="238" measuredH="25" zOrder="1" locked="false" isInGroup="0">
+              <controlProperties>
+                <color>6710886</color>
+                <text>search%20books%20by%20ISBN%2C%20Title%20%2C%20Author</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="583" y="0" w="22" h="26" measuredW="77" measuredH="79" zOrder="2" locked="false" isInGroup="0">
+              <controlProperties>
+                <text/>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::Icon" x="818" y="1" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="3" locked="false" isInGroup="0">
+              <controlProperties>
+                <icon>HLinesIcon%7Csmall</icon>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="240" controlTypeID="com.balsamiq.mockups::Icon" x="900" y="75" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>HLinesIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="257" controlTypeID="com.balsamiq.mockups::Label" x="178" y="290" w="70" h="-1" measuredW="58" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Full%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="258" controlTypeID="com.balsamiq.mockups::TextInput" x="269" y="287" w="274" h="-1" measuredW="79" measuredH="26" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="259" controlTypeID="com.balsamiq.mockups::Label" x="178" y="335" w="63" h="-1" measuredW="32" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Email</text>
+      </controlProperties>
+    </control>
+    <control controlID="260" controlTypeID="com.balsamiq.mockups::TextInput" x="269" y="332" w="274" h="-1" measuredW="79" measuredH="26" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="261" controlTypeID="com.balsamiq.mockups::Label" x="178" y="373" w="-1" h="-1" measuredW="56" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Password</text>
+      </controlProperties>
+    </control>
+    <control controlID="262" controlTypeID="com.balsamiq.mockups::TextInput" x="270" y="370" w="274" h="-1" measuredW="79" measuredH="26" zOrder="10" locked="false" isInGroup="-1"/>
+    <control controlID="265" controlTypeID="com.balsamiq.mockups::Label" x="178" y="409" w="-1" h="-1" measuredW="43" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>District</text>
+      </controlProperties>
+    </control>
+    <control controlID="266" controlTypeID="com.balsamiq.mockups::ComboBox" x="271" y="407" w="197" h="-1" measuredW="112" measuredH="24" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>select%20district</text>
+      </controlProperties>
+    </control>
+    <control controlID="267" controlTypeID="com.balsamiq.mockups::Label" x="178" y="438" w="-1" h="-1" measuredW="41" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Region</text>
+      </controlProperties>
+    </control>
+    <control controlID="268" controlTypeID="com.balsamiq.mockups::ComboBox" x="271" y="436" w="197" h="-1" measuredW="106" measuredH="24" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>select%20region</text>
+      </controlProperties>
+    </control>
+    <control controlID="269" controlTypeID="com.balsamiq.mockups::Image" x="841" y="272" w="98" h="86" measuredW="77" measuredH="79" zOrder="15" locked="false" isInGroup="-1"/>
+    <control controlID="270" controlTypeID="com.balsamiq.mockups::Button" x="841" y="370" w="98" h="27" measuredW="63" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>update</text>
+      </controlProperties>
+    </control>
+    <control controlID="271" controlTypeID="com.balsamiq.mockups::Button" x="447" y="488" w="98" h="27" measuredW="63" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>update</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
