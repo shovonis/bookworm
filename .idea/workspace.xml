@@ -33,12 +33,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="profile.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample_theme/bwTheme/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.4666667" vertical-offset="0" max-vertical-offset="5022">
-              <caret line="201" column="33" selection-start-line="201" selection-start-column="33" selection-end-line="201" selection-end-column="33" />
+            <state vertical-scroll-proportion="-18.0" vertical-offset="324" max-vertical-offset="5022">
+              <caret line="42" column="34" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="26" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sample_theme/bwTheme/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.744836" vertical-offset="272" max-vertical-offset="1095">
+              <caret line="59" column="10" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -64,6 +76,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/sample_theme/bwTheme/profile.html" />
+        <option value="$PROJECT_DIR$/sample_theme/bwTheme/login.html" />
       </list>
     </option>
   </component>
@@ -396,12 +409,12 @@
       <changelist id="53e5b672-453b-4a38-8d12-1609dd3d8d57" name="Default" comment="" />
       <created>1406096073119</created>
       <updated>1406096073119</updated>
-      <workItem from="1406096073699" duration="6397000" />
+      <workItem from="1406096073699" duration="7668000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6397000" />
+    <option name="totallyTimeSpent" value="7668000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="63" y="24" width="1217" height="1000" extended-state="6" />
@@ -472,9 +485,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sample_theme/bwTheme/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.4666667" vertical-offset="0" max-vertical-offset="5022">
-          <caret line="201" column="33" selection-start-line="201" selection-start-column="33" selection-end-line="201" selection-end-column="33" />
+        <state vertical-scroll-proportion="-18.0" vertical-offset="324" max-vertical-offset="5022">
+          <caret line="42" column="34" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample_theme/bwTheme/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.744836" vertical-offset="272" max-vertical-offset="1095">
+          <caret line="59" column="10" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
