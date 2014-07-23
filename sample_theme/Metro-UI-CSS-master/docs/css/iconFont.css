@@ -362,7 +362,7 @@
   content: "\e06c";
 }
 .icon-grid-view:before {
-  content: "\e06d";
+  content: "";
 }
 .icon-tree-view:before {
   content: "\e06e";
