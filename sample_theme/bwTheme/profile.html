@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/iconFont.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <link href="js/prettify/prettify.css" rel="stylesheet">
+
+
+    <!-- Load JavaScript Libraries -->
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.mousewheel.js"></script>
+    <script src="js/prettify/prettify.js"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="js/load-metro.js"></script>
+
+    <!-- Local JavaScript -->
+    <script src="js/docs.js"></script>
+    <script src="js/github.info.js"></script>
+
+    <title>Profile</title>
+</head>
+<body class="metro">
+<header class="bg-dark" data-load="header.html"></header>
+
+<div class="container">
+
+<div class="accordion" data-role="accordion" data-closeany="true">
+
+<div class="accordion-frame active ">
+    <a class="heading" href="#">Offered Booklist</a>
+
+    <div class="content">
+        <div class="grid">
+            <div class="row">
+                <table class="table striped">
+                    <thead>
+                    <tr>
+                        <th class="text-left">Title</th>
+                        <th class="text-left">Author</th>
+                        <th class="text-left">Offered Date</th>
+                        <th class="text-left">Status</th>
+                        <th class="text-left">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>Bing</td>
+                        <td class="right">0:00:01</td>
+                        <td class="right">0,1 Mb</td>
+                        <td class="right">0 Mb</td>
+                        <td class="right">0,1 Mb</td>
+                    </tr>
+                    <tr>
+                        <td>Internet Explorer</td>
+                        <td class="right">0:00:01</td>
+                        <td class="right">0,1 Mb</td>
+                        <td class="right">0 Mb</td>
+                        <td class="right">0,1 Mb</td>
+                    </tr>
+                    <tr>
+                        <td>Chrome</td>
+                        <td class="right">0:00:01</td>
+                        <td class="right">0,1 Mb</td>
+                        <td class="right">0 Mb</td>
+                        <td class="right">0,1 Mb</td>
+                    </tr>
+                    <tr>
+                        <td>News</td>
+                        <td class="right">0:00:01</td>
+                        <td class="right">0,1 Mb</td>
+                        <td class="right">0 Mb</td>
+                        <td class="right">0,1 Mb</td>
+                    </tr>
+                    <tr>
+                        <td>Weather</td>
+                        <td class="right">0:00:01</td>
+                        <td class="right">0,1 Mb</td>
+                        <td class="right">0 Mb</td>
+                        <td class="right">0,1 Mb</td>
+                    </tr>
+                    <tr>
+                        <td>Music</td>
+                        <td class="right">0:00:01</td>
+                        <td class="right">0,1 Mb</td>
+                        <td class="right">0 Mb</td>
+                        <td class="right">0,1 Mb</td>
+                    </tr>
+                    </tbody>
+
+                    <tfoot></tfoot>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="accordion-frame ">
+    <a class="heading" href="#">WishList</a>
+
+    <div class="content">
+        <div class="grid">
+            <div class="row">
+                <div class="span6">
+
+                    <table class="table striped">
+                        <thead>
+                        <tr>
+                            <th class="text-left">Title</th>
+                            <th class="text-left">Author</th>
+                            <th class="text-left">Action</th>
+
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td>Bing</td>
+                            <td class="right">0:00:01</td>
+                            <td>remove</td>
+                        </tr>
+                        <tr>
+                            <td>Internet Explorer</td>
+                            <td class="right">0:00:01</td>
+                            <td>remove</td>
+                        </tr>
+                        <tr>
+                            <td>Chrome</td>
+                            <td class="right">0:00:01</td>
+                            <td>remove</td>
+                        </tr>
+                        <tr>
+                            <td>News</td>
+                            <td class="right">0:00:01</td>
+                            <td>remove</td>
+                        </tr>
+                        <tr>
+                            <td>Weather</td>
+                            <td class="right">0:00:01</td>
+                            <td>remove</td>
+                        </tr>
+                        <tr>
+                            <td>Music</td>
+                            <td class="right">0:00:01</td>
+                            <td>remove</td>
+                        </tr>
+                        </tbody>
+
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+
+                <div class="span1"></div>
+
+                <div class="span4">
+                    <form>
+                        <fieldset>
+                            <legend>Add New Book To WishList</legend>
+                            <lable>Title</lable>
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type title">
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <lable>Author</lable>
+                            <div class="input-control password" data-role="input-control">
+                                <input type="text" placeholder="type author" autofocus>
+                                <button class="btn-reveal" tabindex="-1"></button>
+                            </div>
+
+                            <input type="submit" value="Add">
+                        </fieldset>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="accordion-frame ">
+    <a class="heading" href="#">Personal Information</a>
+
+    <div class="content">
+        <div class="grid">
+            <div class="row">
+
+                <div class="span5">
+                    <form>
+                        <fieldset>
+                            <legend>Basic Info</legend>
+                            <lable>Name</lable>
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="">
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <lable>Email</lable>
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type author" autofocus>
+                                <button class="btn-reveal" tabindex="-1"></button>
+                            </div>
+                            <lable>Password</lable>
+                            <div class="input-control password" data-role="input-control">
+                                <input type="password" placeholder="type author" autofocus>
+                                <button class="btn-reveal" tabindex="-1"></button>
+                            </div>
+
+                            <lable>District</lable>
+                            <div class="input-control select">
+                                <select>
+                                    <option>District 1</option>
+                                    <option>District 2</option>
+                                    <option>District 3</option>
+                                </select>
+                            </div>
+
+                            <lable>Region</lable>
+                            <div class="input-control select">
+                                <select>
+                                    <option>Region 1</option>
+                                    <option>Region 2</option>
+                                    <option>Region 3</option>
+                                </select>
+                            </div>
+
+
+                            <input type="submit" value="Add">
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="span1"></div>
+
+                <fieldset>
+                    <legend>Profile Picture</legend>
+                    <div class="span3">
+                        <div class="tile">
+                            <a class="button">Update</a>
+                            <img src="images/jolie.jpg">
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+</div>
+
+
+<script src="js/hitua.js"></script>
+
+</body>
+</html>
