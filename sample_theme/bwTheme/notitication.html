@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -27,49 +27,30 @@
     <script src="js/docs.js"></script>
     <script src="js/github.info.js"></script>
 
-    <title>Login</title>
+    <title>Notifications</title>
+
 </head>
 <body class="metro">
 <header class="bg-dark" data-load="header.html"></header>
 
-<div class="container" style="margin: 50px">
-
+<div class="container">
     <div class="grid">
-
         <div class="row">
-
-            <div class="span4">
-                <form>
-                    <fieldset>
-                        <legend>Login</legend>
-                        <lable>user id</lable>
-                        <div class="input-control text" data-role="input-control">
-                            <input type="text" placeholder="user id/email">
-                            <button class="btn-clear" tabindex="-1"></button>
-                        </div>
-                        <lable>password</lable>
-                        <div class="input-control password" data-role="input-control">
-                            <input type="password" placeholder="password" autofocus>
-                            <button class="btn-reveal" tabindex="-1"></button>
-                        </div>
-
-                        <input type="submit" value="Login">
-                    </fieldset>
-                </form>
-            </div>
-            <div class="span1" style="border-right:1px solid darkgray;height:200px; margin-top: 50px"></div>
-
-            <div class="span3"  style="margin-top: 100px">
-
-                Not Registered Yet ? <br/>
-                <a href="registration.html">Register Here</a>
+            <div class="notice bg-grayLighter fg-grayDarker">
+                <img src="images/live2.jpg"> <a href="#">shovon</a> has sent you a purchase request <span
+                    style="float:right"> 24/7/2014 10.16am </span> <br/>
+                <button class="small success">approve</button>
+                <button class="small warning">ignore</button>
             </div>
 
+            <div class="notice bg-grayLighter fg-grayDarker">
+                <img src="images/live2.jpg"> <a href="#">rifatul</a> has approved your purchase/exchange request <span
+                    style="float:right"> 24/7/2014 10.16am </span> <br/>
+                <button class="small success">Get contact details</button>
+            </div>
         </div>
     </div>
-
 </div>
-
 
 </body>
 </html>

@@ -27,7 +27,7 @@
     <script src="js/docs.js"></script>
     <script src="js/github.info.js"></script>
 
-    <title>Login</title>
+    <title>Registration</title>
 </head>
 <body class="metro">
 <header class="bg-dark" data-load="header.html"></header>
@@ -38,22 +38,39 @@
 
         <div class="row">
 
-            <div class="span4">
+            <div class="span5">
                 <form>
                     <fieldset>
-                        <legend>Login</legend>
-                        <lable>user id</lable>
+                        <legend>Registration</legend>
+                        <lable>First Name</lable>
                         <div class="input-control text" data-role="input-control">
-                            <input type="text" placeholder="user id/email">
+                            <input type="text" placeholder="your first name">
                             <button class="btn-clear" tabindex="-1"></button>
                         </div>
-                        <lable>password</lable>
+                        <lable>Last Name</lable>
+                        <div class="input-control text" data-role="input-control">
+                            <input type="text" placeholder="your last name">
+                            <button class="btn-clear" tabindex="-1"></button>
+                        </div>
+                        <lable>Email</lable>
+                        <div class="input-control text" data-role="input-control">
+                            <input type="text" placeholder="your email address">
+                            <button class="btn-clear" tabindex="-1"></button>
+                        </div>
+
+                        <lable>Password</lable>
                         <div class="input-control password" data-role="input-control">
                             <input type="password" placeholder="password" autofocus>
                             <button class="btn-reveal" tabindex="-1"></button>
                         </div>
 
-                        <input type="submit" value="Login">
+                        <lable>Confirm Password</lable>
+                        <div class="input-control password" data-role="input-control">
+                            <input type="password" placeholder="retype password" autofocus>
+                            <button class="btn-reveal" tabindex="-1"></button>
+                        </div>
+
+                        <input type="submit" value="Register">
                     </fieldset>
                 </form>
             </div>
@@ -61,8 +78,8 @@
 
             <div class="span3"  style="margin-top: 100px">
 
-                Not Registered Yet ? <br/>
-                <a href="registration.html">Register Here</a>
+                Have an account ? <br/>
+                <a href="login.html">Login Here</a>
             </div>
 
         </div>
