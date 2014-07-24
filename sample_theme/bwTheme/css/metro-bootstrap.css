@@ -8009,7 +8009,10 @@ a {
   height: auto;
   position: relative;
   background-color: #4390df;
-  padding: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 3px;
+  padding: 10px;
 }
 .metro .notice * {
   color: inherit;
