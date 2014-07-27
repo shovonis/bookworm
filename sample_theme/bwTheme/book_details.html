@@ -27,144 +27,235 @@
     <script src="js/docs.js"></script>
     <script src="js/github.info.js"></script>
 
-    <title>Login</title>
+    <title>Book Details</title>
 </head>
 <body class="metro">
 <header class="bg-dark" data-load="header.html"></header>
 
 <div class="container" style="margin: 50px">
 
-    <div class="grid fluid">
-        <div class="row">
-            <div class="span7">
-                <fieldset>
-                    <legend>
-                        Book Detail
-                    </legend>
-                    <div class="tile double double-vertical">
-                        <div class="tile-content image">
-                            <img style="height: inherit;width: inherit" src="images/bizspark_b_2.png">
-                        </div>
-                        <div class="brand">
-                            <span class="label fg-white">Images</span>
-                        </div>
-                    </div>
+<div class="grid fluid">
+<div class="row">
+<div class="span7">
+    <fieldset>
+        <legend>
+            <h2>Book Summary</h2>
+        </legend>
+        <div class=" span4 double-vertical image-container shadow ">
+            <img style="height: 100%" src="images/bizspark_b_2.png">
 
-                    <h2><strong>Book Title</strong></h2>
-                    Posted By<a href="#"> Mr . X</a>
-
-                    <i style="float: right">Date 24/2/14 at 10.00 PM</i>
-
-
-                    <br/><br/>
-                    <div class="span4">
-                        <div class="rating fg-yellow " style="float: left">
-                            <ul>
-                                <li class="rated"></li>
-                                <li class="rated"></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                            <span class="score-hint"></span>
-                        </div>
-
-                        <strong style="color: red">Poor</strong>
-                    </div>
-
-
-                    <div class="span7" style="">
-                        <div class="padding10">
-                            <label>Price : 100BDT</label>
-                            <label>Price : 100BDT</label>
-
-                            <label>Price : 100BDT</label>
-                            <label>Price : 100BDT</label>
-                            <label>Price : 100BDT</label>
-                            <label>Price : 100BDT</label>
-                        </div>
-
-                        <button class="large success margin5">Purchase Request</button>
-                        <button class="large info margin5">Exchange Request</button>
-                    </div>
-
-                    <div class="span7  margin10" style="">
-                        <div class="padding10">
-                            <fieldset>
-                                <legend>Book Summary</legend>
-                                <p>
-                                    lorem dasdasd asdas dasdas das
-                                    dasdasd adasd asdasd adasd sad asd
-                                    dasdasdasssssssssssd
-                                    lorem dasdasd asdas dasdas das
-                                    dasdasd adasd asdasd adasd sad asd
-                                    dasdasdasssssssssssd
-                                    lorem dasdasd asdas dasdas das
-                                    dasdasd adasd asdasd adasd sad asd
-                                    dasdasdasssssssssssd
-                                    lorem dasdasd asdas dasdas das
-                                    dasdasd adasd asdasd adasd sad asd
-                                    dasdasdasssssssssssd
-                                    lorem dasdasd asdas dasdas das
-                                    dasdasd adasd asdasd adasd sad asd
-                                    dasdasdasssssssssssd
-                                </p>
-                            </fieldset>
-                        </div>
-
-
-                    </div>
-
-
-                </fieldset>
-            </div>
-            <div class="span1">
-
-            </div>
-            <div class="span3">
-                <div class="top  bg-white border" style="width: 100% ;  float:right">
-                    <form class="padding10">
-                        <fieldset>
-                            <legend>Want to Sell/Exchange Book ?</legend>
-                            <label>Title</label>
-
-                            <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type title">
-                                <button class="btn-clear" tabindex="-1"></button>
-                            </div>
-                            <label>Author</label>
-
-                            <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type author">
-                                <button class="btn-clear" tabindex="-1"></button>
-                            </div>
-                            <input type="submit" class="success" value="Post Ad">
-                        </fieldset>
-                    </form>
-
-                </div>
-
-                <div class="bottom" style="width: 100% ; float:right;">
-                    <br/>
-                    <fieldset>
-                        <legend>Books you might like </legend>
-                        <div class="tile ol-transparent"></div>
-                        <div class="tile ol-transparent" ></div>
-                        <div class="tile ol-transparent" ></div>
-                        <div class="tile ol-transparent" ></div>
-                        <div class="tile ol-transparent" ></div>
-                        <div class="tile ol-transparent" ></div>
-                        <div class="tile ol-transparent" ></div>
-                        <div class="tile ol-transparent" ></div>
-                        <div class="tile ol-transparent" ></div>
-                    </fieldset>
-                </div>
-
+            <div class="overlay-fluid">
+                <button class="meduim-size warning">Add to WishList</button>
             </div>
         </div>
-    </div>
+
+
+        <div class="span7" id="bookSummary">
+            <div class="padding10">
+                <h2>Book Title</h2>
+                Posted By<a href="#"> Mr . X</a>
+                <i style="float: right">Date 24/2/14 at 10.00 PM</i>
+                <br/>
+            </div>
+        </div>
+
+        <div class="span7">
+            <div class="padding10">
+                <label style="float: left">Quality : </label>
+
+                <div class="rating fg-yellow " style="float: left; margin-left: 10px">
+                    <ul>
+                        <li class="rated"></li>
+                        <li class="rated"></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <span class="score-hint"></span>
+                </div>
+                <strong><a href="#">(Average)</a></strong>
+            </div>
+        </div>
+
+
+        <div class="span7">
+            <div class="padding10">
+                <label>Price : 100BDT</label>
+                <label>Price : 100BDT</label>
+
+                <label>Price : 100BDT</label>
+                <label>Price : 100BDT</label>
+                <label>Price : 100BDT</label>
+                <label>Price : 100BDT</label>
+            </div>
+
+            <button class="large success margin5">Purchase</button>
+            <button class="large info margin5">Exchange</button>
+        </div>
+
+        <div class="span7  margin10" style="">
+            <div class="padding10">
+                <fieldset>
+                    <legend>Book Details</legend>
+                    <p>
+                        lorem dasdasd asdas dasdas das
+                        dasdasd adasd asdasd adasd sad asd
+                        dasdasdasssssssssssd
+                        lorem dasdasd asdas dasdas das
+                        dasdasd adasd asdasd adasd sad asd
+                        dasdasdasssssssssssd
+                        lorem dasdasd asdas dasdas das
+                        dasdasd adasd asdasd adasd sad asd
+                        dasdasdasssssssssssd
+                        lorem dasdasd asdas dasdas das
+                        dasdasd adasd asdasd adasd sad asd
+                        dasdasdasssssssssssd
+                        lorem dasdasd asdas dasdas das
+                        dasdasd adasd asdasd adasd sad asd
+                        dasdasdasssssssssssd
+                    </p>
+                </fieldset>
+            </div>
+        </div>
+    </fieldset>
 </div>
+<div class="span1">
+
+</div>
+<div class="span3">
+    <div class="top  bg-white border" style="width: 100% ;  float:right">
+        <form class="padding10">
+            <fieldset>
+                <legend>Want to Sell/Exchange Book ?</legend>
+                <label>Title</label>
+
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" placeholder="type title">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+                <label>Author</label>
+
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" placeholder="type author">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+                <input type="submit" class="success" value="Post Ad">
+            </fieldset>
+        </form>
+
+    </div>
+
+    <div class="bottom" style="width: 100% ; float:right;">
+        <br/>
+        <fieldset>
+            <legend>Books you might like</legend>
+            <div class="tile double live" data-role="live-tile">
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">Book Title</span>
+                </div>
+            </div>
 
 
+            <div class="tile double live" data-role="live-tile" data-effect="easeInExpo">
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+
+            <div class="tile double live" data-role="live-tile" data-effect="slideRight">
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+            <div class="tile double live" data-role="live-tile">
+
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+</div>
+<footer>
+    <div class="bottom-menu-wrapper">
+        <ul class="horizontal-menu compact">
+            <li>&copy; 2014 M. Shakhwat Hossain and Rifatul Islam</li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Feedback</a></li>
+        </ul>
+    </div>
+</footer>
+</div>
+</div>
+</div>
 </body>
 </html>
