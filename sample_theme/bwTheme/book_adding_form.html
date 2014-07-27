@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <link href="css/metro-bootstrap.css" rel="stylesheet">
+    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/iconFont.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <link href="js/prettify/prettify.css" rel="stylesheet">
+
+
+    <!-- Load JavaScript Libraries -->
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.mousewheel.js"></script>
+    <script src="js/prettify/prettify.js"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="js/load-metro.js"></script>
+
+    <!-- Local JavaScript -->
+    <script src="js/docs.js"></script>
+    <script src="js/github.info.js"></script>
+
+    <title>Add Book</title>
+</head>
+<body class="metro">
+<header class="bg-dark" data-load="header.html"></header>
+
+<div class="container" style="margin: 50px">
+
+<div class="grid fluid">
+<div class="row">
+<div class="span7">
+    <fieldset>
+        <legend>
+            <h2>Add Book</h2>
+        </legend>
+        <div class="span7">
+            <div class="padding10">
+                <label style="float: left">Book Title</label>
+
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" placeholder="Title">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+                <label style="float: left">Author</label>
+
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" placeholder="Author">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+
+                <label style="float: left">ISBN</label>
+
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" placeholder="ISBN">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+
+            </div>
+        </div>
+        <div class="span1"></div>
+        <div id="photo">
+            <fieldset>
+                <legend>Upload Photo</legend>
+                <div class="span4">
+                    <div class="tile">
+                        <img src="images/access.png">
+                    </div>
+                    <button class="meduim-size icon-upload margin5">Upload</button>
+                </div>
+            </fieldset>
+
+        </div>
+
+        <div class="span7">
+            <div class="padding10">
+
+                <label style="float: left">Category</label>
+
+                <div class="input-control select">
+                    <select multiple>
+                        <option>Category 1</option>
+                        <option>Category 2</option>
+                        <option>Category 3</option>
+                    </select>
+                </div>
+
+                <label style="float: left">Publisher</label>
+
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" placeholder="Publisher">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+
+
+                <label style="float: left">Year/Edition</label>
+
+                <div class="input-control text" data-role="input-control">
+                    <input type="text" placeholder="year/edition">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+
+                <br/><br/>
+                <label style="float: left">Book Quality</label>
+
+                <div class="rating"
+                     data-role="rating"
+                     data-static="false"
+                     data-score="3"
+                     data-stars="5"
+                     data-show-score="true"
+                     data-score-hint="Value: ">
+                </div>
+
+                <br/><br/>
+                <label style="float: left">Book Details</label>
+
+                <div class="input-control textarea">
+                    <textarea>Books details</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="span7  margin10">
+            <div class="padding10">
+                <fieldset>
+                    <legend><h2>Exchange Option</h2></legend>
+                    <label style="float: left">Price</label>
+
+                    <div class="input-control text" data-role="input-control">
+                        <input type="number" placeholder="Price">
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
+
+                    <label style="float: left">Exchange List</label>
+
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" placeholder="Exchange list">
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+        <div class="span12">
+            <button class="large warning icon-eye padding5"> Preview</button>
+            <button class="large success icon-plus-2 margin5 offset6"> Add Book</button>
+        </div>
+
+    </fieldset>
+</div>
+
+<div class="span1">
+
+</div>
+
+<div class="span3">
+    <div class="bottom" style="width: 100% ; float:right;">
+        <br/>
+        <fieldset>
+            <legend>Similar Books</legend>
+            <div class="tile double live" data-role="live-tile">
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">Book Title</span>
+                </div>
+            </div>
+
+
+            <div class="tile double live" data-role="live-tile" data-effect="easeInExpo">
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+
+            <div class="tile double live" data-role="live-tile" data-effect="slideRight">
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+            <div class="tile double live" data-role="live-tile">
+
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+
+            <div class="tile double live" data-role="live-tile">
+
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+
+            <div class="tile double live" data-role="live-tile">
+
+                <div class="tile-content image">
+                    <img src="images/2.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/3.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/4.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/5.jpg">
+                </div>
+                <div class="tile-content image">
+                    <img src="images/1.jpg">
+                </div>
+
+                <div class="tile-status bg-dark opacity">
+                    <span class="label">effect: slideLeft</span>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+</div>
+</div>
+</div>
+<div class="span12 border-top">
+    <footer style="margin-top: 30px" class="page-footer">
+        <div class="bottom-menu-wrapper">
+            <ul class="horizontal-menu compact">
+                <li>&copy; 2014 M. Shakhwat Hossain and Rifatul Islam</li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Legal</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Feedback</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+</div>
+</body>
+</html>
