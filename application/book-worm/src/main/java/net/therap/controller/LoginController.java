@@ -7,15 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by shakhawat.hossain on 8/3/14.
+ * @author shakhawat.hossain
+ * @author rifatul.islam
+ * @since 8/4/14
  */
 
 @Controller
 public class LoginController {
 
-    @RequestMapping (value = {"/login", "/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/login", "/"}, method = RequestMethod.GET)
     public String getLoginForm(ModelMap modelMap) {
         modelMap.addAttribute("user", new User());
-        return "test";
+        return "user/login";
     }
 }

@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by shakhawat.hossain on 8/3/14.
+ * @author shakhawat.hossain
+ * @since 8/3/14.
  */
+
 @Controller
 public class RegistrationController {
 
-    @RequestMapping (value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String getRegistrationForm(ModelMap modelMap) {
         return "user/registration";
     }
