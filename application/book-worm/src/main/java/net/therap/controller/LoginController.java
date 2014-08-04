@@ -16,6 +16,6 @@ public class LoginController {
     @RequestMapping (value = {"/login", "/"}, method = RequestMethod.GET)
     public String getLoginForm(ModelMap modelMap) {
         modelMap.addAttribute("user", new User());
-        return "user/login";
+        return "test";
     }
 }
