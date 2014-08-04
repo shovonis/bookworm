@@ -1,5 +1,7 @@
-apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'maven'
+apply plugin: 'java'
+apply plugin: 'idea'
 
 group = 'com.springapp'
 version = '1.0-SNAPSHOT'
@@ -56,5 +58,5 @@ exclude(module: 'commons-logging')
     runtime group: 'ch.qos.logback', name: 'logback-classic', version:'1.1.2'
     testCompile group: 'org.springframework', name: 'spring-test', version:'4.0.5.RELEASE'
     testCompile group: 'junit', name: 'junit', version:'4.8.2'
-    compile group: 'javax.servlet.jsp', name: 'jsp-api', version:'2.1'
+    providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version:'2.1'
 }
