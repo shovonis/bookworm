@@ -1,0 +1,88 @@
+
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/metro-bootstrap.css}" />
+    <link href="/resources/css/metro-bootstrap-responsive.css" rel="stylesheet" />
+    <link href="/resources/css/iconFont.css" rel="stylesheet" />
+    <link href="/resources/css/docs.css" rel="stylesheet" />
+    <link href="/resources/js/prettify/prettify.css" rel="stylesheet" />
+
+
+    <!-- Load JavaScript Libraries -->
+    <script src="/resources/js/jquery/jquery.min.js"></script>
+    <script src="/resources/js/jquery/jquery.widget.min.js"></script>
+    <script src="/resources/js/jquery/jquery.mousewheel.js"></script>
+    <script src="/resources/js/prettify/prettify.js"></script>
+
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="/resources/js/load-metro.js"></script>
+
+    <!-- Local JavaScript -->
+    <script src="/resources/js/docs.js"></script>
+    <script src="/resources/js/github.info.js"></script>
+
+    <title>Registration</title>
+</head>
+<body class="metro">
+<header class="bg-dark" data-load="header.html"></header>
+
+<div class="container" style="margin: 50px">
+
+    <div class="grid">
+
+        <div class="row">
+
+            <div class="span5">
+                <form th:action = "@{/registration}">
+                    <fieldset>
+                        <legend>Registration</legend>
+                        <lable>First Name</lable>
+                        <div class="input-control text" data-role="input-control">
+                            <input type="text" placeholder="your first name" />
+                            <button class="btn-clear" tabindex="-1"></button>
+                        </div>
+                        <lable>Last Name</lable>
+                        <div class="input-control text" data-role="input-control">
+                            <input type="text" placeholder="your last name" />
+                            <button class="btn-clear" tabindex="-1"></button>
+                        </div>
+                        <lable>Email</lable>
+                        <div class="input-control text" data-role="input-control">
+                            <input type="text" placeholder="your email address" />
+                            <button class="btn-clear" tabindex="-1"></button>
+                        </div>
+
+                        <lable>Password</lable>
+                        <div class="input-control password" data-role="input-control">
+                            <input type="password" placeholder="password" />
+                            <button class="btn-reveal" tabindex="-1"></button>
+                        </div>
+
+                        <lable>Confirm Password</lable>
+                        <div class="input-control password" data-role="input-control">
+                            <input type="password" placeholder="retype password" />
+                            <button class="btn-reveal" tabindex="-1"></button>
+                        </div>
+
+                        <input type="submit" class="success" value="Register" />
+                    </fieldset>
+                </form>
+            </div>
+            <div class="span1" style="border-right:1px solid darkgray;height:200px; margin-top: 50px"></div>
+
+            <div class="span3" style="margin-top: 100px">
+                Have an account ? <br/>
+                <a th:href="@{/login}">Login Here</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
