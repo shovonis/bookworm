@@ -1,7 +1,6 @@
 package net.therap.dao;
 
 import net.therap.domain.User;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author rifatul.islam
