@@ -37,7 +37,7 @@ exclude(module: 'commons-lang')
     compile group: 'commons-io', name: 'commons-io', version:'2.4'
     compile group: 'org.aspectj', name: 'aspectjrt', version:'1.6.11'
     compile group: 'org.aspectj', name: 'aspectjweaver', version:'1.7.3'
-    compile group: 'mysql', name: 'mysql-connector-java', version:'5.0.5'
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.30'
     compile group: 'org.hibernate', name: 'hibernate-core', version:'4.0.1.Final'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version:'4.0.1.Final'
     compile group: 'org.hibernate', name: 'hibernate-validator', version:'4.0.1.GA'
