@@ -1,25 +1,57 @@
 package net.therap.domain;
 
+import net.therap.domain.enums.BookQuality;
+
+import javax.persistence.*;
 import java.util.Arrays;
 
 /**
  * @author shakhawat.hossain
- * @since 8/4/14 4:14 PM
+ * @author rifatul.islam
+ * @since 8/4/14 4:19 PM
  */
 
+@Entity
+@Table(name = "book")
 public class Book {
-    private int bookId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "author")
     private String author;
-    private byte[] bookImage;
 
+    @Column(name = "edition")
+    private String edition;
 
-    public int getBookId() {
-        return bookId;
+    @Column(name = "category_id")
+    private int categoryId;
+
+    @Column(name = "quality")
+    private BookQuality quality;
+
+    @Column(name = "price")
+    private double price;
+
+    @Column(name = "details")
+    private String details;
+
+    @Column(name = "photo")
+    @Lob
+    private byte[] photo;
+
+    @Column(name = "exchange_list")
+    private String exchangeList;
+
+    public int getId() {
+        return id;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -38,21 +70,75 @@ public class Book {
         this.author = author;
     }
 
-    public byte[] getBookImage() {
-        return bookImage;
+    public String getEdition() {
+        return edition;
     }
 
-    public void setBookImage(byte[] bookImage) {
-        this.bookImage = bookImage;
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public BookQuality getQuality() {
+        return quality;
+    }
+
+    public void setQuality(BookQuality quality) {
+        this.quality = quality;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getExchangeList() {
+        return exchangeList;
+    }
+
+    public void setExchangeList(String exchangeList) {
+        this.exchangeList = exchangeList;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "bookId=" + bookId +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", bookImage=" + Arrays.toString(bookImage) +
+                ", edition='" + edition + '\'' +
+                ", categoryId=" + categoryId +
+                ", quality=" + quality +
+                ", price=" + price +
+                ", details='" + details + '\'' +
+                ", photo=" + Arrays.toString(photo) +
+                ", exchangeList='" + exchangeList + '\'' +
                 '}';
     }
 }

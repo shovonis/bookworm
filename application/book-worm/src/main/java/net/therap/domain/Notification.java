@@ -2,27 +2,44 @@ package net.therap.domain;
 
 import net.therap.domain.enums.NotificationType;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * @author shakhawat.hossain
+ * @author rifatul.islam
  * @since 8/4/14 4:27 PM
  */
 
+@Entity
+@Table(name = "notification")
 public class Notification {
-    private int notificationId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "sender_id")
     private User sender;
+
+    @Column(name = "receiver_id")
     private User receiver;
-    private NotificationType notificationType;
-    private Date notificationDate;
+
+    @Column(name = "type")
+    private NotificationType type;
+
+    @Column(name = "date_time")
+    private Timestamp dateTime;
+
+    @Column(name = "is_seen")
     private boolean isSeen;
 
-    public int getNotificationId() {
-        return notificationId;
+
+    public int getId() {
+        return id;
     }
 
-    public void setNotificationId(int notificationId) {
-        this.notificationId = notificationId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public User getSender() {
@@ -41,20 +58,20 @@ public class Notification {
         this.receiver = receiver;
     }
 
-    public NotificationType getNotificationType() {
-        return notificationType;
+    public NotificationType getType() {
+        return type;
     }
 
-    public void setNotificationType(NotificationType notificationType) {
-        this.notificationType = notificationType;
+    public void setType(NotificationType type) {
+        this.type = type;
     }
 
-    public Date getNotificationDate() {
-        return notificationDate;
+    public Timestamp getDateTime() {
+        return dateTime;
     }
 
-    public void setNotificationDate(Date notificationDate) {
-        this.notificationDate = notificationDate;
+    public void setDateTime(Timestamp dateTime) {
+        this.dateTime = dateTime;
     }
 
     public boolean isSeen() {
@@ -63,17 +80,5 @@ public class Notification {
 
     public void setSeen(boolean isSeen) {
         this.isSeen = isSeen;
-    }
-
-    @Override
-    public String toString() {
-        return "Notification{" +
-                "notificationId=" + notificationId +
-                ", sender=" + sender +
-                ", receiver=" + receiver +
-                ", notificationType=" + notificationType +
-                ", notificationDate=" + notificationDate +
-                ", isSeen=" + isSeen +
-                '}';
     }
 }
