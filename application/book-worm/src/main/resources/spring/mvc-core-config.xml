@@ -12,6 +12,7 @@
     <mvc:annotation-driven/>
 
     <import resource="mvc-view-config.xml"/>
+    <import resource="business-config.xml" />
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
