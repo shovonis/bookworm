@@ -1,6 +1,7 @@
 package net.therap.domain;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 /**
  * @author rifatul.islam
@@ -109,7 +110,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", areaCode=" + areaCode +
-//                ", profilePicture=" + profilePicture +
+                ", profilePicture=" + Arrays.toString(profilePicture) +
                 ", reputationPoint=" + reputationPoint +
                 '}';
     }
