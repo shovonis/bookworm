@@ -2,6 +2,7 @@ package net.therap.domain;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author rifatul.islam
@@ -36,6 +37,12 @@ public class User {
 
     @Column(name = "reputation_point")
     private double reputationPoint;
+
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinTable(name ="user_wished_book",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id")})
+    private List<WishedBook> wishedBooks;
 
     public int getUserId() {
         return userId;
