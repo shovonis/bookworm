@@ -29,8 +29,9 @@ public class User {
     @Column(name = "area_code")
     private int areaCode;
 
-//    @Column(name = "profile_picture")
-//    private Blob profilePicture;
+    @Lob
+    @Column(name = "profile_picture")
+    private byte[] profilePicture;
 
     @Column(name = "reputation_point")
     private double reputationPoint;
@@ -83,13 +84,13 @@ public class User {
         this.areaCode = areaCode;
     }
 
-//    public Blob getProfilePicture() {
-//        return profilePicture;
-//    }
-//
-//    public void setProfilePicture(Blob profilePicture) {
-//        this.profilePicture = profilePicture;
-//    }
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     public double getReputationPoint() {
         return reputationPoint;
