@@ -1,7 +1,5 @@
 package net.therap.domain;
 
-import net.therap.domain.enums.NotificationType;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -11,8 +9,8 @@ import java.sql.Timestamp;
  * @since 8/4/14 4:27 PM
  */
 
-@Entity
-@Table(name = "notification")
+//@Entity
+//@Table(name = "notification")
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +22,8 @@ public class Notification {
     @Column(name = "receiver_id")
     private User receiver;
 
-    @Column(name = "type")
-    private NotificationType type;
+//    @Column(name = "type")
+//    private NotificationType type;
 
     @Column(name = "date_time")
     private Timestamp dateTime;
@@ -58,13 +56,13 @@ public class Notification {
         this.receiver = receiver;
     }
 
-    public NotificationType getType() {
-        return type;
-    }
-
-    public void setType(NotificationType type) {
-        this.type = type;
-    }
+//    public NotificationType getType() {
+//        return type;
+//    }
+//
+//    public void setType(NotificationType type) {
+//        this.type = type;
+//    }
 
     public Timestamp getDateTime() {
         return dateTime;
