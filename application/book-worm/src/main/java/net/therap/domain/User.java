@@ -1,6 +1,7 @@
 package net.therap.domain;
 
 import javax.persistence.*;
+import java.sql.Blob;
 
 /**
  * @author rifatul.islam
@@ -29,8 +30,8 @@ public class User {
     @Column(name = "area_code")
     private int areaCode;
 
-//    @Column(name = "profile_picture")
-//    private Blob profilePicture;
+    @Column(name = "profile_picture")
+    private Blob profilePicture;
 
     @Column(name = "reputation_point")
     private double reputationPoint;
@@ -83,13 +84,13 @@ public class User {
         this.areaCode = areaCode;
     }
 
-//    public Blob getProfilePicture() {
-//        return profilePicture;
-//    }
-//
-//    public void setProfilePicture(Blob profilePicture) {
-//        this.profilePicture = profilePicture;
-//    }
+    public Blob getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Blob profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     public double getReputationPoint() {
         return reputationPoint;
@@ -108,7 +109,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", areaCode=" + areaCode +
-//                ", profilePicture=" + profilePicture +
+                ", profilePicture=" + profilePicture +
                 ", reputationPoint=" + reputationPoint +
                 '}';
     }
