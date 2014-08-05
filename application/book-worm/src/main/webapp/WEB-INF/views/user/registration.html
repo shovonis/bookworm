@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:include="fragments/header :: header"></div>
-    <title>Registration</title>
+    <title>::.Registration</title>
 </head>
 <body class="metro">
 <div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
@@ -27,13 +27,11 @@
                             <input type="text" placeholder="your email address"/>
                             <button class="btn-clear" tabindex="-1"></button>
                         </div>
-
                         <lable>Password</lable>
                         <div class="input-control password" data-role="input-control">
                             <input type="password" placeholder="password"/>
                             <button class="btn-reveal" tabindex="-1"></button>
                         </div>
-
                         <lable>Confirm Password</lable>
                         <div class="input-control password" data-role="input-control">
                             <input type="password" placeholder="retype password"/>
@@ -44,7 +42,6 @@
                 </form>
             </div>
             <div class="span1" style="border-right:1px solid darkgray;height:200px; margin-top: 50px"></div>
-
             <div class="span3" style="margin-top: 100px">
                 Have an account ? <br/>
                 <a th:href="@{/login}">Login Here</a>
