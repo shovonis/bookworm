@@ -1,6 +1,7 @@
 package net.therap.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -24,7 +25,15 @@ public class User {
     private String lastName;
 
     @Column(name = "email")
+    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
+            message = "invalid email address.")
     private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Transient
+    private String retypedPassword;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -45,6 +54,15 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<WishedBook> wishedBooks;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_book",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> postedBooks;
+
+    public User() {
+    }
 
     public int getUserId() {
         return userId;
@@ -76,6 +94,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhoneNumber() {
@@ -126,6 +152,22 @@ public class User {
         this.wishedBooks = wishedBooks;
     }
 
+    public String getRetypedPassword() {
+        return retypedPassword;
+    }
+
+    public void setRetypedPassword(String retypedPassword) {
+        this.retypedPassword = retypedPassword;
+    }
+
+    public Set<Book> getPostedBooks() {
+        return postedBooks;
+    }
+
+    public void setPostedBooks(Set<Book> postedBooks) {
+        this.postedBooks = postedBooks;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -133,12 +175,15 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", retypedPassword='" + retypedPassword + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", area=" + area +
                 ", profilePicture=" + Arrays.toString(profilePicture) +
                 ", reputationPoint=" + reputationPoint +
                 ", notifications=" + notifications +
                 ", wishedBooks=" + wishedBooks +
+                ", postedBooks=" + postedBooks +
                 '}';
     }
 }
