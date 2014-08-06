@@ -1,7 +1,11 @@
 package net.therap.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -19,17 +23,26 @@ public class User {
     private int userId;
 
     @Column(name = "firstName")
+    @NotNull
+    @NotEmpty(message = "First Name Must Not be empty")
     private String firstName;
 
     @Column(name = "lastName")
+    @NotNull
+    @NotEmpty(message = "Last Name Must Not be empty")
     private String lastName;
 
     @Column(name = "email")
+    @NotNull
+    @NotEmpty(message = "Email Name Must Not be empty")
     @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
-            message = "invalid email address.")
+            message = "Invalid email address.")
     private String email;
 
     @Column(name = "password")
+    @NotNull
+    @NotEmpty(message = "Password Name Must Not be empty")
+    @Size(min = 5, max = 100, message = "Password too small. Minimum length 5")
     private String password;
 
     @Transient

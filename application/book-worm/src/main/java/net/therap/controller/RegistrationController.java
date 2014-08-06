@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 /**
  * @author shakhawat.hossain
  * @author rifatul.islam
@@ -26,7 +28,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registerUser(@ModelAttribute("user") User user, BindingResult result) {
+    public ModelAndView registerUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
         System.out.println(user);
         if (result.hasErrors()) {
             return new ModelAndView("user/registration");
