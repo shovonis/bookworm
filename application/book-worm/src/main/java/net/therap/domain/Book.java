@@ -33,6 +33,7 @@ public class Book {
     private int categoryId;
 
     @Column(name = "quality")
+    @Enumerated(EnumType.STRING)
     private BookQuality quality;
 
     @Column(name = "price")
@@ -44,6 +45,9 @@ public class Book {
     @Column(name = "photo")
     @Lob
     private byte[] photo;
+
+    @ManyToMany(mappedBy = "postedBooks", fetch = FetchType.LAZY)
+    private Set<User> users;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ExchangeBook> exchangeBooks;

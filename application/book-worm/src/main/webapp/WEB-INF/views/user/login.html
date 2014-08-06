@@ -10,17 +10,17 @@
     <div class="grid">
         <div class="row">
             <div class="span4">
-                <form th:action="@{/login}">
+                <form th:action="@{/login}" th:method = "post" th:object="${user}">
                     <fieldset>
                         <legend>Login</legend>
-                        <lable>user id</lable>
+                        <lable> Email</lable>
                         <div class="input-control text" data-role="input-control">
-                            <input type="text" placeholder="user id/email"/>
+                            <input type="text" th:field="*{email}" placeholder="user email" />
                             <button class="btn-clear" tabindex="-1"></button>
                         </div>
                         <lable>password</lable>
                         <div class="input-control password" data-role="input-control">
-                            <input type="password" placeholder="password"/>
+                            <input type="password" th:field="*{password}" placeholder="password"/>
                             <button class="btn-reveal" tabindex="-1"></button>
                         </div>
                         <input type="submit" class="success" value="Login"/>
