@@ -18,11 +18,12 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private User sender;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
     private User receiver;
+
+    @Column(name = "sender_id")
+    private int senderId;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
@@ -34,7 +35,6 @@ public class Notification {
     @Column(name = "is_seen")
     private boolean isSeen;
 
-
     public int getId() {
         return id;
     }
@@ -43,20 +43,20 @@ public class Notification {
         this.id = id;
     }
 
-    public User getSender() {
-        return sender;
-    }
-
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
     public User getReceiver() {
         return receiver;
     }
 
     public void setReceiver(User receiver) {
         this.receiver = receiver;
+    }
+
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
     }
 
     public NotificationType getType() {

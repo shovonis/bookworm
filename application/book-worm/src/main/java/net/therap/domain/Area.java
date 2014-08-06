@@ -18,6 +18,8 @@ public class Area {
     @Column(name = "area_name")
     private String areaName;
 
+    @OneToOne(mappedBy = "area")
+    private User user;
 
     public int getAreaCode() {
         return areaCode;
@@ -35,11 +37,20 @@ public class Area {
         this.areaName = areaName;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Area{" +
                 "areaCode=" + areaCode +
                 ", areaName='" + areaName + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

@@ -1,8 +1,8 @@
 package net.therap.domain;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author rifatul.islam
@@ -28,8 +28,9 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "area_code")
-    private int areaCode;
+    @OneToOne
+    @JoinColumn(name = "area_code")
+    private Area area;
 
     @Lob
     @Column(name = "profile_picture")
@@ -38,8 +39,12 @@ public class User {
     @Column(name = "reputation_point")
     private double reputationPoint;
 
-    @OneToMany( cascade = CascadeType.ALL)
-    @JoinTable(name ="user_wished_book",
+
+    @OneToMany(mappedBy = "receiver")
+    private Set<Notification> notifications;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_wished_book",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "book_id")})
     private List<WishedBook> wishedBooks;
@@ -84,12 +89,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getAreaCode() {
-        return areaCode;
+    public Area getArea() {
+        return area;
     }
 
-    public void setAreaCode(int areaCode) {
-        this.areaCode = areaCode;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
     public byte[] getProfilePicture() {
@@ -108,17 +113,19 @@ public class User {
         this.reputationPoint = reputationPoint;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", areaCode=" + areaCode +
-                ", profilePicture=" + Arrays.toString(profilePicture) +
-                ", reputationPoint=" + reputationPoint +
-                '}';
+    public List<WishedBook> getWishedBooks() {
+        return wishedBooks;
+    }
+
+    public void setWishedBooks(List<WishedBook> wishedBooks) {
+        this.wishedBooks = wishedBooks;
+    }
+
+    public Set<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
