@@ -1,6 +1,7 @@
 package net.therap.domain;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -123,5 +124,21 @@ public class User {
 
     public void setWishedBooks(Set<WishedBook> wishedBooks) {
         this.wishedBooks = wishedBooks;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", area=" + area +
+                ", profilePicture=" + Arrays.toString(profilePicture) +
+                ", reputationPoint=" + reputationPoint +
+                ", notifications=" + notifications +
+                ", wishedBooks=" + wishedBooks +
+                '}';
     }
 }

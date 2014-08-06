@@ -1,4 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <div th:include="fragments/header :: header"></div>
     <title>::.Registration</title>
@@ -9,27 +13,27 @@
     <div class="grid">
         <div class="row">
             <div class="span5">
-                <form th:action="@{/registration}">
+                <form th:action="@{/registration}" th:method="post" th:object="${user}">
                     <fieldset>
                         <legend>Registration</legend>
                         <lable>First Name</lable>
                         <div class="input-control text" data-role="input-control">
-                            <input type="text" placeholder="your first name"/>
+                            <input type="text" th:field="*{firstName}" placeholder="your first name"/>
                             <button class="btn-clear" tabindex="-1"></button>
                         </div>
                         <lable>Last Name</lable>
                         <div class="input-control text" data-role="input-control">
-                            <input type="text" placeholder="your last name"/>
+                            <input type="text" th:field="*{lastName}" placeholder="your last name"/>
                             <button class="btn-clear" tabindex="-1"></button>
                         </div>
                         <lable>Email</lable>
                         <div class="input-control text" data-role="input-control">
-                            <input type="text" placeholder="your email address"/>
+                            <input type="text" th:field="*{email}" placeholder="your email address"/>
                             <button class="btn-clear" tabindex="-1"></button>
                         </div>
                         <lable>Password</lable>
                         <div class="input-control password" data-role="input-control">
-                            <input type="password" placeholder="password"/>
+                            <input type="password"  placeholder="password"/>
                             <button class="btn-reveal" tabindex="-1"></button>
                         </div>
                         <lable>Confirm Password</lable>
