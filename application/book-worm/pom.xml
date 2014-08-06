@@ -102,6 +102,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>3.2.4.RELEASE</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>1.6.0.RELEASE</version>
@@ -151,12 +158,18 @@
             <version>2.4</version>
         </dependency>
 
-
+        <!--Validation for Equal Properties JSR-->
         <!--<dependency>-->
-        <!--<groupId>javax.validation</groupId>-->
-        <!--<artifactId>validation-api</artifactId>-->
-        <!--<version>1.0.0.GA</version>-->
+            <!--<groupId>de.malkusch.validation</groupId>-->
+            <!--<artifactId>validation</artifactId>-->
+            <!--<version>0.3.0</version>-->
         <!--</dependency>-->
+
+        <dependency>
+            <groupId>cz.jirutka.validator</groupId>
+            <artifactId>validator-spring</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 
 
         <!--aop-->

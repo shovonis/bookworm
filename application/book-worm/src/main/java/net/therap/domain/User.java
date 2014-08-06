@@ -1,9 +1,9 @@
 package net.therap.domain;
 
+import cz.jirutka.validator.spring.SpELAssert;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -17,6 +17,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "user")
+@SpELAssert(value = "password.equals(retypedPassword)",
+        message = "{Password did not matched}")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +35,7 @@ public class User {
     @NotEmpty(message = "Last Name Must Not be empty")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @NotNull
     @NotEmpty(message = "Email Name Must Not be empty")
     @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
