@@ -1,11 +1,11 @@
 package net.therap.domain;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
  * @author rifatul.islam
+ * @author shakhawat.hossain
  * @since 8/4/14.
  */
 @Entity
@@ -40,14 +40,13 @@ public class User {
     private double reputationPoint;
 
 
+
     @OneToMany(mappedBy = "receiver")
     private Set<Notification> notifications;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_wished_book",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "book_id")})
-    private List<WishedBook> wishedBooks;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<WishedBook> wishedBooks;
 
     public int getUserId() {
         return userId;
@@ -113,19 +112,19 @@ public class User {
         this.reputationPoint = reputationPoint;
     }
 
-    public List<WishedBook> getWishedBooks() {
-        return wishedBooks;
-    }
-
-    public void setWishedBooks(List<WishedBook> wishedBooks) {
-        this.wishedBooks = wishedBooks;
-    }
-
     public Set<Notification> getNotifications() {
         return notifications;
     }
 
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public Set<WishedBook> getWishedBooks() {
+        return wishedBooks;
+    }
+
+    public void setWishedBooks(Set<WishedBook> wishedBooks) {
+        this.wishedBooks = wishedBooks;
     }
 }

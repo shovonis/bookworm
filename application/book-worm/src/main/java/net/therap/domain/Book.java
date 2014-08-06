@@ -4,6 +4,8 @@ import net.therap.domain.enums.BookQuality;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author shakhawat.hossain
@@ -43,8 +45,8 @@ public class Book {
     @Lob
     private byte[] photo;
 
-    @Column(name = "exchange_list")
-    private String exchangeList;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ExchangeBook> exchangeBooks;
 
     public int getId() {
         return id;
@@ -118,12 +120,12 @@ public class Book {
         this.photo = photo;
     }
 
-    public String getExchangeList() {
-        return exchangeList;
+    public Set<ExchangeBook> getExchangeBooks() {
+        return exchangeBooks;
     }
 
-    public void setExchangeList(String exchangeList) {
-        this.exchangeList = exchangeList;
+    public void setExchangeBooks(Set<ExchangeBook> exchangeBooks) {
+        this.exchangeBooks = exchangeBooks;
     }
 
     @Override
@@ -138,7 +140,7 @@ public class Book {
                 ", price=" + price +
                 ", details='" + details + '\'' +
                 ", photo=" + Arrays.toString(photo) +
-                ", exchangeList='" + exchangeList + '\'' +
+                ", exchangeList='" + exchangeBooks + '\'' +
                 '}';
     }
 }
