@@ -9,7 +9,7 @@ import net.therap.domain.User;
 
 
 public interface UserService {
-    public User getAuthenticatedUser(String email, String password);
+    public User getAuthenticatedUser(User user);
 
     public void addUser(User user);
 

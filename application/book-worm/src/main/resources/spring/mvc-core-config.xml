@@ -13,6 +13,8 @@
 
     <import resource="mvc-view-config.xml"/>
     <import resource="business-config.xml" />
+    <import resource="srping-security.xml" />
+
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

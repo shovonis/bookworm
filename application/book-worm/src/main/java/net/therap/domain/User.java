@@ -43,7 +43,7 @@ public class User {
     @Column(name = "password")
     @NotNull
     @NotEmpty(message = "Password Name Must Not be empty")
-    @Size(min = 5, max = 100, message = "Password too small. Minimum length 5")
+    @Size(min = 5, max = 128, message = "Password too small. Minimum length 5")
     private String password;
 
     @Transient

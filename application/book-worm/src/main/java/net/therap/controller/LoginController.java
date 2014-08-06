@@ -37,7 +37,7 @@ public class LoginController {
     public ModelAndView login(@ModelAttribute User user, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();
 
-        User authenticatedUser = userService.verifyAndGetUser(user);
+        User authenticatedUser = userService.getAuthenticatedUser(user);
 
         if(authenticatedUser != null){
           modelAndView.addObject("user", authenticatedUser);
