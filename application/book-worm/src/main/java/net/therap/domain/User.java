@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * @author rifatul.islam
+ * @author shakhawat.hossain
  * @since 8/4/14.
  */
 @Entity

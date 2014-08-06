@@ -4,15 +4,15 @@ import javax.persistence.*;
 
 /**
  * @author shakhawat.hossain
- * @since 8/5/14 4:25 PM
+ * @since 8/6/14 10:15 AM
  */
 
 @Entity
-@Table(name = "wished_book")
-public class WishedBook {
+@Table(name = "book_exchange")
+public class ExchangeBook {
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "title")
@@ -22,7 +22,7 @@ public class WishedBook {
     private String bookAuthor;
 
     @ManyToOne
-    private User user;
+    private Book book;
 
     public String getBookTitle() {
         return bookTitle;
@@ -40,12 +40,12 @@ public class WishedBook {
         this.bookAuthor = bookAuthor;
     }
 
-    public User getUser() {
-        return user;
+    public Book getBook() {
+        return book;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.book = book;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class WishedBook {
         return "WishedBook{" +
                 "bookTitle='" + bookTitle + '\'' +
                 ", bookAuthor='" + bookAuthor + '\'' +
-                ", user=" + user +
+                ", book=" + book +
                 '}';
     }
 }

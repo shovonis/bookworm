@@ -4,6 +4,7 @@ import net.therap.domain.enums.BookQuality;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author shakhawat.hossain
@@ -43,8 +44,11 @@ public class Book {
     @Lob
     private byte[] photo;
 
-    @Column(name = "exchange_list")
-    private String exchangeList;
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name ="book_exchange_book",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "exchange_book_id")})
+    private List<ExchangeBook> exchangeBooks;
 
     public int getId() {
         return id;
@@ -118,12 +122,12 @@ public class Book {
         this.photo = photo;
     }
 
-    public String getExchangeList() {
-        return exchangeList;
+    public List<ExchangeBook> getExchangeBooks() {
+        return exchangeBooks;
     }
 
-    public void setExchangeList(String exchangeList) {
-        this.exchangeList = exchangeList;
+    public void setExchangeBooks(List<ExchangeBook> exchangeBooks) {
+        this.exchangeBooks = exchangeBooks;
     }
 
     @Override
@@ -138,7 +142,7 @@ public class Book {
                 ", price=" + price +
                 ", details='" + details + '\'' +
                 ", photo=" + Arrays.toString(photo) +
-                ", exchangeList='" + exchangeList + '\'' +
+                ", exchangeList='" + exchangeBooks + '\'' +
                 '}';
     }
 }
