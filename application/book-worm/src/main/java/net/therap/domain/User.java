@@ -3,6 +3,7 @@ package net.therap.domain;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -180,6 +181,11 @@ public class User {
     public void setPostedBooks(Set<Book> postedBooks) {
         this.postedBooks = postedBooks;
     }
+
+//    @AssertTrue(message = "Password did not matched")
+//    public boolean isValid() {
+//        return this.password.equals(retypedPassword);
+//    }
 
     @Override
     public String toString() {

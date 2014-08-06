@@ -15,11 +15,12 @@ import javax.persistence.*;
  * @since 8/6/14 12:15 PM
  */
 @Repository
-@Qualifier ("userDaoJpa")
+@Qualifier("userDaoJpa")
 public class UserDaoImpl implements UserDao {
+    private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
+
     @PersistenceContext
     EntityManager entityManager;
-    private Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
     @Override
     public User getAuthenticatedUser(String email, String password) {
@@ -41,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-
+        entityManager.persist(user);
     }
 
     @Override

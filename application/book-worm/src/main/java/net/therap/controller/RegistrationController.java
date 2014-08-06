@@ -1,11 +1,13 @@
 package net.therap.controller;
 
 import net.therap.domain.User;
+import net.therap.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,10 +23,10 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-    @Autowired
-
-
     private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView getRegistrationForm() {
@@ -37,6 +39,7 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return new ModelAndView("user/registration");
         }
+        userService.addUser(user);
         return new ModelAndView("user/login");
     }
 }

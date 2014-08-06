@@ -11,4 +11,6 @@ import net.therap.domain.User;
 public interface UserService {
     public User getAuthenticatedUser(String email, String password);
 
+    public void addUser(User user);
+
 }

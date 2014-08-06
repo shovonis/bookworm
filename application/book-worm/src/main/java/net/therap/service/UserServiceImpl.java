@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
     public User getAuthenticatedUser(String email, String password) {
         return userDao.getAuthenticatedUser(email, password);
     }
+
+    @Override
+    public void addUser(User user) {
+        userDao.addUser(user);
+    }
 }
