@@ -3,6 +3,7 @@ package net.therap.controller;
 import net.therap.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,9 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
+    @Autowired
+
+
     private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
