@@ -22,7 +22,16 @@ public class WishedBook {
     private String bookAuthor;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getBookTitle() {
         return bookTitle;
@@ -51,7 +60,8 @@ public class WishedBook {
     @Override
     public String toString() {
         return "WishedBook{" +
-                "bookTitle='" + bookTitle + '\'' +
+                "id=" + id +
+                ", bookTitle='" + bookTitle + '\'' +
                 ", bookAuthor='" + bookAuthor + '\'' +
                 ", user=" + user +
                 '}';

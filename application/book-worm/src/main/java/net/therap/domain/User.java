@@ -39,11 +39,8 @@ public class User {
     @Column(name = "reputation_point")
     private double reputationPoint;
 
-
-
     @OneToMany(mappedBy = "receiver")
     private Set<Notification> notifications;
-
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<WishedBook> wishedBooks;
