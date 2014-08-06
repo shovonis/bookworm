@@ -63,7 +63,7 @@ public class User {
     @Column(name = "reputation_point")
     private double reputationPoint;
 
-    @OneToMany(mappedBy = "receiver")
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
     private Set<Notification> notifications;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
