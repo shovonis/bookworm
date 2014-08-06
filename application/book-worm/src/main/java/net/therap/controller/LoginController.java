@@ -1,16 +1,17 @@
 package net.therap.controller;
 
 import net.therap.domain.User;
+import net.therap.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author shakhawat.hossain
@@ -19,9 +20,12 @@ import javax.validation.Valid;
  */
 
 @Controller
+@SessionAttributes ("user")
 public class LoginController {
-
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping (value = {"/login", "/"}, method = RequestMethod.GET)
     public String getLoginForm(ModelMap modelMap) {
@@ -30,11 +34,19 @@ public class LoginController {
     }
 
     @RequestMapping (value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute @Valid User user, BindingResult bindingResult, ModelMap modelMap) {
-        if(bindingResult.hasErrors()){
-            return "user/login";
+    public ModelAndView login(@ModelAttribute User user, ModelMap modelMap) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        User authenticatedUser = userService.verifyAndGetUser(user);
+
+        if(authenticatedUser != null){
+          modelAndView.addObject("user", authenticatedUser);
+          modelAndView.setViewName("redirect:/home");
+        }else {
+          modelMap.addAttribute("loginFailedMsg","Incorrect email / password");
+          modelAndView.setViewName("user/login");
         }
-        logger.debug("authentication request using email : {} password : {}", user.getEmail(), user.getPassword());
-        return "home";
+
+        return modelAndView;
     }
 }

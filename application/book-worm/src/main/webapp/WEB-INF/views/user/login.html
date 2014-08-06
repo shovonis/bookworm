@@ -13,6 +13,7 @@
                 <form th:action="@{/login}" th:method = "post" th:object="${user}">
                     <fieldset>
                         <legend>Login</legend>
+                        <p class="fg-red" th:if="${loginFailedMsg} != null" th:text = "${loginFailedMsg}"></p>
                         <lable> Email</lable>
                         <div class="input-control text" data-role="input-control">
                             <input type="text" th:field="*{email}" placeholder="user email" />
