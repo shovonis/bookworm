@@ -34,7 +34,7 @@ public class LoginController {
         if(bindingResult.hasErrors()){
             return "user/login";
         }
-        logger.debug("authentication request using email : {} password : {]", user.getEmail(), user.getPassword());
+        logger.debug("authentication request using email : {} password : {}", user.getEmail(), user.getPassword());
         return "home";
     }
 }
