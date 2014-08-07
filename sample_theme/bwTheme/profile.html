@@ -24,6 +24,18 @@
     <script src="js/github.info.js"></script>
 
     <title>Profile</title>
+
+    <script>
+       $(document).ready(function(){
+            $("#wishedBookAddButton").click(function(){
+              var title = $('#bookTitle').val();
+              var author = $('#bookAuthor').val();
+      //        alert("title "+title+" author "+author) ;
+              $('#wishedBookTable  tbody:last').append('<tr><td>column 1 value</td><td>column 2 value</td>td>column 2 value</td></tr>');
+            });
+        });
+    </script>
+
 </head>
 <body class="metro">
 <header class="bg-dark" data-load="header.html"></header>
@@ -109,7 +121,7 @@
             <div class="row">
                 <div class="span6">
 
-                    <table class="table striped">
+                    <table class="table striped" id="wishedBookTable">
                         <thead>
                         <tr>
                             <th class="text-left">Title</th>
@@ -164,16 +176,16 @@
                             <legend>Add New Book To WishList</legend>
                             <lable>Title</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type title">
+                                <input type="text" id="bookTitle" placeholder="type title">
                                 <button class="btn-clear" tabindex="-1"></button>
                             </div>
                             <lable>Author</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type author" autofocus>
+                                <input type="text" id="bookAuthor" placeholder="type author" autofocus>
                                 <button class="btn-reveal" tabindex="-1"></button>
                             </div>
 
-                            <input type="submit" class="success" value="Add">
+                            <input type="button" id="wishedBookAddButton" onclick="test()"  class="success" value="Add">
                         </fieldset>
                     </form>
                 </div>
