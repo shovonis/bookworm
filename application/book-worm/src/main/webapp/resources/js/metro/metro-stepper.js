@@ -87,6 +87,8 @@
 
         prior: function(){
             var o = this.options;
+            var stepValue = document.getElementById("stepper_value").value;
+            stepValue -=1;
 
             if (o.start - 1 == 0) return;
 

@@ -4,7 +4,6 @@ import net.therap.domain.enums.BookQuality;
 
 import javax.persistence.*;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,12 +28,14 @@ public class Book {
     @Column(name = "edition")
     private String edition;
 
+    @Column(name = "publisher")
+    private String publisher;
+
     @Column(name = "category_id")
     private int categoryId;
 
     @Column(name = "quality")
-    @Enumerated(EnumType.STRING)
-    private BookQuality quality;
+    private int quality;
 
     @Column(name = "price")
     private double price;
@@ -84,6 +85,14 @@ public class Book {
         this.edition = edition;
     }
 
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
     public int getCategoryId() {
         return categoryId;
     }
@@ -92,11 +101,11 @@ public class Book {
         this.categoryId = categoryId;
     }
 
-    public BookQuality getQuality() {
+    public int getQuality() {
         return quality;
     }
 
-    public void setQuality(BookQuality quality) {
+    public void setQuality(int quality) {
         this.quality = quality;
     }
 
@@ -124,6 +133,14 @@ public class Book {
         this.photo = photo;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     public Set<ExchangeBook> getExchangeBooks() {
         return exchangeBooks;
     }
@@ -139,12 +156,14 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", edition='" + edition + '\'' +
+                ", publisher='" + publisher + '\'' +
                 ", categoryId=" + categoryId +
                 ", quality=" + quality +
                 ", price=" + price +
                 ", details='" + details + '\'' +
                 ", photo=" + Arrays.toString(photo) +
-                ", exchangeList='" + exchangeBooks + '\'' +
+                ", users=" + users +
+                ", exchangeBooks=" + exchangeBooks +
                 '}';
     }
 }

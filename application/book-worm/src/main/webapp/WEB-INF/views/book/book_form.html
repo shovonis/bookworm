@@ -20,119 +20,126 @@
         <legend>
             <h2>Add Book</h2>
         </legend>
-        <div class="span7">
-            <div class="padding10">
-                <label style="float: left">Book Title</label>
+        <form th:action="@{#}" th:method="post" th:object="${book}">
+            <div class="span7">
+                <div class="padding10">
+                    <label style="float: left">Book Title</label>
 
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="Title"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-                <label style="float: left">Author</label>
-
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="Author"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-
-                <label style="float: left">ISBN</label>
-
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="ISBN"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-            </div>
-        </div>
-
-        <div class="span1"></div>
-        <div id="photo">
-            <fieldset>
-                <legend>Upload Photo</legend>
-                <div class="span4">
-                    <div class="tile">
-                        <img src="/resources/images/access.png"/>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" th:field="*{title}" placeholder="Title"/>
+                        <button class="btn-clear" tabindex="-1"></button>
                     </div>
-                    <button class="meduim-size icon-upload margin5">Upload</button>
-                </div>
-            </fieldset>
+                    <label style="float: left">Author</label>
 
-        </div>
-
-        <div class="span7">
-            <div class="padding10">
-
-                <label style="float: left">Category</label>
-
-                <div class="input-control select">
-                    <select>
-                        <option>Category 1</option>
-                        <option>Category 2</option>
-                        <option>Category 3</option>
-                    </select>
-                </div>
-
-                <label style="float: left">Publisher</label>
-
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="Publisher"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-
-
-                <label style="float: left">Year/Edition</label>
-
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="year/edition"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-
-                <br/><br/>
-                <label style="float: left">Book Quality</label>
-
-                <div class="rating"
-                     data-role="rating"
-                     data-static="false"
-                     data-score="3"
-                     data-stars="5"
-                     data-show-score="true"
-                     data-score-hint="Value: ">
-                </div>
-
-                <br/><br/>
-                <label style="float: left">Book Details</label>
-
-                <div class="input-control textarea">
-                    <textarea>Books details</textarea>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" th:field="*{author}" placeholder="Author"/>
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="span7  margin10">
-            <div class="padding10">
+            <div class="span1"></div>
+            <div id="photo">
                 <fieldset>
-                    <legend><h2>Exchange Option</h2></legend>
-                    <label style="float: left">Price</label>
-
-                    <div class="input-control text" data-role="input-control">
-                        <input type="number" placeholder="Price"/>
-                        <button class="btn-clear" tabindex="-1"></button>
+                    <legend>Upload Photo</legend>
+                    <div class="span4">
+                        <div class="tile">
+                            <img src="/resources/images/access.png" alt="upload image"/>
+                        </div>
+                        <button class="meduim-size icon-upload margin5">Upload</button>
                     </div>
-
-                    <label style="float: left">Exchange List</label>
-
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" placeholder="Exchange list"/>
-                        <button class="btn-clear" tabindex="-1"></button>
-                    </div>
-
                 </fieldset>
             </div>
-        </div>
-        <div class="span12">
-            <button class="large warning icon-eye padding5"> Preview</button>
-            <button class="large success icon-plus-2 margin5 offset6"> Add Book</button>
-        </div>
 
+            <div class="span7">
+                <div class="padding10">
+                    <label style="float: left">Category</label>
+
+                    <div class="input-control select">
+                        <select th:field="*{categoryId}">
+                            <option th:each="category : ${categories}"
+                                    th:value="${category.id}"
+                                    th:text="${category.name}">Category
+                            </option>
+                        </select>
+                    </div>
+
+                    <label style="float: left">Publisher</label>
+
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" th:field="*{publisher}" placeholder="Publisher"/>
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
+
+
+                    <label style="float: left">Year/Edition</label>
+
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" th:field="*{edition}" placeholder="year/edition"/>
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
+
+                    <br/><br/>
+                    <label style="float: left">Book Quality</label>
+                    <br/>
+
+
+                </div>
+            </div>
+
+            <div class="span3 notice offset8">
+                ... content ...
+            </div>
+
+            <div class="span7">
+                <div class="padding10">
+
+                    <div class="stepper rounded" data-steps="4"
+                         data-role="stepper" id="demo_stepper_methods">
+                        <input id="stepper_value" type="hidden" value="0"
+                               th:field="*{quality}"/>
+                    </div>
+
+                    <div class="actions">
+                        <a class="button" onclick="onclickOfPrior('#demo_stepper_methods')">Prior</a>
+                        <a class="button" onclick="onclickOfNext('#demo_stepper_methods')">Next</a>
+                    </div>
+                    <br/>
+                    <label style="float: left">Book Details</label>
+
+                    <div class="input-control textarea" th:field="*{details}">
+                        <textarea>Books details</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span7  margin10">
+                <div class="padding10">
+                    <fieldset>
+                        <legend><h2>Exchange Option</h2></legend>
+                        <label style="float: left">Price</label>
+
+                        <div class="input-control text" data-role="input-control">
+                            <input type="text" th:field="*{price}" placeholder="Price"/>
+                            <button class="btn-clear" tabindex="-1"></button>
+                        </div>
+
+                        <label style="float: left">Exchange List</label>
+
+                        <div class="input-control text" data-role="input-control">
+                            <input type="text" placeholder="Exchange list"/>
+                            <button class="btn-clear" tabindex="-1"></button>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+            <div class="span12">
+                <button class="large warning icon-eye padding5"> Preview</button>
+                <button class="large success icon-plus-2 margin5 offset6"> Add Book</button>
+            </div>
+
+        </form>
     </fieldset>
 </div>
 

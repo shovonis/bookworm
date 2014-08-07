@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getAuthenticatedUser(String email, String password) {
+        User authenticatedUser = null;
         String queryStr = "SELECT user FROM User user " +
                 "WHERE user.email = :email AND user.password = :password";
 
@@ -31,14 +32,12 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("email", email);
         query.setParameter("password", password);
 
-        User user;
         try {
-            user = query.getSingleResult();
+            authenticatedUser = query.getSingleResult();
         } catch (NoResultException | NonUniqueResultException exp) {
-            System.out.println("query failed...");
-            return null;
+            log.error("Error in Executing Query");
         }
-        return user;
+        return authenticatedUser;
     }
 
     @Override

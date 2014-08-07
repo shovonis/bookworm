@@ -34,14 +34,14 @@ public class User {
 
     @Column(name = "email", unique = true)
     @NotNull
-    @NotEmpty(message = "Email Name Must Not be empty")
+    @NotEmpty(message = "Email Must Not be empty")
     @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
             message = "Invalid email address.")
     private String email;
 
     @Column(name = "password")
     @NotNull
-    @NotEmpty(message = "Password Name Must Not be empty")
+    @NotEmpty(message = "Password  Must Not be empty")
     @Size(min = 5, max = 128, message = "Password too small. Minimum length 5")
     private String password;
 
