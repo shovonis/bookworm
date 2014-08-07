@@ -2,7 +2,72 @@
 <html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:include="fragments/header :: header"></div>
-    <title>::.Home</title>
+    <title>::.Profile</title>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#wishedBookAddButton").click(function () {
+                var title = $('#bookTitle').val();
+                var author = $('#bookAuthor').val();
+                var json = { "title": title, "author": author};
+
+                $.ajax({
+                    url: $("#addWishedBookForm").attr("action"),
+                    data: JSON.stringify(json),
+                    type: "POST",
+
+                    beforeSend: function (xhr) {
+                        $('#loadingImageWishedBook').show();
+                        xhr.setRequestHeader("Accept", "application/json");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                    },
+
+                    success: function () {
+                        $("#wishedBookTable  tr:last").after
+                        ("<tr> <td>" + title + "</td> <td>" + author + "</td> <td> remove </td> </tr>").show("slow");
+
+                        $('#bookTitle').val("");
+                        $('#bookAuthor').val("");
+
+                        $('#loadingImageWishedBook').hide();
+                    }
+
+                });
+            });
+
+            $(".removeWishedBook").click(function () {
+                var rowId = $(this).closest('tr').attr('id');
+
+                $.ajax({
+                    url: "/removeWishedBook",
+                    type: "POST",
+                    data: {"wishedBookId": rowId},
+                    beforeSend: function (xhr) {
+                        $('#loadingImageWishedBook').show();
+                    },
+
+                    success: function () {
+                        $("#" + rowId).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                        $('#loadingImageWishedBook').hide();
+                    }
+
+                });
+
+
+            });
+
+//            event.preventDefault();
+
+
+        });
+
+    </script>
+
 </head>
 <body class="metro">
 <div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
@@ -10,6 +75,7 @@
 <div class="accordion with-marker" data-role="accordion" data-closeany="true">
 <div class="accordion-frame active ">
     <a class="heading" href="#">Offered Booklist</a>
+
     <div class="content">
         <div class="grid">
             <div class="row">
@@ -67,19 +133,22 @@
                         <td class="right">0,1 Mb</td>
                     </tr>
                     </tbody>
-                    <tfoot></tfoot>
+                    <tfoot>
+
+                    </tfoot>
                 </table>
             </div>
         </div>
     </div>
 </div>
 <div class="accordion-frame ">
-    <a class="heading" href="#">Wishlist</a>
+    <a class="heading" href="#">WishedBook</a>
+
     <div class="content">
         <div class="grid">
             <div class="row">
                 <div class="span6">
-                    <table class="table striped">
+                    <table class="table striped" id="wishedBookTable">
                         <thead>
                         <tr>
                             <th class="text-left">Title</th>
@@ -88,56 +157,61 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr id="1">
                             <td>Bing</td>
                             <td class="right">0:00:01</td>
-                            <td>remove</td>
+                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
                         </tr>
-                        <tr>
+                        <tr id="2">
                             <td>Internet Explorer</td>
                             <td class="right">0:00:01</td>
-                            <td>remove</td>
+                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
                         </tr>
                         <tr>
                             <td>Chrome</td>
                             <td class="right">0:00:01</td>
-                            <td>remove</td>
+                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
                         </tr>
                         <tr>
                             <td>News</td>
                             <td class="right">0:00:01</td>
-                            <td>remove</td>
+                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
                         </tr>
                         <tr>
                             <td>Weather</td>
                             <td class="right">0:00:01</td>
-                            <td>remove</td>
+                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
                         </tr>
                         <tr>
                             <td>Music</td>
                             <td class="right">0:00:01</td>
-                            <td>remove</td>
+                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
                         </tr>
                         </tbody>
                         <tfoot></tfoot>
                     </table>
+                    <div id="loadingImageWishedBook" align="center" style="display: none">
+                        <img src="/resources/images/wait_small.gif"/>
+                    </div>
+
                 </div>
                 <div class="span1"></div>
                 <div class="span4">
-                    <form>
+                    <form id="addWishedBookForm" th:action="@{/addWishedBook}">
                         <fieldset>
                             <legend>Add New Book To WishList</legend>
                             <lable>Title</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type title" />
+                                <input type="text" id="bookTitle" placeholder="type title"/>
                                 <button class="btn-clear" tabindex="-1"></button>
                             </div>
                             <lable>Author</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type author" />
+                                <input type="text" id="bookAuthor" placeholder="type author"/>
                                 <button class="btn-reveal" tabindex="-1"></button>
                             </div>
-                            <input type="submit" class="success" value="Add" />
+
+                            <input type="button" id="wishedBookAddButton" class="success" value="Add"/>
                         </fieldset>
                     </form>
                 </div>
@@ -147,6 +221,7 @@
 </div>
 <div class="accordion-frame ">
     <a class="heading" href="#">Personal Information</a>
+
     <div class="content">
         <div class="grid">
             <div class="row">
@@ -156,22 +231,22 @@
                             <legend>Basic Info</legend>
                             <lable>First Name</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="your first name" />
+                                <input type="text" placeholder="your first name"/>
                                 <button class="btn-clear" tabindex="-1"></button>
                             </div>
                             <lable>Last Name</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="your last name" />
+                                <input type="text" placeholder="your last name"/>
                                 <button class="btn-clear" tabindex="-1"></button>
                             </div>
                             <lable>Email</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type author" />
-                                <button class="btn-reveal"  tabindex="-1"></button>
+                                <input type="text" placeholder="type author"/>
+                                <button class="btn-reveal" tabindex="-1"></button>
                             </div>
                             <lable>Password</lable>
                             <div class="input-control password" data-role="input-control">
-                                <input type="password" placeholder="type author" />
+                                <input type="password" placeholder="type author"/>
                                 <button class="btn-reveal" tabindex="-1"></button>
                             </div>
                             <lable>District</lable>
@@ -190,7 +265,7 @@
                                     <option>Region 3</option>
                                 </select>
                             </div>
-                            <input type="submit" class="success" value="update/save" />
+                            <input type="submit" class="success" value="update/save"/>
                         </fieldset>
                     </form>
                 </div>
@@ -200,7 +275,7 @@
                     <div class="span3">
                         <div class="tile">
                             <a class="button">Update</a>
-                            <img src="/resources/images/access.png" />
+                            <img src="/resources/images/access.png"/>
                         </div>
                     </div>
                 </fieldset>
@@ -209,6 +284,7 @@
     </div>
 </div>
 </div>
+
 </div>
 </body>
 </html>

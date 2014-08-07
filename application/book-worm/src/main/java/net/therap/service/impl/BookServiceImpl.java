@@ -1,6 +1,7 @@
 package net.therap.service.impl;
 
 import net.therap.domain.Book;
+import net.therap.domain.WishedBook;
 import net.therap.service.BookService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookServiceImpl implements BookService {
     @Override
     public void addBook(Book book) {
+
+    }
+
+    @Override
+    public void addWishedBook(WishedBook wishedBook) {
 
     }
 }
