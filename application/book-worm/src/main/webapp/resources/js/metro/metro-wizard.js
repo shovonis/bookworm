@@ -97,6 +97,8 @@
 
         next: function(){
             var new_step = this._currentStep + 1;
+            var stepValue = document.getElementById("stepper_value").value;
+            stepValue +=1;
 
             if (new_step == this._steps.length) return false;
             this._currentStep = new_step;
@@ -105,6 +107,8 @@
 
             this.options.onPage(this._currentStep + 1, this.element);
             this._stepper.stepper('next');
+
+
 
             var finish = parseInt(this.options.finishStep == 'default' ? this._steps.length - 1 : this.options.finishStep);
             if (new_step == finish) {
@@ -118,6 +122,9 @@
 
         prior: function(){
             var new_step = this._currentStep - 1;
+
+            var stepValue = document.getElementById("stepper_value").value;
+            stepValue -=1;
 
             if (new_step < 0) return false;
             this._currentStep = new_step;

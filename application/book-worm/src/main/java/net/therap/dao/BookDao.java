@@ -1,22 +1,18 @@
-package net.therap.service;
+package net.therap.dao;
 
 import net.therap.domain.Book;
-import net.therap.domain.WishedBook;
 import net.therap.domain.Category;
+
 import java.util.List;
 
 /**
  * @author rifatul.islam
- * @author shakhawat.hossain
  * @since 8/7/14.
  */
 
-public interface BookService {
+public interface BookDao {
 
     public void addBook(Book book);
 
-    public void addWishedBook(WishedBook wishedBook);
-
     public List<Category> getAllCategory();
-
 }
