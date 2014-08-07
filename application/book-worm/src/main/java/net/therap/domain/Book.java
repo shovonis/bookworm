@@ -1,6 +1,6 @@
 package net.therap.domain;
 
-import net.therap.domain.enums.BookQuality;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -20,9 +20,11 @@ public class Book {
     private int id;
 
     @Column(name = "title")
+    @NotEmpty(message = "Title Cannot Be Empty")
     private String title;
 
     @Column(name = "author")
+    @NotEmpty(message = "Author name cannot be empty")
     private String author;
 
     @Column(name = "edition")

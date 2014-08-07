@@ -20,7 +20,7 @@
         <legend>
             <h2>Add Book</h2>
         </legend>
-        <form th:action="@{#}" th:method="post" th:object="${book}">
+        <form th:action="@{addbook}" th:method="post" th:object="${book}" enctype="multipart/form-data">
             <div class="span7">
                 <div class="padding10">
                     <label style="float: left">Book Title</label>
@@ -46,7 +46,7 @@
                         <div class="tile">
                             <img src="/resources/images/access.png" alt="upload image"/>
                         </div>
-                        <button class="meduim-size icon-upload margin5">Upload</button>
+                        <input type="file" class="meduim-size" name="bookImage" value="Add Image"/>
                     </div>
                 </fieldset>
             </div>
@@ -78,21 +78,18 @@
                         <input type="text" th:field="*{edition}" placeholder="year/edition"/>
                         <button class="btn-clear" tabindex="-1"></button>
                     </div>
-
-                    <br/><br/>
-                    <label style="float: left">Book Quality</label>
-                    <br/>
-
-
                 </div>
             </div>
-
-            <div class="span3 notice offset8">
-                ... content ...
+            <!--<div class="spn4"></div>-->
+            <div id="quality_description" class="span3 notice offset8" style="position: relative ; top: 100px">
+                Readable
             </div>
 
             <div class="span7">
                 <div class="padding10">
+
+                    <label style="float: left">Book Quality</label>
+                    <br/>
 
                     <div class="stepper rounded" data-steps="4"
                          data-role="stepper" id="demo_stepper_methods">
@@ -107,8 +104,8 @@
                     <br/>
                     <label style="float: left">Book Details</label>
 
-                    <div class="input-control textarea" th:field="*{details}">
-                        <textarea>Books details</textarea>
+                    <div class="input-control textarea">
+                        <textarea th:field="*{details}">Books details</textarea>
                     </div>
                 </div>
             </div>

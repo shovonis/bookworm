@@ -2,23 +2,12 @@
 <ehcache xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='ehcache.xsd'>
     <defaultCache eternal='true' timeToLiveSeconds="60" maxElementsInMemory='100' overflowToDisk='false'  />
 
-    <cache name='project'
-           timeToLiveSeconds="120"
-           maxElementsInMemory='10000'
-           eternal='false'
-           overflowToDisk='false'
-           maxElementsOnDisk="1000"
-           diskPersistent="false"
-           diskExpiryThreadIntervalSeconds="1"
-           memoryStoreEvictionPolicy="LRU"
-            />
-
-    <cache name="singleStudent"
-           timeToLiveSeconds="300"
-           maxElementsInMemory="10"
+    <cache name="BookCategory"
+           timeToLiveSeconds="60"
+           maxElementsInMemory="100"
            eternal="false"
            overflowToDisk="false"
-           maxElementsOnDisk="1000"
+           maxElementsOnDisk="10000000"
            diskPersistent="false"
            diskExpiryThreadIntervalSeconds="1"
            memoryStoreEvictionPolicy="LRU"/>

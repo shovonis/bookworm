@@ -12,8 +12,9 @@
     <mvc:annotation-driven/>
 
     <import resource="mvc-view-config.xml"/>
-    <import resource="business-config.xml" />
-    <import resource="srping-security.xml" />
+    <import resource="business-config.xml"/>
+    <import resource="srping-security.xml"/>
+    <import resource="tools-config.xml"/>
 
 
     <bean id="multipartResolver"
