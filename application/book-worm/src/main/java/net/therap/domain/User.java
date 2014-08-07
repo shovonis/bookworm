@@ -1,6 +1,5 @@
 package net.therap.domain;
 
-import cz.jirutka.validator.spring.SpELAssert;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -17,8 +16,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "user")
-@SpELAssert(value = "password.equals(retypedPassword)",
-        message = "{Password did not matched}")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

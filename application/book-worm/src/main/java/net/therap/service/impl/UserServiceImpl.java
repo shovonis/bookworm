@@ -1,10 +1,9 @@
-package net.therap.service;
+package net.therap.service.impl;
 
 import net.therap.dao.UserDao;
 import net.therap.domain.User;
+import net.therap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,11 +26,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        
-        String hashedPassword = passwordEncoder.encode("123");
-        System.out.println(passwordEncoder.matches(hashedPassword,"123"));
-        System.out.println(hashedPassword);
-//        userDao.addUser(user);
+        //TODO: Complete encryption
+//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String hashedPassword = passwordEncoder.encode("123");
+//        System.out.println(passwordEncoder.matches(hashedPassword, "123"));
+//        System.out.println(hashedPassword);
+        userDao.addUser(user);
     }
 }
