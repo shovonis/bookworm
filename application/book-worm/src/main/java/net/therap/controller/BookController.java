@@ -31,7 +31,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping (value = "/addbook", method = RequestMethod.GET)
+    @RequestMapping(value = "/addbook", method = RequestMethod.GET)
     public ModelAndView getBookForm() {
         List<Category> categories = bookService.getAllCategory();
 
@@ -58,20 +58,20 @@ public class BookController {
         return "home";
     }
 
-    @RequestMapping (value = "/addWishedBook", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void addWishedBook(@RequestBody WishedBook wishedBook) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1000); //TODO: Remove this.
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("request received with " + wishedBook.toString());
+        System.out.println("request received with " + wishedBook.toString()); //TODO:Use Info log
     }
 
     @RequestMapping(value = "/removeWishedBook", method = RequestMethod.POST)
     @ResponseBody
-    public void removeWishedBook(@RequestParam("wishedBookId") int wishedBookId){
-       System.out.println("wishedBook id = "+wishedBookId);
+    public void removeWishedBook(@RequestParam("wishedBookId") int wishedBookId) {
+        System.out.println("wishedBook id = " + wishedBookId); //TODO:Use Info log
     }
 }
