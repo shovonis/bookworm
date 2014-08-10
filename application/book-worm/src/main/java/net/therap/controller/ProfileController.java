@@ -1,5 +1,6 @@
 package net.therap.controller;
 
+import net.therap.domain.Area;
 import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -25,23 +27,32 @@ public class ProfileController {
 
     @Autowired
     UserService userService;
+    private User user;
 
     @RequestMapping (value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
-        User user = (User) httpSession.getAttribute("user");
+        user = (User) httpSession.getAttribute("user");
         int userId = user.getUserId();
 
         Collection<Book> postedBooks = userService.getPostedBooksByUserId(userId);
         Collection<WishedBook> wishedBooks = userService.getWishedBooksByUserId(userId);
+        Collection<Area> areas  = userService.getAreas();
 
         ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.addObject("postedBooks", postedBooks);
         modelAndView.addObject("wishedBooks", wishedBooks);
         modelAndView.addObject("wishedBook", new WishedBook());
+        modelAndView.addObject("areas", areas);
         modelAndView.addObject("user", user);
 
         modelAndView.setViewName("user/profile");
         return modelAndView;
+    }
+
+    @RequestMapping ("/getProfilePicture")
+    @ResponseBody
+    public byte[] getProfilePicture() {
+        return user.getProfilePicture();
     }
 }

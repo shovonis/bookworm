@@ -1,6 +1,7 @@
 package net.therap.dao.jpa;
 
 import net.therap.dao.UserDao;
+import net.therap.domain.Area;
 import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
@@ -75,5 +76,11 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("userId", userId);
         User user =  (User) query.getSingleResult();
         return user.getWishedBooks();
+    }
+
+    @Override
+    public Collection<Area> getAreas() {
+        Query query = entityManager.createQuery("SELECT area from Area area", Area.class);
+        return query.getResultList();
     }
 }

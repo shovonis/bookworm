@@ -1,5 +1,6 @@
 package net.therap.service;
 
+import net.therap.domain.Area;
 import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
@@ -21,4 +22,5 @@ public interface UserService {
 
     Collection<WishedBook> getWishedBooksByUserId(int userId);
 
+    Collection<Area> getAreas();
 }

@@ -1,6 +1,7 @@
 package net.therap.service.impl;
 
 import net.therap.dao.UserDao;
+import net.therap.domain.Area;
 import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
@@ -46,5 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection<WishedBook> getWishedBooksByUserId(int userId) {
         return userDao.getWishedBooksByUserId(userId);
+    }
+
+    @Override
+    public Collection<Area> getAreas() {
+        return userDao.getAreas();
     }
 }

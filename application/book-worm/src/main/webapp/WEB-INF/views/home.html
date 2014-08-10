@@ -20,37 +20,12 @@
                     <legend>
                         Recently Posted books
                     </legend>
-                    <div class="tile ol-transparent">
-                        <img src="images/bizspark_b.png" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/bizspark_b.png" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/bizspark_b.png" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/bizspark_b.png" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/bizspark_b_2.png" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/bizspark_b_2.png" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/bizspark_b_2.png" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/alchemist.jpg" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/deceptionpoint.jpg" style="height:inherit; width:inherit "/>
-                    </div>
-                    <div class="tile ol-transparent">
-                        <img src="images/deceptionpoint.jpg" style="height:inherit; width:inherit "/>
-                    </div>
 
+                        <div class=" tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}">
+                            <img th:src="@{/getBookPhoto/}+${row.index}" style="height:inherit; width:inherit "/>
+
+                            <div class="overlay-fluid"><a th:text="${recentBookPost.title}"></a> </div>
+                        </div>
                 </fieldset>
             </div>
             <div class="span2">

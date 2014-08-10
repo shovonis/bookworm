@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -46,6 +47,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public void removeWishedBookById(int wishedBookId) {
        bookDao.removeWishedBookById(wishedBookId);
+    }
+
+    @Override
+    public List<Book> getRecentlyPostedBooks() {
+       return bookDao.getRecentlyPostedBooks();
     }
 
     @Override

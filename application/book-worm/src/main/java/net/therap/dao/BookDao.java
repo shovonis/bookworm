@@ -24,4 +24,6 @@ public interface BookDao {
     void removePostedBookById(int postedBookId);
 
     void removeWishedBookById(int wishedBookId);
+
+    List<Book> getRecentlyPostedBooks();
 }

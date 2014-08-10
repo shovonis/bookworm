@@ -9,6 +9,30 @@
 
         $(document).ready(function () {
 
+            $("#updateSaveButton").click(function () {
+                updateSave = $(this).val();
+                if (updateSave == "update") {
+                    $("#firstName").prop("disabled", false);
+                    $("#lastName").prop("disabled", false);
+                    $("#email").prop("disabled", false);
+                    $("#areaSelector").prop("disabled", false);
+
+                    $(this).val("save");
+
+                }
+                else {
+                    $("#firstName").prop("disabled", true);
+                    ;
+                    $("#lastName").prop("disabled", true);
+                    $("#email").prop("disabled", true);
+                    $("#areaSelector").prop("disabled", true);
+
+                    $(this).val("update");
+                }
+
+
+            });
+
             $("#wishedBookAddButton").click(function () {
                 var title = $('#bookTitle').val();
                 var author = $('#bookAuthor').val();
@@ -29,7 +53,7 @@
                         alert(addedWishedBookId);
 
                         $("#wishedBookTable  tr:last").after
-                        ("<tr id="+addedWishedBookId+"> <td>" + title + "</td> <td>" + author + "</td> <td> remove </td> </tr>").show("slow");
+                        ("<tr id=" + addedWishedBookId + "> <td>" + title + "</td> <td>" + author + "</td> <td> remove </td> </tr>").show("slow");
 
                         $('#bookTitle').val("");
                         $('#bookAuthor').val("");
@@ -98,164 +122,166 @@
 <body class="metro">
 <div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
 <div class="container">
-<div class="accordion with-marker" data-role="accordion" data-closeany="true">
-<div class="accordion-frame active ">
-    <a class="heading" href="#">Posted Booklist</a>
+    <div class="accordion with-marker" data-role="accordion" data-closeany="true">
+        <div class="accordion-frame active ">
+            <a class="heading" href="#">Posted Booklist</a>
 
-    <div class="content">
-        <div class="grid">
-            <div class="row">
+            <div class="content">
+                <div class="grid">
+                    <div class="row">
 
-                <table class="table striped">
-                    <thead>
-                    <tr th:if="${not #lists.isEmpty(postedBooks)}">
-                        <th class="text-left">Title</th>
-                        <th class="text-left">Author</th>
-                        <th class="text-left">Post Date</th>
-                        <th class="text-left">Status</th>
-                        <th class="text-left">Action</th>
-                    </tr>
+                        <table class="table striped">
+                            <thead>
+                            <tr th:if="${not #lists.isEmpty(postedBooks)}">
+                                <th class="text-left">Title</th>
+                                <th class="text-left">Author</th>
+                                <th class="text-left">Post Date</th>
+                                <th class="text-left">Status</th>
+                                <th class="text-left">Action</th>
+                            </tr>
 
-                    <div th:if="${#lists.isEmpty(postedBooks)}">
-                     You have no book post .
-                     post a book now
-                    </div>
-
-                    </thead>
-                    <tbody>
-                    <tr th:each="postedBook : ${postedBooks}" th:id = "${postedBook.id}" >
-                        <td th:text="${postedBook.title}">title</td>
-                        <td class="right" th:text="${postedBook.author}"> author </td>
-                        <td class="right" th:text="${postedBook.postDateTime}"></td>
-                        <td class="right">open</td>
-                        <td><input type="button" class="removePostedBook button mini danger" value="remove"/></td>
-                    </tr>
-
-                    </tbody>
-                    <tfoot>
-
-                    </tfoot>
-                </table>
-                <div id="loadingImagePostedBook" align="center" style="display: none">
-                    <img src="/resources/images/wait_small.gif"/>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="accordion-frame ">
-    <a class="heading" href="#">WishedBook</a>
-
-    <div class="content">
-        <div class="grid">
-            <div class="row">
-                <div class="span6">
-                    <table class="table striped" id="wishedBookTable">
-                        <thead>
-                        <tr th:if="${not #lists.isEmpty(wishedBooks)}">
-                            <th class="text-left">Title</th>
-                            <th class="text-left">Author</th>
-                            <th class="text-left">Action</th>
-                        </tr>
-
-                        <div th:if="${#lists.isEmpty(wishedBooks)}" id="wishedBooksEmpty">
-                            No Books in wished List
-                         </div>
-
-                        </thead>
-                        <tbody>
-                        <tr th:each="wishedBook : ${wishedBooks}" th:id = "${wishedBook.id}" >
-                            <td th:text="${wishedBook.title}">Title</td>
-                            <td th:text="${wishedBook.author}" class="right">author</td>
-                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
-                        </tr>
-
-                        </tbody>
-                        <tfoot></tfoot>
-                    </table>
-                    <div id="loadingImageWishedBook" align="center" style="display: none">
-                        <img src="/resources/images/wait_small.gif"/>
-                    </div>
-
-                </div>
-                <div class="span1"></div>
-                <div class="span4">
-                    <form id="addWishedBookForm" th:action="@{/addWishedBook}">
-                        <fieldset>
-                            <legend>Add New Book To WishList</legend>
-                            <lable>Title</lable>
-                            <div class="input-control text" data-role="input-control">
-                                <input type="text" id="bookTitle" placeholder="type title"/>
-                                <button class="btn-clear" tabindex="-1"></button>
-                            </div>
-                            <lable>Author</lable>
-                            <div class="input-control text" data-role="input-control">
-                                <input type="text" id="bookAuthor" placeholder="type author"/>
-                                <button class="btn-reveal" tabindex="-1"></button>
+                            <div th:if="${#lists.isEmpty(postedBooks)}">
+                                You have no book post .
+                                post a book now
                             </div>
 
-                            <input type="button" id="wishedBookAddButton" class="success" value="Add"/>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="accordion-frame ">
-    <a class="heading" href="#">Personal Information</a>
+                            </thead>
+                            <tbody>
+                            <tr th:each="postedBook : ${postedBooks}" th:id="${postedBook.id}">
+                                <td th:text="${postedBook.title}">title</td>
+                                <td class="right" th:text="${postedBook.author}"> author</td>
+                                <td class="right" th:text="${postedBook.postDateTime}"></td>
+                                <td class="right">open</td>
+                                <td><input type="button" class="removePostedBook button mini danger" value="remove"/>
+                                </td>
+                            </tr>
 
-    <div class="content">
-        <div class="grid">
-            <div class="row">
-                <div class="span5">
-                    <form>
-                        <fieldset>
-                            <legend>Basic Info</legend>
-                            <lable>First Name</lable>
-                            <div class="input-control text" data-role="input-control">
-                                <input id="firstName" type="text" disabled = "disabled" th:value ="${user.firstName}" />
-                                <button class="btn-clear" tabindex="-1"></button>
-                            </div>
-                            <lable>Last Name</lable>
-                            <div class="input-control text" data-role="input-control">
-                                <input id="lastName" type="text" disabled = "disabled" th:value ="${user.lastName}"  />
-                                <button class="btn-clear" tabindex="-1"></button>
-                            </div>
-                            <lable>Email</lable>
-                            <div class="input-control text" data-role="input-control">
-                                <input id="email" type="text" disabled = "disabled" th:value ="${user.email}"  />
-                                <button class="btn-reveal" tabindex="-1"></button>
-                            </div>
+                            </tbody>
+                            <tfoot>
 
-                            <lable>Area</lable>
-                            <div class="input-control select">
-                                <select>
-                                    <option>District 1</option>
-                                    <option>District 2</option>
-                                    <option>District 3</option>
-                                </select>
-                            </div>
-
-                            <input type="submit" class="success" value="update"/>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="span1"></div>
-                <fieldset>
-                    <legend>Profile Picture</legend>
-                    <div class="span3">
-                        <div class="tile">
-                            <a class="button">Update</a>
-                            <img src="/resources/images/access.png"/>
+                            </tfoot>
+                        </table>
+                        <div id="loadingImagePostedBook" align="center" style="display: none">
+                            <img src="/resources/images/wait_small.gif"/>
                         </div>
                     </div>
-                </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-frame ">
+            <a class="heading" href="#">WishedBook</a>
+
+            <div class="content">
+                <div class="grid">
+                    <div class="row">
+                        <div class="span6">
+                            <table class="table striped" id="wishedBookTable">
+                                <thead>
+                                <tr th:if="${not #lists.isEmpty(wishedBooks)}">
+                                    <th class="text-left">Title</th>
+                                    <th class="text-left">Author</th>
+                                    <th class="text-left">Action</th>
+                                </tr>
+
+                                <div th:if="${#lists.isEmpty(wishedBooks)}" id="wishedBooksEmpty">
+                                    No Books in wished List
+                                </div>
+
+                                </thead>
+                                <tbody>
+                                <tr th:each="wishedBook : ${wishedBooks}" th:id="${wishedBook.id}">
+                                    <td th:text="${wishedBook.title}">Title</td>
+                                    <td th:text="${wishedBook.author}" class="right">author</td>
+                                    <td><input type="button" class="removeWishedBook button mini danger"
+                                               value="remove"/></td>
+                                </tr>
+
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                            <div id="loadingImageWishedBook" align="center" style="display: none">
+                                <img src="/resources/images/wait_small.gif"/>
+                            </div>
+
+                        </div>
+                        <div class="span1"></div>
+                        <div class="span4">
+                            <form id="addWishedBookForm" th:action="@{/addWishedBook}">
+                                <fieldset>
+                                    <legend>Add New Book To WishList</legend>
+                                    <lable>Title</lable>
+                                    <div class="input-control text" data-role="input-control">
+                                        <input type="text" id="bookTitle" placeholder="type title"/>
+                                        <button class="btn-clear" tabindex="-1"></button>
+                                    </div>
+                                    <lable>Author</lable>
+                                    <div class="input-control text" data-role="input-control">
+                                        <input type="text" id="bookAuthor" placeholder="type author"/>
+                                        <button class="btn-reveal" tabindex="-1"></button>
+                                    </div>
+
+                                    <input type="button" id="wishedBookAddButton" class="success" value="Add"/>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-frame ">
+            <a class="heading" href="#">Personal Information</a>
+
+            <div class="content">
+                <div class="grid">
+                    <div class="row">
+                        <div class="span5">
+
+                            <fieldset>
+                                <legend>Basic Info</legend>
+                                <lable>First Name</lable>
+                                <div class="input-control text" data-role="input-control">
+                                    <input id="firstName" type="text" disabled="disabled" th:value="${user.firstName}"/>
+                                    <button class="btn-clear" tabindex="-1"></button>
+                                </div>
+                                <lable>Last Name</lable>
+                                <div class="input-control text" data-role="input-control">
+                                    <input id="lastName" type="text" disabled="disabled" th:value="${user.lastName}"/>
+                                    <button class="btn-clear" tabindex="-1"></button>
+                                </div>
+                                <lable>Email</lable>
+                                <div class="input-control text" data-role="input-control">
+                                    <input id="email" type="text" disabled="disabled" th:value="${user.email}"/>
+                                    <button class="btn-reveal" tabindex="-1"></button>
+                                </div>
+
+                                <lable>Area</lable>
+                                <div class="input-control select">
+                                    <select th:field="*{user.area.areaCode}" id="areaSelector" disabled="disabled">
+                                        <option th:each="area : ${areas}"
+                                                th:selected="${area.areaCode == user.area.areaCode}? 'true' : 'false' "
+                                                th:value="${area.areaCode}"
+                                                th:text="${area.areaName} ">area name
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <input type="submit" class="success" id="updateSaveButton" value="update"/>
+                            </fieldset>
+
+                        </div>
+                        <div class="span1"></div>
+                        <fieldset>
+                            <legend>Profile Picture</legend>
+                            <div class="span3">
+                                <img width="300px" height="300px" th:src="@{/getProfilePicture}"/>
+                                <a class="button" id="profilePicture">Update</a>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 
 </div>
 </body>

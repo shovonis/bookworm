@@ -1,5 +1,6 @@
 package net.therap.dao;
 
+import net.therap.domain.Area;
 import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
@@ -21,4 +22,7 @@ public interface UserDao {
     java.util.Collection<Book> getPostedBooksByUserId(int userId);
 
     Collection<WishedBook> getWishedBooksByUserId(int userId);
+
+    Collection<Area> getAreas();
+
 }

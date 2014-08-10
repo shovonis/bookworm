@@ -74,4 +74,10 @@ public class BookDaoImpl implements BookDao {
         WishedBook wishedBookToBeRemoved = entityManager.find(WishedBook.class, wishedBookId);
         entityManager.remove(wishedBookToBeRemoved);
     }
+
+    @Override
+    public List<Book> getRecentlyPostedBooks() {
+        Query query = entityManager.createQuery("SELECT book FROM Book book ORDER BY book.postDateTime DESC");
+        return query.getResultList();
+    }
 }
