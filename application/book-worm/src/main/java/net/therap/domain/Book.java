@@ -54,10 +54,10 @@ public class Book {
     @Column(name = "post_timestamp")
     private Timestamp postDateTime = new java.sql.Timestamp(new Date().getTime());
 
-    @ManyToMany(mappedBy = "postedBooks", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<User> users;
+    @ManyToOne
+    private User user;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ExchangeBook> exchangeBooks;
 
     public int getId() {
@@ -140,12 +140,12 @@ public class Book {
         this.photo = photo;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<ExchangeBook> getExchangeBooks() {
@@ -176,9 +176,7 @@ public class Book {
                 ", quality=" + quality +
                 ", price=" + price +
                 ", details='" + details + '\'' +
-                ", photo=" + Arrays.toString(photo) +
-                ", users=" + users +
-                ", exchangeBooks=" + exchangeBooks +
+                ", postDateTime=" + postDateTime +
                 '}';
     }
 

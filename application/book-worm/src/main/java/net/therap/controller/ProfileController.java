@@ -26,12 +26,12 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @RequestMapping (value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
         int userId = user.getUserId();
 
-        Collection<Book> postedBooks  = userService.getPostedBooksByUserId(userId);
+        Collection<Book> postedBooks = userService.getPostedBooksByUserId(userId);
         Collection<WishedBook> wishedBooks = userService.getWishedBooksByUserId(userId);
 
         ModelAndView modelAndView = new ModelAndView();

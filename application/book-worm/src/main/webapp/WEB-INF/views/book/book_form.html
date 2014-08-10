@@ -20,19 +20,19 @@
         <legend>
             <h2>Add Book</h2>
         </legend>
-        <form th:action="@{addbook}" th:method="post" th:object="${book}" enctype="multipart/form-data">
+        <form th:action="@{/addbook}" th:method="post" th:object="${book}" enctype="multipart/form-data">
             <div class="span7">
                 <div class="padding10">
                     <label style="float: left">Book Title</label>
 
                     <div class="input-control text" data-role="input-control">
-                        <input type="text" th:field="*{title}" placeholder="Title"/>
+                        <input type="text" th:field="*{title}" placeholder="Title" th:attr="value=*{title}"/>
                         <button class="btn-clear" tabindex="-1"></button>
                     </div>
                     <label style="float: left">Author</label>
 
                     <div class="input-control text" data-role="input-control">
-                        <input type="text" th:field="*{author}" placeholder="Author"/>
+                        <input type="text" th:field="*{author}" placeholder="Author" th:attr="value=*{author}"/>
                         <button class="btn-clear" tabindex="-1"></button>
                     </div>
                 </div>
