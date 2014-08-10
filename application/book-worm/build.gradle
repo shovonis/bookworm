@@ -106,7 +106,7 @@ test {
 
 task deploy(type: Copy) {
     from 'build/libs/book-worm.war'
-    into '/usr/local/Tomcat/apache-tomcat-8.0.8/webapps/'
+    into '/home/rifatul.islam/apache-tomcat-7.0.53/webapps/'
 }
 
 task wrapper(type: Wrapper) { gradleVersion = '1.12' }

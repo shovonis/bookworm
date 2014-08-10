@@ -2,7 +2,14 @@
  * Created by rifatul.islam on 8/7/14.
  */
 
-//TODO: Bug here . step value cant be negative or more than maximum step.
+
+function onExchangeBookClick(id) {
+    alert(id);
+    var div = document.getElementById("table_body").innerHTML;
+    var newRowElement = '<tr>' + '<td><input type="text" th:field="${exchangeBook.bookTitle}"/></td>' +
+        '<td><input type="text" th:field="${exchangeBook.bookAuthor}"/></td>' + '</tr>';
+    document.getElementById("table_body").innerHTML = div + newRowElement;
+}
 
 function onclickOfNext(id) {
     $('#demo_stepper_methods').stepper('next');
@@ -47,3 +54,4 @@ function processQualityDescription(stepValue) {
     }
     document.getElementById("quality_description").innerHTML = qualityDiv;
 }
+

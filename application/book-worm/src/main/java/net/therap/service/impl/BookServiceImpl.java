@@ -2,9 +2,8 @@ package net.therap.service.impl;
 
 import net.therap.dao.BookDao;
 import net.therap.domain.Book;
-
-import net.therap.domain.WishedBook;
 import net.therap.domain.Category;
+import net.therap.domain.WishedBook;
 import net.therap.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

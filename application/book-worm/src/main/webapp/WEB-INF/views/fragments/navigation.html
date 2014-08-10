@@ -4,7 +4,7 @@
 <div th:fragment="navigation">
     <nav class="navigation-bar dark">
         <div class="navigation-bar-content container">
-            <a href="home" class="element">Bookworm</a>
+            <a href="/home" th:href="@{/home}" class="element">Bookworm</a>
             <span class="element-divider"></span>
 
             <ul class="element-menu">
@@ -26,24 +26,24 @@
                             <span class="icon-cog"></span>
                         </a>
                         <ul class="dropdown-menu dark place-right" data-role="dropdown">
-                            <li><a href="login">Sign In</a></li>
-                            <li><a href="registration">Register</a></li>
+                            <li><a href="/login" th:href="@{/login}">Sign In</a></li>
+                            <li><a href="registration" th:href="@{/registration}">Register</a></li>
                         </ul>
                     </div>
                     <span class="element-divider place-right"></span>
                     <button class="element image-button image-left place-right">
-                        <img src="resources/images/information.png"/>
+                        <img src="/resources/images/information.png" th:href="@{/resources/images/information.png}"/>
                     </button>
 
                     <span class="element-divider place-right"></span>
                     <button class="element image-button image-left place-right">
                         Mr.Xyx
-                        <img src="resources/images/me.jpg"/>
+                        <img src="/resources/images/me.jpg" th:href="@{/resources/images/me.jpg}"/>
                     </button>
 
                     <span class="element-divider place-right"></span>
                     <button class="element image-button image-left place-right">
-                        <a href="home">Home</a>
+                        <a href="/home" th:href="@{/home}">Home</a>
                     </button>
 
                 </div>

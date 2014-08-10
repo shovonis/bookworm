@@ -123,11 +123,35 @@
 
                         <label style="float: left">Exchange List</label>
 
-                        <div class="input-control text" data-role="input-control">
-                            <input type="text" placeholder="Exchange list"/>
-                            <button class="btn-clear" tabindex="-1"></button>
-                        </div>
+                        <!--<div class="input-control text" data-role="input-control">-->
+                        <!--<input type="text" placeholder="Exchange list"/>-->
+                        <!--<button class="btn-clear" tabindex="-1"></button>-->
+                        <!--</div>-->
 
+
+                        <table class="table hovered">
+                            <thead>
+                            <tr>
+                                <th class="text-left">Title</th>
+                                <th class="text-left">Author</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <th:block th:each="exchangeBook : *{exchangeBooks}" id="table_body">
+                                <tr>
+                                    <td><input type="text" th:text="${exchangeBook.bookTitle}"
+                                               th:field="${exchangeBook.bookTitle}"/></td>
+                                    <td><input type="text" th:text="${exchangeBook.bookAuthor}"
+                                               th:field="${exchangeBook.bookAuthor}"/></td>
+                                </tr>
+                            </th:block>
+
+                            </tbody>
+
+                            <tfoot></tfoot>
+                        </table>
+                        <a class="button" onclick="onExchangeBookClick('table_body')">Add Exchange Book</a>
                     </fieldset>
                 </div>
             </div>
