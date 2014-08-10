@@ -1,11 +1,14 @@
 package net.therap.service.impl;
 
 import net.therap.dao.UserDao;
+import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 /**
  * @author rifatul.islam
@@ -32,5 +35,10 @@ public class UserServiceImpl implements UserService {
 //        System.out.println(passwordEncoder.matches(hashedPassword, "123"));
 //        System.out.println(hashedPassword);
         userDao.addUser(user);
+    }
+
+    @Override
+    public Collection<Book> getPostedBooksByUserId(int userId) {
+      return userDao.getPostedBooksByUserId(userId);
     }
 }

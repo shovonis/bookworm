@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -60,7 +61,7 @@ public class User {
     private byte[] profilePicture;
 
     @Column(name = "reputation_point")
-    private double reputationPoint;
+    private Double reputationPoint;
 
     @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
     private Set<Notification> notifications;
@@ -68,7 +69,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<WishedBook> wishedBooks;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "user_book",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
@@ -204,4 +205,5 @@ public class User {
                 ", postedBooks=" + postedBooks +
                 '}';
     }
+
 }

@@ -34,7 +34,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addWishedBook(WishedBook wishedBook) {
+    public void removePostedBookById(int postedBookId) {
+        bookDao.removePostedBookById(postedBookId);
+    }
 
+    @Override
+    public void addWishedBook(WishedBook wishedBook) {
+       bookDao.addWishedBook(wishedBook);
     }
 }

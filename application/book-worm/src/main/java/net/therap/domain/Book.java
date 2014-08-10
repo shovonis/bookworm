@@ -3,6 +3,7 @@ package net.therap.domain;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -49,7 +50,10 @@ public class Book {
     @Lob
     private byte[] photo;
 
-    @ManyToMany(mappedBy = "postedBooks", fetch = FetchType.LAZY)
+    @Column(name = "post_timestamp")
+    private Timestamp postDateTime;
+
+    @ManyToMany(mappedBy = "postedBooks", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<User> users;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -1,6 +1,7 @@
 package net.therap.dao.jpa;
 
 import net.therap.dao.UserDao;
+import net.therap.domain.Book;
 import net.therap.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * @author shakhawat.hossain
@@ -48,5 +50,17 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(String userId) {
 
+    }
+
+    @Override
+    public Collection<Book> getPostedBooksByUserId(int userId) {
+        Query query =  entityManager
+                .createQuery("SELECT  user FROM User user " +
+                        "LEFT JOIN FETCH user.postedBooks " +
+                        "WHERE user.userId = :userId");
+
+        query.setParameter("userId", userId);
+        User user =  (User) query.getSingleResult();
+        return user.getPostedBooks();
     }
 }

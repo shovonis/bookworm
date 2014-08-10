@@ -19,4 +19,5 @@ public interface BookService {
 
     public List<Category> getAllCategory();
 
+    void removePostedBookById(int postedBookId);
 }

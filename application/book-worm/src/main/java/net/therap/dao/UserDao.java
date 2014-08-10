@@ -1,5 +1,6 @@
 package net.therap.dao;
 
+import net.therap.domain.Book;
 import net.therap.domain.User;
 
 /**
@@ -13,4 +14,6 @@ public interface UserDao {
     public void addUser(User user);
 
     public void deleteUser(String userId);
+
+    java.util.Collection<Book> getPostedBooksByUserId(int userId);
 }

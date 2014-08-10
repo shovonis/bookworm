@@ -3,6 +3,7 @@ package net.therap.dao.jpa;
 import net.therap.dao.BookDao;
 import net.therap.domain.Book;
 import net.therap.domain.Category;
+import net.therap.domain.WishedBook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,5 +46,18 @@ public class BookDaoImpl implements BookDao {
             log.error("Error in Executing Query" + exp);
         }
         return categoryList;
+    }
+
+    @Override
+    public void addWishedBook(WishedBook wishedBook) {
+
+    }
+
+    @Override
+    public void removePostedBookById(int postedBookId) {
+        Book bookToBeRemoved  = entityManager.find(Book.class, postedBookId);
+        entityManager.remove(bookToBeRemoved);
+
+        log.debug("removed book of id ",postedBookId);
     }
 }

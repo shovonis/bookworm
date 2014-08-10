@@ -61,17 +61,20 @@ public class BookController {
     @RequestMapping (value = "/addWishedBook", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void addWishedBook(@RequestBody WishedBook wishedBook) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("request received with " + wishedBook.toString());
+        bookService.addWishedBook(wishedBook);
     }
 
     @RequestMapping(value = "/removeWishedBook", method = RequestMethod.POST)
     @ResponseBody
     public void removeWishedBook(@RequestParam("wishedBookId") int wishedBookId){
-       System.out.println("wishedBook id = "+wishedBookId);
+       log.debug("wishedBook id = {}", wishedBookId);
+    }
+
+    @RequestMapping(value = "/removePostedBook", method = RequestMethod.POST)
+    @ResponseBody
+    public void removePostedBook(@RequestParam("postedBookId") int postedBookId){
+        log.debug("remove request for posted book {}", postedBookId);
+
+        bookService.removePostedBookById(postedBookId);
     }
 }

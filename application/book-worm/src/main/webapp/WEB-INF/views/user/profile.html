@@ -61,6 +61,29 @@
 
             });
 
+            $(".removePostedBook").click(function () {
+                var rowId = $(this).closest('tr').attr('id');
+
+                $.ajax({
+                    url: "/removePostedBook",
+                    type: "POST",
+                    data: {"postedBookId": rowId},
+                    beforeSend: function (xhr) {
+                        $('#loadingImagePostedBook').show();
+                    },
+
+                    success: function () {
+                        $("#" + rowId).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                        $('#loadingImagePostedBook').hide();
+                    }
+
+                });
+
+
+            });
+
 //            event.preventDefault();
 
 
@@ -74,69 +97,44 @@
 <div class="container">
 <div class="accordion with-marker" data-role="accordion" data-closeany="true">
 <div class="accordion-frame active ">
-    <a class="heading" href="#">Offered Booklist</a>
+    <a class="heading" href="#">Posted Booklist</a>
 
     <div class="content">
         <div class="grid">
             <div class="row">
+
                 <table class="table striped">
                     <thead>
-                    <tr>
+                    <tr th:if="${not #lists.isEmpty(postedBooks)}">
                         <th class="text-left">Title</th>
                         <th class="text-left">Author</th>
                         <th class="text-left">Offered Date</th>
                         <th class="text-left">Status</th>
                         <th class="text-left">Action</th>
                     </tr>
+
+                    <div th:if="${#lists.isEmpty(postedBooks)}">
+                       post a book
+                    </div>
+
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Bing</td>
-                        <td class="right">0:00:01</td>
+                    <tr th:each="postedBook : ${postedBooks}" th:id = "${postedBook.id}" >
+                        <td th:text="${postedBook.title}">title</td>
+                        <td class="right" th:text="${postedBook.author}"> author </td>
                         <td class="right">0,1 Mb</td>
                         <td class="right">0 Mb</td>
-                        <td class="right">0,1 Mb</td>
+                        <td><input type="button" class="removePostedBook button mini danger" value="remove"/></td>
                     </tr>
-                    <tr>
-                        <td>Internet Explorer</td>
-                        <td class="right">0:00:01</td>
-                        <td class="right">0,1 Mb</td>
-                        <td class="right">0 Mb</td>
-                        <td class="right">0,1 Mb</td>
-                    </tr>
-                    <tr>
-                        <td>Chrome</td>
-                        <td class="right">0:00:01</td>
-                        <td class="right">0,1 Mb</td>
-                        <td class="right">0 Mb</td>
-                        <td class="right">0,1 Mb</td>
-                    </tr>
-                    <tr>
-                        <td>News</td>
-                        <td class="right">0:00:01</td>
-                        <td class="right">0,1 Mb</td>
-                        <td class="right">0 Mb</td>
-                        <td class="right">0,1 Mb</td>
-                    </tr>
-                    <tr>
-                        <td>Weather</td>
-                        <td class="right">0:00:01</td>
-                        <td class="right">0,1 Mb</td>
-                        <td class="right">0 Mb</td>
-                        <td class="right">0,1 Mb</td>
-                    </tr>
-                    <tr>
-                        <td>Music</td>
-                        <td class="right">0:00:01</td>
-                        <td class="right">0,1 Mb</td>
-                        <td class="right">0 Mb</td>
-                        <td class="right">0,1 Mb</td>
-                    </tr>
+
                     </tbody>
                     <tfoot>
 
                     </tfoot>
                 </table>
+                <div id="loadingImagePostedBook" align="center" style="display: none">
+                    <img src="/resources/images/wait_small.gif"/>
+                </div>
             </div>
         </div>
     </div>
