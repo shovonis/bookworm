@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * @author rifatul.islam
+ * @author shakhawat.hossain
  * @since 8/7/14.
  */
 
@@ -38,7 +39,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addWishedBook(WishedBook wishedBook) {
-       bookDao.addWishedBook(wishedBook);
+    public void removeWishedBookById(int wishedBookId) {
+       bookDao.removeWishedBookById(wishedBookId);
+    }
+
+    @Override
+    public int addWishedBookAndGetId(WishedBook wishedBook) {
+       return bookDao.addWishedBookAndGetId(wishedBook);
     }
 }

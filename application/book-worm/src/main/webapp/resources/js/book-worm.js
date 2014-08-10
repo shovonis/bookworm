@@ -5,10 +5,11 @@
 
 function onExchangeBookClick(id) {
     alert(id);
-    var div = document.getElementById("table_body").innerHTML;
     var newRowElement = '<tr>' + '<td><input type="text" th:field="${exchangeBook.bookTitle}"/></td>' +
         '<td><input type="text" th:field="${exchangeBook.bookAuthor}"/></td>' + '</tr>';
-    document.getElementById("table_body").innerHTML = div + newRowElement;
+    $("#exchangeBookListTable  tr:last").after(newRowElement);
+
+
 }
 
 function onclickOfNext(id) {

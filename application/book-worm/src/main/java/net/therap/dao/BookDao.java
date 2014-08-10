@@ -17,7 +17,9 @@ public interface BookDao {
 
     public List<Category> getAllCategory();
 
-    void addWishedBook(WishedBook wishedBook);
+    int addWishedBookAndGetId(WishedBook wishedBook);
 
     void removePostedBookById(int postedBookId);
+
+    void removeWishedBookById(int wishedBookId);
 }

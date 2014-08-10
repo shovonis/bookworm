@@ -25,14 +25,17 @@
                         xhr.setRequestHeader("Content-Type", "application/json");
                     },
 
-                    success: function () {
+                    success: function (addedWishedBookId) {
+                        alert(addedWishedBookId);
+
                         $("#wishedBookTable  tr:last").after
-                        ("<tr> <td>" + title + "</td> <td>" + author + "</td> <td> remove </td> </tr>").show("slow");
+                        ("<tr id="+addedWishedBookId+"> <td>" + title + "</td> <td>" + author + "</td> <td> remove </td> </tr>").show("slow");
 
                         $('#bookTitle').val("");
                         $('#bookAuthor').val("");
 
                         $('#loadingImageWishedBook').hide();
+                        $('#wishedBooksEmpty').hide();
                     }
 
                 });
@@ -108,13 +111,14 @@
                     <tr th:if="${not #lists.isEmpty(postedBooks)}">
                         <th class="text-left">Title</th>
                         <th class="text-left">Author</th>
-                        <th class="text-left">Offered Date</th>
+                        <th class="text-left">Post Date</th>
                         <th class="text-left">Status</th>
                         <th class="text-left">Action</th>
                     </tr>
 
                     <div th:if="${#lists.isEmpty(postedBooks)}">
-                       post a book
+                     You have no book post .
+                     post a book now
                     </div>
 
                     </thead>
@@ -122,8 +126,8 @@
                     <tr th:each="postedBook : ${postedBooks}" th:id = "${postedBook.id}" >
                         <td th:text="${postedBook.title}">title</td>
                         <td class="right" th:text="${postedBook.author}"> author </td>
-                        <td class="right">0,1 Mb</td>
-                        <td class="right">0 Mb</td>
+                        <td class="right" th:text="${postedBook.postDateTime}"></td>
+                        <td class="right">open</td>
                         <td><input type="button" class="removePostedBook button mini danger" value="remove"/></td>
                     </tr>
 
@@ -148,43 +152,24 @@
                 <div class="span6">
                     <table class="table striped" id="wishedBookTable">
                         <thead>
-                        <tr>
+                        <tr th:if="${not #lists.isEmpty(wishedBooks)}">
                             <th class="text-left">Title</th>
                             <th class="text-left">Author</th>
                             <th class="text-left">Action</th>
                         </tr>
+
+                        <div th:if="${#lists.isEmpty(wishedBooks)}" id="wishedBooksEmpty">
+                            No Books in wished List
+                         </div>
+
                         </thead>
                         <tbody>
-                        <tr id="1">
-                            <td>Bing</td>
-                            <td class="right">0:00:01</td>
+                        <tr th:each="wishedBook : ${wishedBooks}" th:id = "${wishedBook.id}" >
+                            <td th:text="${wishedBook.title}">Title</td>
+                            <td th:text="${wishedBook.author}" class="right">author</td>
                             <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
                         </tr>
-                        <tr id="2">
-                            <td>Internet Explorer</td>
-                            <td class="right">0:00:01</td>
-                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
-                        </tr>
-                        <tr>
-                            <td>Chrome</td>
-                            <td class="right">0:00:01</td>
-                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
-                        </tr>
-                        <tr>
-                            <td>News</td>
-                            <td class="right">0:00:01</td>
-                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
-                        </tr>
-                        <tr>
-                            <td>Weather</td>
-                            <td class="right">0:00:01</td>
-                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
-                        </tr>
-                        <tr>
-                            <td>Music</td>
-                            <td class="right">0:00:01</td>
-                            <td><input type="button" class="removeWishedBook button mini danger" value="remove"/></td>
-                        </tr>
+
                         </tbody>
                         <tfoot></tfoot>
                     </table>
@@ -229,25 +214,21 @@
                             <legend>Basic Info</legend>
                             <lable>First Name</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="your first name"/>
+                                <input id="firstName" type="text" disabled = "disabled" th:value ="${user.firstName}" />
                                 <button class="btn-clear" tabindex="-1"></button>
                             </div>
                             <lable>Last Name</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="your last name"/>
+                                <input id="lastName" type="text" disabled = "disabled" th:value ="${user.lastName}"  />
                                 <button class="btn-clear" tabindex="-1"></button>
                             </div>
                             <lable>Email</lable>
                             <div class="input-control text" data-role="input-control">
-                                <input type="text" placeholder="type author"/>
+                                <input id="email" type="text" disabled = "disabled" th:value ="${user.email}"  />
                                 <button class="btn-reveal" tabindex="-1"></button>
                             </div>
-                            <lable>Password</lable>
-                            <div class="input-control password" data-role="input-control">
-                                <input type="password" placeholder="type author"/>
-                                <button class="btn-reveal" tabindex="-1"></button>
-                            </div>
-                            <lable>District</lable>
+
+                            <lable>Area</lable>
                             <div class="input-control select">
                                 <select>
                                     <option>District 1</option>
@@ -255,15 +236,8 @@
                                     <option>District 3</option>
                                 </select>
                             </div>
-                            <lable>Region</lable>
-                            <div class="input-control select">
-                                <select>
-                                    <option>Region 1</option>
-                                    <option>Region 2</option>
-                                    <option>Region 3</option>
-                                </select>
-                            </div>
-                            <input type="submit" class="success" value="update/save"/>
+
+                            <input type="submit" class="success" value="update"/>
                         </fieldset>
                     </form>
                 </div>

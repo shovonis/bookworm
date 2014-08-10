@@ -29,13 +29,19 @@ public class ProfileController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
+        int userId = user.getUserId();
 
-        Collection<Book> postedBooks  = userService.getPostedBooksByUserId(user.getUserId());
+        Collection<Book> postedBooks  = userService.getPostedBooksByUserId(userId);
+        Collection<WishedBook> wishedBooks = userService.getWishedBooksByUserId(userId);
 
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.addObject("postedBooks", postedBooks);
-        modelAndView.setViewName("user/profile");
+        modelAndView.addObject("wishedBooks", wishedBooks);
         modelAndView.addObject("wishedBook", new WishedBook());
+        modelAndView.addObject("user", user);
+
+        modelAndView.setViewName("user/profile");
         return modelAndView;
     }
 }

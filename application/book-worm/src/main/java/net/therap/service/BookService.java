@@ -16,9 +16,11 @@ public interface BookService {
 
     public void addBook(Book book);
 
-    public void addWishedBook(WishedBook wishedBook);
+    public int addWishedBookAndGetId(WishedBook wishedBook);
 
     public List<Category> getAllCategory();
 
     void removePostedBookById(int postedBookId);
+
+    void removeWishedBookById(int wishedBookId);
 }

@@ -3,6 +3,7 @@ package net.therap.dao.jpa;
 import net.therap.dao.UserDao;
 import net.therap.domain.Book;
 import net.therap.domain.User;
+import net.therap.domain.WishedBook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -62,5 +63,17 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("userId", userId);
         User user =  (User) query.getSingleResult();
         return user.getPostedBooks();
+    }
+
+    @Override
+    public Collection<WishedBook> getWishedBooksByUserId(int userId) {
+        Query query =  entityManager
+                .createQuery("SELECT  user FROM User user " +
+                        "LEFT JOIN FETCH user.wishedBooks " +
+                        "WHERE user.userId = :userId");
+
+        query.setParameter("userId", userId);
+        User user =  (User) query.getSingleResult();
+        return user.getWishedBooks();
     }
 }

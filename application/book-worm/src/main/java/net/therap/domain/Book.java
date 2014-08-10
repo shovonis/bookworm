@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -51,7 +52,7 @@ public class Book {
     private byte[] photo;
 
     @Column(name = "post_timestamp")
-    private Timestamp postDateTime;
+    private Timestamp postDateTime = new java.sql.Timestamp(new Date().getTime());
 
     @ManyToMany(mappedBy = "postedBooks", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<User> users;
@@ -155,6 +156,14 @@ public class Book {
         this.exchangeBooks = exchangeBooks;
     }
 
+    public Timestamp getPostDateTime() {
+        return postDateTime;
+    }
+
+    public void setPostDateTime(Timestamp postDateTime) {
+        this.postDateTime = postDateTime;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -172,4 +181,5 @@ public class Book {
                 ", exchangeBooks=" + exchangeBooks +
                 '}';
     }
+
 }

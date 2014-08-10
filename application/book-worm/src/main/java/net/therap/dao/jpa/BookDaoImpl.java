@@ -49,8 +49,10 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public void addWishedBook(WishedBook wishedBook) {
-
+    public int addWishedBookAndGetId(WishedBook wishedBook) {
+         entityManager.persist(wishedBook);
+         entityManager.flush();
+         return wishedBook.getId();
     }
 
     @Override
@@ -59,5 +61,11 @@ public class BookDaoImpl implements BookDao {
         entityManager.remove(bookToBeRemoved);
 
         log.debug("removed book of id ",postedBookId);
+    }
+
+    @Override
+    public void removeWishedBookById(int wishedBookId) {
+        WishedBook wishedBookToBeRemoved = entityManager.find(WishedBook.class, wishedBookId);
+        entityManager.remove(wishedBookToBeRemoved);
     }
 }

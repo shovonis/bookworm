@@ -2,6 +2,9 @@ package net.therap.dao;
 
 import net.therap.domain.Book;
 import net.therap.domain.User;
+import net.therap.domain.WishedBook;
+
+import java.util.Collection;
 
 /**
  * @author rifatul.islam
@@ -16,4 +19,6 @@ public interface UserDao {
     public void deleteUser(String userId);
 
     java.util.Collection<Book> getPostedBooksByUserId(int userId);
+
+    Collection<WishedBook> getWishedBooksByUserId(int userId);
 }

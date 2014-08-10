@@ -3,6 +3,7 @@ package net.therap.controller;
 
 import net.therap.domain.Book;
 import net.therap.domain.Category;
+import net.therap.domain.User;
 import net.therap.domain.WishedBook;
 import net.therap.service.BookService;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -60,14 +62,19 @@ public class BookController {
 
     @RequestMapping(value = "/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void addWishedBook(@RequestBody WishedBook wishedBook) {
-        bookService.addWishedBook(wishedBook);
+    public int addWishedBook(@RequestBody WishedBook wishedBook, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        wishedBook.setUser(user);
+
+        return bookService.addWishedBookAndGetId(wishedBook);
     }
 
     @RequestMapping(value = "/removeWishedBook", method = RequestMethod.POST)
     @ResponseBody
     public void removeWishedBook(@RequestParam("wishedBookId") int wishedBookId){
        log.debug("wishedBook id = {}", wishedBookId);
+
+       bookService.removeWishedBookById(wishedBookId);
     }
 
     @RequestMapping(value = "/removePostedBook", method = RequestMethod.POST)

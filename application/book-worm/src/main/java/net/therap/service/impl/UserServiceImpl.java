@@ -3,6 +3,7 @@ package net.therap.service.impl;
 import net.therap.dao.UserDao;
 import net.therap.domain.Book;
 import net.therap.domain.User;
+import net.therap.domain.WishedBook;
 import net.therap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection<Book> getPostedBooksByUserId(int userId) {
       return userDao.getPostedBooksByUserId(userId);
+    }
+
+    @Override
+    public Collection<WishedBook> getWishedBooksByUserId(int userId) {
+        return userDao.getWishedBooksByUserId(userId);
     }
 }
