@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -53,10 +52,10 @@ public class Book {
     @Column(name = "post_timestamp")
     private Timestamp postDateTime;
 
-    @ManyToMany(mappedBy = "postedBooks", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<User> users;
+    @ManyToOne
+    private User user;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ExchangeBook> exchangeBooks;
 
     public int getId() {
@@ -139,12 +138,12 @@ public class Book {
         this.photo = photo;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<ExchangeBook> getExchangeBooks() {
@@ -153,6 +152,14 @@ public class Book {
 
     public void setExchangeBooks(Set<ExchangeBook> exchangeBooks) {
         this.exchangeBooks = exchangeBooks;
+    }
+
+    public Timestamp getPostDateTime() {
+        return postDateTime;
+    }
+
+    public void setPostDateTime(Timestamp postDateTime) {
+        this.postDateTime = postDateTime;
     }
 
     @Override
@@ -167,9 +174,7 @@ public class Book {
                 ", quality=" + quality +
                 ", price=" + price +
                 ", details='" + details + '\'' +
-                ", photo=" + Arrays.toString(photo) +
-                ", users=" + users +
-                ", exchangeBooks=" + exchangeBooks +
+                ", postDateTime=" + postDateTime +
                 '}';
     }
 }

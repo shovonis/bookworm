@@ -28,6 +28,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book getBookById(int bookId) {
+        return bookDao.getBookById(bookId);
+    }
+
+    @Override
     public List<Category> getAllCategory() {
         return bookDao.getAllCategory();
     }
@@ -39,6 +44,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addWishedBook(WishedBook wishedBook) {
-       bookDao.addWishedBook(wishedBook);
+        bookDao.addWishedBook(wishedBook);
     }
 }

@@ -31,6 +31,12 @@ public class BookDaoImpl implements BookDao {
         entityManager.persist(book);
     }
 
+    @Override
+    public Book getBookById(int bookId) {
+        Book book = entityManager.find(Book.class, bookId);
+        return book;
+    }
+
     @Cacheable(value = "BookCategory")
     @Override
     public List<Category> getAllCategory() {
@@ -55,9 +61,9 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public void removePostedBookById(int postedBookId) {
-        Book bookToBeRemoved  = entityManager.find(Book.class, postedBookId);
+        Book bookToBeRemoved = entityManager.find(Book.class, postedBookId);
         entityManager.remove(bookToBeRemoved);
 
-        log.debug("removed book of id ",postedBookId);
+        log.debug("removed book of id ", postedBookId);
     }
 }

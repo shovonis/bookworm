@@ -16,6 +16,9 @@ public interface BookService {
 
     public void addBook(Book book);
 
+
+    public Book getBookById(int bookId);
+
     public void addWishedBook(WishedBook wishedBook);
 
     public List<Category> getAllCategory();
