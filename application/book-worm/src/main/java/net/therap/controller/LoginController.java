@@ -20,31 +20,31 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@SessionAttributes ("user")
+@SessionAttributes("user")
 public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping (value = {"/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String getLoginForm(ModelMap modelMap) {
         modelMap.addAttribute("user", new User());
         return "user/login";
     }
 
-    @RequestMapping (value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@ModelAttribute User user, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();
 
         User authenticatedUser = userService.getAuthenticatedUser(user);
 
-        if(authenticatedUser != null){
-          modelAndView.addObject("user", authenticatedUser);
-          modelAndView.setViewName("redirect:/home");
-        }else {
-          modelMap.addAttribute("loginFailedMsg","Incorrect email / password");
-          modelAndView.setViewName("user/login");
+        if (authenticatedUser != null) {
+            modelAndView.addObject("user", authenticatedUser);
+            modelAndView.setViewName("redirect:/home");
+        } else {
+            modelMap.addAttribute("loginFailedMsg", "Incorrect email / password");
+            modelAndView.setViewName("user/login");
         }
 
         return modelAndView;

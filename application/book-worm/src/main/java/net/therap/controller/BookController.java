@@ -31,7 +31,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping (value = "/addbook", method = RequestMethod.GET)
+    @RequestMapping(value = "/addbook", method = RequestMethod.GET)
     public ModelAndView getBookForm() {
         List<Category> categories = bookService.getAllCategory();
 
@@ -58,7 +58,7 @@ public class BookController {
         return "home";
     }
 
-    @RequestMapping (value = "/addWishedBook", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void addWishedBook(@RequestBody WishedBook wishedBook) {
         bookService.addWishedBook(wishedBook);
@@ -72,9 +72,10 @@ public class BookController {
 
     @RequestMapping(value = "/removePostedBook", method = RequestMethod.POST)
     @ResponseBody
-    public void removePostedBook(@RequestParam("postedBookId") int postedBookId){
+    public void removePostedBook(@RequestParam("postedBookId") int postedBookId) {
         log.debug("remove request for posted book {}", postedBookId);
 
         bookService.removePostedBookById(postedBookId);
     }
+
 }

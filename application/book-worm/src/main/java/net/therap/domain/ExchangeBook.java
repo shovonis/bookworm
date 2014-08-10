@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Table(name = "book_exchange")
 public class ExchangeBook {
     @Id
-    @Column (name = "id")
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "title")

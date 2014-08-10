@@ -10,4 +10,4 @@ public enum BookQuality {
     VERY_GOOD,
     GOOD,
     READABLE
-  }
+}
