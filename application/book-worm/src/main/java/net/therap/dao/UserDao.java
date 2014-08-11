@@ -25,6 +25,10 @@ public interface UserDao {
 
     Collection<Area> getAreas();
 
+
     public User getUserById(int userId);
+
+
+    void updateUser(User updatedUser);
 
 }

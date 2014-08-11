@@ -25,4 +25,7 @@ public interface UserService {
     public Collection<Area> getAreas();
 
     public User getUserById(int userId);
+
+    void updateUser(User updatedUser);
+
 }

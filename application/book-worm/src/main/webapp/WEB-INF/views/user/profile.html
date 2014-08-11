@@ -9,23 +9,61 @@
 
         $(document).ready(function () {
 
+            firstNameField = $("#firstName");
+            lastNameField = $("#lastName");
+            emailField = $("#email");
+            phoneNumberField = $("#phone");
+            areaSelectorDropdown = $("#areaSelector");
+            profilePictureUpdateButton = $("#profilePictureUpdateButton");
+
             $("#updateSaveButton").click(function () {
+
                 updateSave = $(this).val();
+
                 if (updateSave == "update") {
-                    $("#firstName").prop("disabled", false);
-                    $("#lastName").prop("disabled", false);
-                    $("#email").prop("disabled", false);
-                    $("#areaSelector").prop("disabled", false);
+                    firstNameField.prop("disabled", false);
+                    lastNameField.prop("disabled", false);
+                    emailField.prop("disabled", false);
+                    phoneNumberField.prop("disabled", false);
+                    areaSelectorDropdown.prop("disabled", false);
+                    profilePictureUpdateButton.css('display', 'block')
 
                     $(this).val("save");
+                } else {
+                    firstNameField.prop("disabled", true);
+                    lastNameField.prop("disabled", true);
+                    emailField.prop("disabled", true);
+                    phoneNumberField.prop("disabled", true);
+                    areaSelectorDropdown.prop("disabled", true);
+                    profilePictureUpdateButton.css('display', 'none')
 
-                }
-                else {
-                    $("#firstName").prop("disabled", true);
-                    ;
-                    $("#lastName").prop("disabled", true);
-                    $("#email").prop("disabled", true);
-                    $("#areaSelector").prop("disabled", true);
+                    firstName = firstNameField.val();
+                    lastName = lastNameField.val();
+                    email = emailField.val();
+                    phoneNumber = phoneNumberField.val();
+                    area = areaSelectorDropdown.val();
+                    profilePicture = $("#profilePictureUpdateButton").val();
+
+                    var json = { "firstName": firstName, "lastName": lastName, "email": email,"phoneNumber" : phoneNumber, "area": {"areaCode": area, "areaName": ""} };
+
+                    $.ajax({
+//                        $("#userInfo").attr("action")
+                        url: "/profile/update",
+                        data: JSON.stringify(json),
+                        type: "POST",
+
+                        beforeSend: function (xhr) {
+                            $('#loadingImageUserInfo').show();
+                            xhr.setRequestHeader("Accept", "application/json");
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                        },
+
+                        success: function () {
+                            $('#loadingImageUserInfo').hide();
+
+                        }
+
+                    });
 
                     $(this).val("update");
                 }
@@ -235,48 +273,59 @@
                 <div class="grid">
                     <div class="row">
                         <div class="span5">
+                            <form id="userInfo" th:action="@{/profile/update}" method="post">
+                                <fieldset>
+                                    <legend>Basic Info</legend>
+                                    <lable>First Name</lable>
+                                    <div class="input-control text" data-role="input-control">
+                                        <input id="firstName" type="text" disabled="disabled"
+                                               th:value="${user.firstName}"/>
+                                        <button class="btn-clear" tabindex="-1"></button>
+                                    </div>
+                                    <lable>Last Name</lable>
+                                    <div class="input-control text" data-role="input-control">
+                                        <input id="lastName" type="text" disabled="disabled"
+                                               th:value="${user.lastName}"/>
+                                        <button class="btn-clear" tabindex="-1"></button>
+                                    </div>
+                                    <lable>Email</lable>
+                                    <div class="input-control text" data-role="input-control">
+                                        <input id="email" type="text" disabled="disabled" th:value="${user.email}"/>
+                                        <button class="btn-reveal" tabindex="-1"></button>
+                                    </div>
 
-                            <fieldset>
-                                <legend>Basic Info</legend>
-                                <lable>First Name</lable>
-                                <div class="input-control text" data-role="input-control">
-                                    <input id="firstName" type="text" disabled="disabled" th:value="${user.firstName}"/>
-                                    <button class="btn-clear" tabindex="-1"></button>
-                                </div>
-                                <lable>Last Name</lable>
-                                <div class="input-control text" data-role="input-control">
-                                    <input id="lastName" type="text" disabled="disabled" th:value="${user.lastName}"/>
-                                    <button class="btn-clear" tabindex="-1"></button>
-                                </div>
-                                <lable>Email</lable>
-                                <div class="input-control text" data-role="input-control">
-                                    <input id="email" type="text" disabled="disabled" th:value="${user.email}"/>
-                                    <button class="btn-reveal" tabindex="-1"></button>
-                                </div>
+                                    <lable>Phone</lable>
+                                    <div class="input-control text" data-role="input-control">
+                                        <input id="phone" type="text" disabled="disabled" th:value="${user.phoneNumber}"/>
+                                        <button class="btn-reveal" tabindex="-1"></button>
+                                    </div>
 
-                                <lable>Area</lable>
-                                <div class="input-control select">
-                                    <select th:field="*{user.area.areaCode}" id="areaSelector" disabled="disabled">
-                                        <option th:each="area : ${areas}"
-                                                th:selected="${area.areaCode == user.area.areaCode}? 'true' : 'false' "
-                                                th:value="${area.areaCode}"
-                                                th:text="${area.areaName} ">area name
-                                        </option>
-                                    </select>
-                                </div>
+                                    <lable>Area</lable>
+                                    <div class="input-control select">
+                                        <select th:field="*{user.area.areaCode}" id="areaSelector" disabled="disabled">
+                                            <option th:each="area : ${areas}"
+                                                    th:selected="${area.areaCode == user.area.areaCode}? 'true' : 'false' "
+                                                    th:value="${area.areaCode}"
+                                                    th:text="${area.areaName} ">area name
+                                            </option>
+                                        </select>
+                                    </div>
 
-                                <input type="submit" class="success" id="updateSaveButton" value="update"/>
-                            </fieldset>
-
+                                    <input type="button" class="success" id="updateSaveButton" value="update"/>
+                                </fieldset>
+                            </form>
                         </div>
                         <div class="span1"></div>
                         <fieldset>
                             <legend>Profile Picture</legend>
-                            <div class="span3">
-                                <img width="300px" height="300px" th:src="@{/getProfilePicture}"/>
-                                <a class="button" id="profilePicture">Update</a>
+                            <div class="span2">
+                                <img width="300px" id="profilePicture" height="300px" th:src="@{/getProfilePicture}"/>
+                                <input type="file" id="profilePictureUpdateButton" style="display:none" value="update"/>
                             </div>
                         </fieldset>
+                        <div id="loadingImageUserInfo" align="center" style="display: none">
+                            <img src="/resources/images/wait_small.gif"/>
+                        </div>
                     </div>
                 </div>
             </div>

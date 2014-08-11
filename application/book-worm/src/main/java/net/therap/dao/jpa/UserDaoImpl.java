@@ -96,4 +96,8 @@ public class UserDaoImpl implements UserDao {
         User user = (User) query.getSingleResult();
         return user;
     }
+
+    public void updateUser(User updatedUser) {
+        entityManager.merge(updatedUser);
+    }
 }
