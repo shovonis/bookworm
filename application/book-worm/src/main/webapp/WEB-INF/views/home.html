@@ -21,7 +21,7 @@
                         Recently Posted books
                     </legend>
 
-                        <div class="tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}" >
+        <div class=" tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}" >
                             <a th:href="@{/bookDetails/}+${recentBookPost.id}">
                             <img th:src="@{/getBookPhoto/}+${row.index}" style="height:inherit; width:inherit "/>
                             </a>
