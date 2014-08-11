@@ -83,4 +83,20 @@ public class UserDaoImpl implements UserDao {
         Query query = entityManager.createQuery("SELECT area from Area area", Area.class);
         return query.getResultList();
     }
+
+    @Override
+    public void updateUser(User updatedUser) {
+//        String queryStr = "SELECT user FROM User user " +
+//                "WHERE user.userId = :userId ";
+//        TypedQuery<User> query = entityManager.createQuery(queryStr, User.class);
+//        query.setParameter("userId", updatedUser.getUserId());
+//
+//        User oldUser = query.getSingleResult();
+//        oldUser.setFirstName(updatedUser.getFirstName());
+//        oldUser.setEmail(updatedUser.getEmail());
+//        System.out.println("Old user .."+oldUser.getEmail());
+
+        entityManager.merge(updatedUser);
+
+    }
 }

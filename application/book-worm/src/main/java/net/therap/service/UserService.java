@@ -23,4 +23,6 @@ public interface UserService {
     Collection<WishedBook> getWishedBooksByUserId(int userId);
 
     Collection<Area> getAreas();
+
+    void updateUser(User updatedUser);
 }

@@ -21,10 +21,15 @@
                         Recently Posted books
                     </legend>
 
-                        <div class=" tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}">
+                        <div class="tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}" >
+                            <a th:href="@{/bookDetails/}+${recentBookPost.id}">
                             <img th:src="@{/getBookPhoto/}+${row.index}" style="height:inherit; width:inherit "/>
-
-                            <div class="overlay-fluid"><a th:text="${recentBookPost.title}"></a> </div>
+                            </a>
+                            <div class="overlay-fluid fg-white" >
+                                <p th:text="${recentBookPost.title}" class="fg-white" ></p>
+                                <p th:text = "${recentBookPost.author}" class="fg-white" > </p>
+                                <p th:text = "${recentBookPost.postDateTime}" class="fg-white" > </p>
+                            </div>
                         </div>
                 </fieldset>
             </div>
@@ -32,11 +37,26 @@
 
             </div>
             <div class="span3">
-                <div class="top" style="width: 100% ;  float:right">
-                    <fieldset>
-                        <legend>want to sell/exchange books?</legend>
-                        <div class="tile ol-transparent" style="background-color: darkorange; width:100%;"></div>
-                    </fieldset>
+                <div class="top  bg-white border" style="width: 100% ;  float:right">
+                    <form class="padding10" th:action="@{/addbook}" th:method="get" th:object="${bookForm}">
+                        <fieldset>
+                            <legend>Want to Sell/Exchange Book ?</legend>
+                            <label>Title</label>
+
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type title" th:field="*{title}"/>
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <label>Author</label>
+
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type author" th:field="*{author}"/>
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <input type="submit" class="success" value="Post Ad"/>
+                        </fieldset>
+                    </form>
+
                 </div>
 
                 <div class="bottom" style="width: 100% ; float:right;">

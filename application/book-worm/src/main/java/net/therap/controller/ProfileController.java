@@ -6,8 +6,10 @@ import net.therap.domain.User;
 import net.therap.domain.WishedBook;
 import net.therap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,4 +57,16 @@ public class ProfileController {
     public byte[] getProfilePicture() {
         return user.getProfilePicture();
     }
+
+    @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void updateProfile(@RequestBody User updatedUser, HttpSession httpSession){
+        user = (User) httpSession.getAttribute("user");
+        updatedUser.setUserId(user.getUserId());
+        updatedUser.setReputationPoint(user.getReputationPoint());
+        updatedUser.setPassword(user.getPassword());
+        System.out.println("updating user ... "+updatedUser.toString());
+        userService.updateUser(updatedUser);
+    }
+
 }

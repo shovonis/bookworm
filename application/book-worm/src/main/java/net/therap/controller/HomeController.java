@@ -28,6 +28,7 @@ public class HomeController {
     public String getHomePage(ModelMap modelMap) {
         recentlyPostedBooks = bookService.getRecentlyPostedBooks();
         modelMap.addAttribute("recentBookPosts", recentlyPostedBooks);
+        modelMap.addAttribute("bookForm", new Book());
         return "home";
     }
 

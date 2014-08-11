@@ -25,4 +25,5 @@ public interface UserDao {
 
     Collection<Area> getAreas();
 
+    void updateUser(User updatedUser);
 }

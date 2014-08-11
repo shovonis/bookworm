@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
     public Collection<Area> getAreas() {
         return userDao.getAreas();
     }
+
+    @Override
+    public void updateUser(User updatedUser) {
+        userDao.updateUser(updatedUser);
+    }
 }
