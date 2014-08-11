@@ -30,10 +30,36 @@
             $("#wishedBookAddButton").click(function(){
               var title = $('#bookTitle').val();
               var author = $('#bookAuthor').val();
-      //        alert("title "+title+" author "+author) ;
-              $('#wishedBookTable  tbody:last').append('<tr><td>column 1 value</td><td>column 2 value</td>td>column 2 value</td></tr>');
+              var json = { "title" : title, "author" : author, "userId" : "1223"};
+
+                $.ajax({
+                    url: $("#addWishedBookForm").attr( "action"),
+                    data: JSON.stringify(json),
+                    type: "POST",
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Accept", "application/json");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                    },
+                    success: function() {
+                        alert("got it..");
+                        $("#wishedBookTable  tr:last").after("<tr> <td>"+title+"</td> <td>"+author+"</td> <td>remove</td></tr>").show("slow");
+
+                    }
+                });
+
+                event.preventDefault();
             });
-        });
+
+
+//                $("#wishedBookTable  tr:last").fadeOut(400, function(){
+//                  $(this).remove();
+//              });
+
+                $('#bookTitle').val("");
+                $('#bookAuthor').val("");
+
+         });
+
     </script>
 
 </head>
@@ -171,7 +197,7 @@
                 <div class="span1"></div>
 
                 <div class="span4">
-                    <form>
+                    <form id="addWishedBookForm" action="/addWishedBook">
                         <fieldset>
                             <legend>Add New Book To WishList</legend>
                             <lable>Title</lable>
@@ -267,6 +293,11 @@
 
 </div>
 </div>
+
+<div id="loadingImage" align="center" style="display: none">
+    <img src="images/wait_small.gif" />
+</div>
+
 </div>
 
 <script src="js/hitua.js"></script>
