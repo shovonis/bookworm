@@ -5,9 +5,12 @@ import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
 import net.therap.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,18 +28,20 @@ import java.util.Collection;
 @Controller
 public class ProfileController {
 
+    private static final Logger log = LoggerFactory.getLogger(ProfileController.class);
     @Autowired
-    UserService userService;
+    private UserService userService;
+
     private User user;
 
-    @RequestMapping (value = "/profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         int userId = user.getUserId();
 
         Collection<Book> postedBooks = userService.getPostedBooksByUserId(userId);
         Collection<WishedBook> wishedBooks = userService.getWishedBooksByUserId(userId);
-        Collection<Area> areas  = userService.getAreas();
+        Collection<Area> areas = userService.getAreas();
 
         ModelAndView modelAndView = new ModelAndView();
 
@@ -50,9 +55,20 @@ public class ProfileController {
         return modelAndView;
     }
 
-    @RequestMapping ("/getProfilePicture")
+    @RequestMapping("/getProfilePicture")
     @ResponseBody
     public byte[] getProfilePicture() {
         return user.getProfilePicture();
     }
+
+    @RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
+    public ModelAndView getUser(@PathVariable int userId) {
+        user = userService.getUserById(userId);
+        ModelAndView modelAndView = new ModelAndView("user/user_summary");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("bookForm", new Book());
+        return modelAndView;
+    }
+
+    //TODO: Complete user reputation
 }

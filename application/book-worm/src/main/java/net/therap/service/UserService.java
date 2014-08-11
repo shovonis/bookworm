@@ -18,9 +18,11 @@ public interface UserService {
 
     public void addUser(User user);
 
-    java.util.Collection<Book> getPostedBooksByUserId(int userId);
+    public java.util.Collection<Book> getPostedBooksByUserId(int userId);
 
-    Collection<WishedBook> getWishedBooksByUserId(int userId);
+    public Collection<WishedBook> getWishedBooksByUserId(int userId);
 
-    Collection<Area> getAreas();
+    public Collection<Area> getAreas();
+
+    public User getUserById(int userId);
 }

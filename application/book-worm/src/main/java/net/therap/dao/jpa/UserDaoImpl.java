@@ -56,25 +56,25 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Collection<Book> getPostedBooksByUserId(int userId) {
-        Query query =  entityManager
+        Query query = entityManager
                 .createQuery("SELECT  user FROM User user " +
                         "LEFT JOIN FETCH user.postedBooks " +
                         "WHERE user.userId = :userId");
 
         query.setParameter("userId", userId);
-        User user =  (User) query.getSingleResult();
+        User user = (User) query.getSingleResult();
         return user.getPostedBooks();
     }
 
     @Override
     public Collection<WishedBook> getWishedBooksByUserId(int userId) {
-        Query query =  entityManager
+        Query query = entityManager
                 .createQuery("SELECT  user FROM User user " +
                         "LEFT JOIN FETCH user.wishedBooks " +
                         "WHERE user.userId = :userId");
 
         query.setParameter("userId", userId);
-        User user =  (User) query.getSingleResult();
+        User user = (User) query.getSingleResult();
         return user.getWishedBooks();
     }
 
@@ -82,5 +82,18 @@ public class UserDaoImpl implements UserDao {
     public Collection<Area> getAreas() {
         Query query = entityManager.createQuery("SELECT area from Area area", Area.class);
         return query.getResultList();
+    }
+
+    @Override
+    public User getUserById(int userId) {
+        Query query = entityManager
+                .createQuery("SELECT  user FROM User user " +
+                        "LEFT JOIN FETCH user.wishedBooks " + "LEFT JOIN FETCH user.postedBooks  " +
+                        " LEFT JOIN FETCH user.area " +
+                        "WHERE user.userId = :userId");
+
+        query.setParameter("userId", userId);
+        User user = (User) query.getSingleResult();
+        return user;
     }
 }

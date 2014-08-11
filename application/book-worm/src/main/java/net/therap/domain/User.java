@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -60,7 +61,10 @@ public class User {
     private byte[] profilePicture;
 
     @Column(name = "reputation_point")
-    private Double reputationPoint;
+    private double reputationPoint;
+
+    @Column(name = "reviewer_count")
+    private int reviewerCount = 0;
 
     @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
     private Set<Notification> notifications;
@@ -144,6 +148,14 @@ public class User {
 
     public void setReputationPoint(double reputationPoint) {
         this.reputationPoint = reputationPoint;
+    }
+
+    public int getReviewerCount() {
+        return reviewerCount;
+    }
+
+    public void setReviewerCount(int reviewerCount) {
+        this.reviewerCount = reviewerCount;
     }
 
     public Set<Notification> getNotifications() {
