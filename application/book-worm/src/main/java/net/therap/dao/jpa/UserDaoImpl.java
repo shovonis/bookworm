@@ -19,7 +19,7 @@ import java.util.Collection;
  * @since 8/6/14 12:15 PM
  */
 @Repository
-@Qualifier("userDaoJpa")
+@Qualifier ("userDaoJpa")
 public class UserDaoImpl implements UserDao {
     private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
 

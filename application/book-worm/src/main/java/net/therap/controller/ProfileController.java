@@ -74,9 +74,11 @@ public class ProfileController {
     @ResponseBody
     public void updateProfile(@RequestBody User updatedUser, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
+
         updatedUser.setUserId(user.getUserId());
         updatedUser.setReputationPoint(user.getReputationPoint());
         updatedUser.setPassword(user.getPassword());
+
         System.out.println("updating user ... " + updatedUser.toString());
         userService.updateUser(updatedUser);
     }

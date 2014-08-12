@@ -9,10 +9,10 @@
 
             <ul class="element-menu">
                 <div class="element input-element">
-                    <form>
+                    <form th:action="@{/search}" method="GET">
 
                         <div class="input-control text">
-                            <input type="text" placeholder="Search..."/>
+                            <input type="text" name="query" placeholder="Search..."/>
                             <button class="btn-search"></button>
                         </div>
                     </form>
