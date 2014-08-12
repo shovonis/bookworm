@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <div th:include="fragments/header :: header"></div>
+    <title>::.Home</title>
+</head>
+
+<body class="metro">
+<div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
+
+
+<div class="container" style="margin: 50px">
+
+    <div class="grid fluid">
+        <div class="row">
+
+            <div class="span8">
+
+                <div class="notice bg-white " th:each="matchedBook, row: ${matchedBooks}">
+                    <p class="fg-gray" th:text="${matchedBook.title}">Title : title </p>
+                    <img width="50px" height="50px" th:src="@{/search/getPhoto/}+${row.index}"/>
+                    <br/>
+                    <span style="float:left" th:text="${matchedBook.author}"> Author : author </span> <br/>
+                    <span style="float:right" th:text="${matchedBook.postDateTime}"> 24/7/2014 10.16am </span> <br/>
+                    <a th:href="@{/getUser/}+${matchedBook.user.userId}" th:text="${matchedBook.user.firstName}" style="float: right"> </a>
+                    <a style="float:left" th:href="@{/bookDetails/}+${matchedBook.id}" class="button small success">details</a>
+                    <br/>
+                </div>
+
+                <div class="notice bg-white " style="margin-top:2px">
+                    <p>Title : title </p>
+                    <img src="/resources/images/live2.jpg"/>
+                    <br/>
+                    <span style="float:left"> Author : author </span> <br/>
+                    <span style="float:right"> 24/7/2014 10.16am </span> <br/>
+                    <span style="float:right"> Posted By : shovon </span>
+                    <button style="float:left" class="small success">details</button>
+                    <br/>
+                </div>
+
+            </div>
+            <div class="span3">
+                <div class="top  bg-white border" style="width: 100% ;  float:right">
+                    <form class="padding10" th:action="@{/addbook}" th:method="GET" th:object="${bookForm}">
+                        <fieldset>
+                            <legend>Want to Sell/Exchange Book ?</legend>
+                            <label>Title</label>
+
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type title" th:field="*{title}"/>
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <label>Author</label>
+
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type author" th:field="*{author}"/>
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <input type="submit" class="success" value="Post Ad"/>
+                        </fieldset>
+                    </form>
+
+                </div>
+
+                <div class="bottom" style="width: 100% ; float:right;">
+                    <fieldset>
+                        <legend>You may like these books</legend>
+                        <div class="tile ol-transparent">
+                            <img src="images/bizspark_b_2.png" style="height:inherit; width:inherit "/>
+                        </div>
+                        <div class="tile ol-transparent">
+                            <img src="images/bizspark_b_2.png" style="height:inherit; width:inherit "/>
+                        </div>
+                        <div class="tile ol-transparent">
+                            <img src="images/alchemist.jpg" style="height:inherit; width:inherit "/>
+                        </div>
+                        <div class="tile ol-transparent">
+                            <img src="images/deceptionpoint.jpg" style="height:inherit; width:inherit "/>
+                        </div>
+                        <div class="tile ol-transparent">
+                            <img src="images/deceptionpoint.jpg" style="height:inherit; width:inherit "/>
+                        </div>
+                    </fieldset>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -26,4 +26,6 @@ public interface BookDao {
     void removeWishedBookById(int wishedBookId);
 
     List<Book> getRecentlyPostedBooks();
+
+    List<Book> getBooksBySearchKey(String searchKey);
 }

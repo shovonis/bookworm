@@ -27,4 +27,6 @@ public interface BookService {
     void removeWishedBookById(int wishedBookId);
 
     List<Book> getRecentlyPostedBooks();
+
+    List<Book> getBooksBySearchKey(String searchKey);
 }

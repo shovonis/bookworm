@@ -54,6 +54,9 @@ public class Book {
     @Column(name = "post_timestamp")
     private Timestamp postDateTime = new java.sql.Timestamp(new Date().getTime());
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
     @ManyToOne
     private User user;
 
@@ -180,4 +183,11 @@ public class Book {
                 '}';
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 }

@@ -19,7 +19,7 @@ import java.util.Collection;
  * @since 8/6/14 12:15 PM
  */
 @Repository
-@Qualifier("userDaoJpa")
+@Qualifier ("userDaoJpa")
 public class UserDaoImpl implements UserDao {
     private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
 
@@ -56,25 +56,25 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Collection<Book> getPostedBooksByUserId(int userId) {
-        Query query =  entityManager
+        Query query = entityManager
                 .createQuery("SELECT  user FROM User user " +
                         "LEFT JOIN FETCH user.postedBooks " +
                         "WHERE user.userId = :userId");
 
         query.setParameter("userId", userId);
-        User user =  (User) query.getSingleResult();
+        User user = (User) query.getSingleResult();
         return user.getPostedBooks();
     }
 
     @Override
     public Collection<WishedBook> getWishedBooksByUserId(int userId) {
-        Query query =  entityManager
+        Query query = entityManager
                 .createQuery("SELECT  user FROM User user " +
                         "LEFT JOIN FETCH user.wishedBooks " +
                         "WHERE user.userId = :userId");
 
         query.setParameter("userId", userId);
-        User user =  (User) query.getSingleResult();
+        User user = (User) query.getSingleResult();
         return user.getWishedBooks();
     }
 

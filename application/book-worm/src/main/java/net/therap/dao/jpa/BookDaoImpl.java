@@ -33,8 +33,7 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public Book getBookById(int bookId) {
-        Book book = entityManager.find(Book.class, bookId);
-        return book;
+        return entityManager.find(Book.class, bookId);
     }
 
     @Cacheable(value = "BookCategory")
@@ -78,6 +77,16 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getRecentlyPostedBooks() {
         Query query = entityManager.createQuery("SELECT book FROM Book book ORDER BY book.postDateTime DESC");
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Book> getBooksBySearchKey(String searchKey) {
+        Query query = entityManager.createQuery("SELECT book FROM Book book WHERE book.isActive = true " +
+                "AND ( book.title LIKE :title OR book.author LIKE :author )");
+        query.setParameter("title",  "%" + searchKey + "%");
+        query.setParameter("author", "%" + searchKey + "%");
+
         return query.getResultList();
     }
 }

@@ -34,6 +34,7 @@ public class BookController {
     private BookService bookService;
 
     private Book book;
+    private List<Book> matchedBooks ;
 
     @RequestMapping (value = "/bookDetails/{bookId}", method = RequestMethod.GET)
     public ModelAndView showBookDetails(@PathVariable int bookId) {
@@ -105,5 +106,22 @@ public class BookController {
         bookService.removePostedBookById(postedBookId);
     }
 
+    @RequestMapping (value = "/search", method = RequestMethod.GET)
+    public ModelAndView searchBook(ModelAndView modelAndView, @RequestParam("query") String searchKey){
+        log.info("searching books for query {}", searchKey);
+
+        matchedBooks = bookService.getBooksBySearchKey(searchKey);
+
+        modelAndView.addObject("bookForm", new Book());
+        modelAndView.setViewName("book/book_search");
+        modelAndView.addObject("matchedBooks",matchedBooks);
+        return  modelAndView;
+    }
+
+    @RequestMapping ("/search/getPhoto/{index}")
+    @ResponseBody
+    public byte[] getBookPhoto(@PathVariable("index") int index) {
+        return matchedBooks.get(index).getPhoto();
+    }
 
 }
