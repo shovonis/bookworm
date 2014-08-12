@@ -88,10 +88,13 @@
                     },
 
                     success: function (addedWishedBookId) {
-                        alert(addedWishedBookId);
-
+                        removeButton= '<input type="button" value="remove" class = "removeWishedBook button mini danger" />';
                         $("#wishedBookTable  tr:last").after
-                        ("<tr id=" + addedWishedBookId + "> <td>" + title + "</td> <td>" + author + "</td> <td> remove </td> </tr>").show("slow");
+                        ("<tr id=" + addedWishedBookId + ">" +
+                                " <td>" + title + "</td>" +
+                                 " <td class = "+'right'+" >" + author + "</td>" +
+                                " <td> "+removeButton+" </td> " +
+                                " </tr>");
 
                         $('#bookTitle').val("");
                         $('#bookAuthor').val("");
