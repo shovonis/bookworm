@@ -56,3 +56,65 @@ function processQualityDescription(stepValue) {
     document.getElementById("quality_description").innerHTML = qualityDiv;
 }
 
+function sendAjax() {
+    $.ajax({
+        url: "/getUser/",
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        success: function (data) {
+            alert(data.id + " " + data.name);
+        },
+        error: function (data, status, er) {
+            alert("error: " + data + " status: " + status + " er:" + er);
+        }
+    });
+}
+$(function () {
+    $("#createFlatWindow").on('click', function () {
+        userId = $("#urlValue").val();
+        $.ajax({
+            url: '/getUser',
+            type: 'POST',
+
+            data: {"userId": userId},
+
+
+            success: function (user) {
+                alert(user);
+            },
+            error: function (data, status, er) {
+                alert("error: " + data + " status: " + status + " er:" + er);
+            }
+        });
+
+        $.Dialog({
+            overlay: true,
+            shadow: true,
+            flat: true,
+            draggable: true,
+            icon: '<img src="/resources/images/excel2013icon.png"/>',
+            title: 'Flat window',
+            content: '',
+            padding: 10,
+            onShow: function (_dialog) {
+                var content = '<form class="user-input">' +
+                    '<label>Login</label>' +
+                    '<div class="input-control text"><input type="text" name="login"/><button class="btn-clear"/></div>' +
+                    '<label>Password</label>' +
+                    '<div class="input-control password"><input type="password" name="password"/><button class="btn-reveal"></button></div>' +
+                    '<div class="input-control checkbox"><label><input type="checkbox" name="c1" /><span class="check"></span>Check me out</label></div>' +
+                    '<div class="form-actions">' +
+                    '<button class="button primary">Login to...</button>&nbsp;' +
+                    '<button class="button" type="button" onclick="$.Dialog.close()">Cancel</button> ' +
+                    '</div>' +
+                    '</form>';
+
+                $.Dialog.title("User Details");
+                $.Dialog.content(content);
+            }
+        });
+    });
+});
+

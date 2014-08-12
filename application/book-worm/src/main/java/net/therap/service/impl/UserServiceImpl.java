@@ -21,6 +21,7 @@ import java.util.Collection;
 @Service
 @Transactional(value = "transactionManager")
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
 
@@ -31,17 +32,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        //TODO: Complete encryption
-//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String hashedPassword = passwordEncoder.encode("123");
-//        System.out.println(passwordEncoder.matches(hashedPassword, "123"));
-//        System.out.println(hashedPassword);
         userDao.addUser(user);
     }
 
     @Override
     public Collection<Book> getPostedBooksByUserId(int userId) {
-      return userDao.getPostedBooksByUserId(userId);
+        return userDao.getPostedBooksByUserId(userId);
     }
 
     @Override
@@ -55,7 +51,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+
+    public User getUserById(int userId) {
+        return userDao.getUserById(userId);
+    }
+
     public void updateUser(User updatedUser) {
         userDao.updateUser(updatedUser);
+
     }
 }

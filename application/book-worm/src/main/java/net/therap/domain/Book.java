@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 

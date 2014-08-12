@@ -32,9 +32,11 @@
                     <div class="span7" id="bookSummary">
                         <div class="padding10">
                             <h2 th:text="${bookDetails.title}"></h2>
-                            Posted By: <a href="#"
-                                          th:text="${bookDetails.user.firstName} +' '+ ${bookDetails.user.lastName}"
-                                          th:href="@{#}"></a>
+                            Posted By: <a th:href="@{/getUser/} + ${bookDetails.user.userId}"
+                                          th:text="${bookDetails.user.firstName} +' '+ ${bookDetails.user.lastName}">
+
+                        </a>
+                            <input type="hidden" id="urlValue" th:value="${bookDetails.user.userId}"/>
                             <label style="float: right">Date :<label
                                     th:text="${bookDetails.postDateTime}"></label></label>
                             <br/>
@@ -209,5 +211,8 @@
         <div th:include="fragments/footer :: footer"></div>
     </div>
 </div>
+<script>
+
+</script>
 </body>
 </html>
