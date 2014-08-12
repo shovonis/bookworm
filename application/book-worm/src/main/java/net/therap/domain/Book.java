@@ -59,6 +59,9 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ExchangeBook> exchangeBooks;
 
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Notification> notifications;
+
     public int getId() {
         return id;
     }

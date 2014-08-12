@@ -22,11 +22,12 @@ public class Notification {
     @JoinColumn(name = "receiver_id")
     private User receiver;
 
-    @Column(name = "sender_id")
-    private int senderId;
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
     @Column(name = "type")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private NotificationType type;
 
     @Column(name = "date_time")
@@ -34,6 +35,11 @@ public class Notification {
 
     @Column(name = "is_seen")
     private boolean isSeen;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
 
     public int getId() {
         return id;
@@ -51,12 +57,12 @@ public class Notification {
         this.receiver = receiver;
     }
 
-    public int getSenderId() {
-        return senderId;
+    public User getSender() {
+        return sender;
     }
 
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
     public NotificationType getType() {
@@ -81,5 +87,13 @@ public class Notification {
 
     public void setSeen(boolean isSeen) {
         this.isSeen = isSeen;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

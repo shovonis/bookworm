@@ -31,9 +31,15 @@
                         </ul>
                     </div>
                     <span class="element-divider place-right"></span>
-                    <button class="element image-button image-left place-right">
-                        <img src="/resources/images/information.png" th:href="@{/resources/images/information.png}"/>
-                    </button>
+
+                    <div th:if="${session.isLoggedIn} != null">
+                        <a class="element image-button image-left place-right"
+                           th:href="@{/notification/} + ${session.user.userId}">
+                            <img src="/resources/images/information.png"
+                                 th:href="@{/resources/images/information.png}"/>
+                        </a>
+                    </div>
+
 
                     <span class="element-divider place-right"></span>
                     <button class="element image-button image-left place-right">

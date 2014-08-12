@@ -11,14 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-
-import org.springframework.web.bind.annotation.PathVariable;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -76,17 +69,31 @@ public class ProfileController {
         return modelAndView;
     }
 
-    //TODO: Complete user reputation
+
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void updateProfile(@RequestBody User updatedUser, HttpSession httpSession){
+    public void updateProfile(@RequestBody User updatedUser, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         updatedUser.setUserId(user.getUserId());
         updatedUser.setReputationPoint(user.getReputationPoint());
         updatedUser.setPassword(user.getPassword());
-        System.out.println("updating user ... "+updatedUser.toString());
+        System.out.println("updating user ... " + updatedUser.toString());
         userService.updateUser(updatedUser);
     }
 
+    //TODO: Complete user reputation
+    @RequestMapping(value = "/reputation", method = RequestMethod.POST)
+    @ResponseBody
+    public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint, HttpSession session) {
+        log.info("REPUTATION POINT {}", reputationPoint);
+        log.info("User ID {}", user.getUserId());
+
+        int reviewCount = user.getReviewerCount() + 1;
+        double currentReputation = (reputationPoint + user.getReputationPoint() * 5) / reviewCount;
+
+        user.setReputationPoint(currentReputation);
+        user.setReviewerCount(reviewCount);
+        userService.updateUser(user);
+    }
 
 }

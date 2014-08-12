@@ -58,6 +58,5 @@ public class UserServiceImpl implements UserService {
 
     public void updateUser(User updatedUser) {
         userDao.updateUser(updatedUser);
-
     }
 }

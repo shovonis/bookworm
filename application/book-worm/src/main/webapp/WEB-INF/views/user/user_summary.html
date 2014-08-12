@@ -40,11 +40,10 @@
                 <div id="rating_2" class="large fg-yellow">
 
                 </div>
-                <form action="#">
+                <form th:action="@{/reputation}" th:method="post" id="rating_form">
                     <input id="reputation" type="hidden" th:value="${user.reputationPoint}"
                            th:field="${user.reputationPoint}"/>
                 </form>
-
                 <script>
                     $(function () {
                         repu = $("#reputation").val();
@@ -56,6 +55,17 @@
                             click: function (value, rating) {
                                 $("#reputation").val(value);
                                 rating.rate(value);
+                                var reputation = $("#reputation").val();
+                                $.ajax({
+                                    url: $("#rating_form").attr("action"),
+                                    data: {"reputationPoint": reputation},
+                                    type: "POST",
+                                    dataType: 'json',
+
+                                    success: function () {
+
+                                    }
+                                });
                             }
                         });
                     });

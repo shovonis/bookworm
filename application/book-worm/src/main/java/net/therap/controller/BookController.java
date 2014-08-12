@@ -35,7 +35,7 @@ public class BookController {
 
     private Book book;
 
-    @RequestMapping (value = "/bookDetails/{bookId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookDetails/{bookId}", method = RequestMethod.GET)
     public ModelAndView showBookDetails(@PathVariable int bookId) {
         book = bookService.getBookById(bookId);
         ModelAndView modelAndView = new ModelAndView("book/book_details");
@@ -44,14 +44,14 @@ public class BookController {
         return modelAndView;
     }
 
-    @RequestMapping ("/getBookImage")
+    @RequestMapping("/getBookImage")
     @ResponseBody
     public byte[] getProfilePicture() {
         return book.getPhoto();
     }
 
-    @RequestMapping (value = "/addbook", method = RequestMethod.GET)
-    public ModelAndView getBookForm(@ModelAttribute ("bookForm") Book book) {
+    @RequestMapping(value = "/addbook", method = RequestMethod.GET)
+    public ModelAndView getBookForm(@ModelAttribute("bookForm") Book book) {
         List<Category> categories = bookService.getAllCategory();
 
         ModelAndView modelAndView = new ModelAndView("book/book_form");
@@ -61,9 +61,9 @@ public class BookController {
         return modelAndView;
     }
 
-    @RequestMapping (value = "/addbook", method = RequestMethod.POST)
-    public String addBook(@ModelAttribute ("book") Book book, BindingResult result,
-                          @RequestParam (value = "bookImage") MultipartFile bookImage, HttpSession session) {
+    @RequestMapping(value = "/addbook", method = RequestMethod.POST)
+    public String addBook(@ModelAttribute("book") Book book, BindingResult result,
+                          @RequestParam(value = "bookImage") MultipartFile bookImage, HttpSession session) {
         if (result.hasErrors()) {
             return "redirect:/addbook";
         }
@@ -76,10 +76,10 @@ public class BookController {
             e.printStackTrace();
         }
         bookService.addBook(book);
-        return "home";
+        return "redirect:home";
     }
 
-    @RequestMapping (value = "/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public int addWishedBook(@RequestBody WishedBook wishedBook, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
@@ -88,18 +88,18 @@ public class BookController {
         return bookService.addWishedBookAndGetId(wishedBook);
     }
 
-    @RequestMapping (value = "/removeWishedBook", method = RequestMethod.POST)
+    @RequestMapping(value = "/removeWishedBook", method = RequestMethod.POST)
     @ResponseBody
-    public void removeWishedBook(@RequestParam ("wishedBookId") int wishedBookId) {
+    public void removeWishedBook(@RequestParam("wishedBookId") int wishedBookId) {
         log.debug("wishedBook id = {}", wishedBookId);
 
         bookService.removeWishedBookById(wishedBookId);
     }
 
 
-    @RequestMapping (value = "/removePostedBook", method = RequestMethod.POST)
+    @RequestMapping(value = "/removePostedBook", method = RequestMethod.POST)
     @ResponseBody
-    public void removePostedBook(@RequestParam ("postedBookId") int postedBookId) {
+    public void removePostedBook(@RequestParam("postedBookId") int postedBookId) {
         log.debug("remove request for posted book {}", postedBookId);
 
         bookService.removePostedBookById(postedBookId);
