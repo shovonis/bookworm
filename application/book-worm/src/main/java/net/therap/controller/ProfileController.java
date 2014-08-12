@@ -5,20 +5,14 @@ import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
 import net.therap.service.UserService;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-
-import org.springframework.web.bind.annotation.PathVariable;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -79,7 +73,7 @@ public class ProfileController {
     //TODO: Complete user reputation
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void updateProfile(@RequestBody User updatedUser, HttpSession httpSession){
+    public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession){
         user = (User) httpSession.getAttribute("user");
 
         updatedUser.setUserId(user.getUserId());
@@ -87,6 +81,16 @@ public class ProfileController {
         updatedUser.setPassword(user.getPassword());
 
         userService.updateUser(updatedUser);
+    }
+
+    @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
+    @ResponseBody
+    public void updateProfilePicture(@RequestParam("updatedPhotoStr") String  updateEncodedPhoto, HttpSession httpSession){
+        user = (User) httpSession.getAttribute("user");
+        byte[] imageBytes = Base64.decodeBase64(updateEncodedPhoto .getBytes());
+        System.out.println("Updated encoded photo. isvalid  " + updateEncodedPhoto);
+        userService.updateProfilePicture(user.getUserId(), imageBytes);
+
     }
 
 

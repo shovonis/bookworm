@@ -31,4 +31,5 @@ public interface UserDao {
 
     void updateUser(User updatedUser);
 
+    void updateProfilePicture(int userId, byte[] imageBytes);
 }

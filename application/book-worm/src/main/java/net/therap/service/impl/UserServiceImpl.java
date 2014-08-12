@@ -60,4 +60,9 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(updatedUser);
 
     }
+
+    @Override
+    public void updateProfilePicture(int userId, byte[] imageBytes) {
+       userDao.updateProfilePicture(userId, imageBytes);
+    }
 }
