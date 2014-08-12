@@ -12,4 +12,6 @@ import java.util.List;
 
 public interface NotificationService {
     public List<Notification> getAllNotification(int receiverId);
+
+    public void addNewNotification(int senderId, int receiverId, int bookId, int notificationType);
 }

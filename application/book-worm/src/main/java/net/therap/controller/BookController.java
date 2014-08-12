@@ -1,10 +1,7 @@
 package net.therap.controller;
 
 
-import net.therap.domain.Book;
-import net.therap.domain.Category;
-import net.therap.domain.User;
-import net.therap.domain.WishedBook;
+import net.therap.domain.*;
 import net.therap.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -6,12 +6,10 @@ import net.therap.service.NotificationService;
 import net.therap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -45,8 +43,11 @@ public class NotificationController {
         return user.getProfilePicture();
     }
 
-//    @RequestMapping
-//    public void sendNotification() {
-//
-//    }
+    @RequestMapping(value = "/sendNotification", method = RequestMethod.POST)
+    public String sendNotification(@RequestParam("receiverId") int receiverId, @RequestParam("bookId") int bookId
+            , @RequestParam("type") int type, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        notificationService.addNewNotification(user.getUserId(), receiverId, bookId, type);
+        return "redirect:home";
+    }
 }

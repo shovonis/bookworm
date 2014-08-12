@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface NotificationDao {
     public List getAllNotification(int receiverId);
+
+    public void addNewNotification(Notification notification);
 }

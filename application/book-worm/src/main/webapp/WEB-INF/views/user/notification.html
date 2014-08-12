@@ -21,13 +21,38 @@
                            th:text="${notification.sender.firstName} ">[Name]</a>
                         <label style="float: right">Date and Time</label>
 
+                        <p th:if="${notification.type.ordinal()} == 0" th:text="#{notification.exchangeNotification}">
+                            [Notification
+                            Message]</p>
 
-                        <p th:text="#{notification.bookDetails}">[Notification Message]</p>
+                        <p th:if="${notification.type.ordinal()} == 1" th:text="#{notification.purchaseNotification}">
+                            [Notification
+                            Message]</p>
+
+                        <p th:if="${notification.type.ordinal()} == 2" th:text="#{notification.approveNotification}">
+                            [Notification
+                            Message]</p>
+
+                        <p th:text="#{notification.bookDetails}">[Book Details]</p>
+
                         <a th:href="@{/bookDetails/} + ${notification.book.id}"
                            th:text="${notification.book.title} ">[Book Name]</a>
                         <span style="float:right" th:text="${notification.dateTime}"> [Date] </span> <br/>
-                        <button class="small success">approve</button>
-                        <button class="small warning">ignore</button>
+
+                        <form th:action="@{/sendNotification}" th:method="post">
+                            <input name="receiverId" type="hidden" th:value="${notification.sender.userId}"/>
+                            <input name="bookId" type="hidden" th:value="${notification.book.id}"/>
+                            <input id="typeField" name="type" type="hidden" value="0"/>
+
+                            <button th:if="${notification.type.ordinal()} != 2" class="small success"
+                                    onclick="onClickOfApproveButton()">Approve
+                            </button>
+                            <button th:if="${notification.type.ordinal()} != 2" class="small warning"
+                                    onclick="onClickOfIgnoreButton()">Ignore
+                            </button>
+                        </form>
+
+
                     </div>
                 </div>
 

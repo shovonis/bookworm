@@ -4,6 +4,7 @@ import net.therap.domain.enums.NotificationType;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author shakhawat.hossain
@@ -28,13 +29,13 @@ public class Notification {
 
     @Column(name = "type")
     @Enumerated(EnumType.ORDINAL)
-    private NotificationType type;
+    private NotificationType type = NotificationType.EXCHANGE;
 
     @Column(name = "date_time")
-    private Timestamp dateTime;
+    private Timestamp dateTime = new java.sql.Timestamp(new Date().getTime());
 
     @Column(name = "is_seen")
-    private boolean isSeen;
+    private boolean isSeen = false;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -43,6 +44,7 @@ public class Notification {
 
     public int getId() {
         return id;
+
     }
 
     public void setId(int id) {
