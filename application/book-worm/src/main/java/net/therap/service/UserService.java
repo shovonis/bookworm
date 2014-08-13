@@ -26,7 +26,7 @@ public interface UserService {
 
     public User getUserById(int userId);
 
-    void updateUser(User updatedUser);
+    void updateUser(User updatedUser, int userId);
 
     void updateProfilePicture(int userId, byte[] imageBytes);
 }

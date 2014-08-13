@@ -60,14 +60,19 @@ public class User implements Serializable {
     @Column(name = "profile_picture")
     private byte[] profilePicture;
 
+    @NotNull
     @Column(name = "reputation_point")
-    private double reputationPoint;
+    private double reputationPoint = 0.0;
 
+    @NotNull
     @Column(name = "reviewer_count")
     private int reviewerCount = 0;
 
-    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Notification> notifications;
+
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Notification> sentNotification;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<WishedBook> wishedBooks;
@@ -164,6 +169,14 @@ public class User implements Serializable {
 
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public Set<Notification> getSentNotification() {
+        return sentNotification;
+    }
+
+    public void setSentNotification(Set<Notification> sentNotification) {
+        this.sentNotification = sentNotification;
     }
 
     public Set<WishedBook> getWishedBooks() {

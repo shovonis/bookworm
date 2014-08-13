@@ -152,7 +152,7 @@
 
                     success: function (addedWishedBookId) {
                         removeButton= '<input type="button" value="remove" class = "removeWishedBook button mini danger" />';
-                        $("#wishedBookTable  tr:last").after
+                        $("#wishedBookTable  tbody").append
                         ("<tr id=" + addedWishedBookId + ">" +
                                 " <td>" + title + "</td>" +
                                  " <td class = "+'right'+" >" + author + "</td>" +
@@ -280,15 +280,17 @@
                         <div class="span6">
                             <table class="table striped" id="wishedBookTable">
                                 <thead>
-                                <tr th:if="${not #lists.isEmpty(wishedBooks)}">
+                                <tr>
                                     <th class="text-left">Title</th>
                                     <th class="text-left">Author</th>
                                     <th class="text-left">Action</th>
                                 </tr>
 
-                                <div th:if="${#lists.isEmpty(wishedBooks)}" id="wishedBooksEmpty">
+                                <tr th:if="${#lists.isEmpty(wishedBooks)}" id="wishedBooksEmpty">
+                                    <td colspan="3">
                                     No Books in wished List
-                                </div>
+                                    </td>
+                                </tr>
 
                                 </thead>
                                 <tbody>

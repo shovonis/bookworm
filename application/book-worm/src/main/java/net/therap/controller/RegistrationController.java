@@ -27,18 +27,18 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping (value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView getRegistrationForm() {
         return new ModelAndView("user/registration", "user", new User());
     }
 
-    @RequestMapping (value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registerUser(@Valid @ModelAttribute ("user") User user, BindingResult result) {
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
         System.out.println(user);
         if (result.hasErrors()) {
-            return new ModelAndView("user/registration");
+            return "user/registration";
         }
         userService.addUser(user);
-        return new ModelAndView("user/login");
+        return "redirect:login";
     }
 }

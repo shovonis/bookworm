@@ -118,3 +118,18 @@ $(function () {
     });
 });
 
+function onClickOfPurchaseButton() {
+    document.getElementById("typeField").value = 1;
+}
+
+function onClickOfExchangeButton() {
+    document.getElementById("typeField").value = 0;
+}
+
+function onClickOfApproveButton() {
+    document.getElementById("typeField").value = 2;
+}
+
+function onClickOfIgnoreButton() {
+    document.getElementById("typeField").value = 3;
+}

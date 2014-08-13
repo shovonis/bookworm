@@ -4,6 +4,7 @@ import net.therap.domain.enums.NotificationType;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author shakhawat.hossain
@@ -22,21 +23,28 @@ public class Notification {
     @JoinColumn(name = "receiver_id")
     private User receiver;
 
-    @Column(name = "sender_id")
-    private int senderId;
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
     @Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private NotificationType type;
+    @Enumerated(EnumType.ORDINAL)
+    private NotificationType type = NotificationType.EXCHANGE;
 
     @Column(name = "date_time")
-    private Timestamp dateTime;
+    private Timestamp dateTime = new java.sql.Timestamp(new Date().getTime());
 
     @Column(name = "is_seen")
-    private boolean isSeen;
+    private boolean isSeen = false;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
 
     public int getId() {
         return id;
+
     }
 
     public void setId(int id) {
@@ -51,12 +59,12 @@ public class Notification {
         this.receiver = receiver;
     }
 
-    public int getSenderId() {
-        return senderId;
+    public User getSender() {
+        return sender;
     }
 
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
     public NotificationType getType() {
@@ -81,5 +89,13 @@ public class Notification {
 
     public void setSeen(boolean isSeen) {
         this.isSeen = isSeen;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

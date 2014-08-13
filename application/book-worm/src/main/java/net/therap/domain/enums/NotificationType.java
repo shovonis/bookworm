@@ -9,5 +9,9 @@ package net.therap.domain.enums;
 public enum NotificationType {
     EXCHANGE,
     PURCHASE,
-    APPROVAL
+    APPROVAL,
+    IGNORE;
+
+    public static final NotificationType values[] = values();
+
 }

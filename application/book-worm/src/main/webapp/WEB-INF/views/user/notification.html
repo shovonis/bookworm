@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <div th:include="fragments/header :: header"></div>
+    <title>Notifications</title>
+</head>
+<body class="metro">
+<div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
+
+<div class="container">
+    <div class="grid">
+        <div class="row">
+            <fieldset class="padding10">
+                <legend>Notifications</legend>
+                <div th:if="${not #lists.isEmpty(notificationList)}">
+
+                    <div class="notice bg-grayLighter fg-grayDarker" th:each="notification : ${notificationList}">
+                        <img height="50px" width="50px"
+                             th:src="@{/getSenderImage/} + ${notification.sender.userId}"/>
+                        <a th:href="@{/getUser/} + ${notification.sender.userId}"
+                           th:text="${notification.sender.firstName} ">[Name]</a>
+                        <label style="float: right">Date and Time</label>
+
+                        <p th:if="${notification.type.ordinal()} == 0" th:text="#{notification.exchangeNotification}">
+                            [Notification
+                            Message]</p>
+
+                        <p th:if="${notification.type.ordinal()} == 1" th:text="#{notification.purchaseNotification}">
+                            [Notification
+                            Message]</p>
+
+                        <p th:if="${notification.type.ordinal()} == 2" th:text="#{notification.approveNotification}">
+                            [Notification
+                            Message]</p>
+
+                        <p th:text="#{notification.bookDetails}">[Book Details]</p>
+
+                        <a th:href="@{/bookDetails/} + ${notification.book.id}"
+                           th:text="${notification.book.title} ">[Book Name]</a>
+                        <span style="float:right" th:text="${notification.dateTime}"> [Date] </span> <br/>
+
+                        <form th:action="@{/sendNotification}" th:method="post">
+                            <input name="receiverId" type="hidden" th:value="${notification.sender.userId}"/>
+                            <input name="bookId" type="hidden" th:value="${notification.book.id}"/>
+                            <input id="typeField" name="type" type="hidden" value="0"/>
+
+                            <button th:if="${notification.type.ordinal()} != 2" class="small success"
+                                    onclick="onClickOfApproveButton()">Approve
+                            </button>
+                            <button th:if="${notification.type.ordinal()} != 2" class="small warning"
+                                    onclick="onClickOfIgnoreButton()">Ignore
+                            </button>
+                        </form>
+
+
+                    </div>
+                </div>
+
+
+                <div th:if="${#lists.isEmpty(notificationList)}">
+                    No Notification
+                </div>
+            </fieldset>
+        </div>
+        <div th:include="fragments/footer :: footer"></div>
+    </div>
+</div>
+
+</body>
+</html>

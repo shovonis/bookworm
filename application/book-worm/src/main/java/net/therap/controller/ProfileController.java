@@ -70,17 +70,12 @@ public class ProfileController {
         return modelAndView;
     }
 
-    //TODO: Complete user reputation
+
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession){
         user = (User) httpSession.getAttribute("user");
-
-        updatedUser.setUserId(user.getUserId());
-        updatedUser.setReputationPoint(user.getReputationPoint());
-        updatedUser.setPassword(user.getPassword());
-
-        userService.updateUser(updatedUser);
+        userService.updateUser(updatedUser, user.getUserId());
     }
 
     @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
@@ -93,5 +88,19 @@ public class ProfileController {
 
     }
 
+    //TODO: Complete user reputation
+    @RequestMapping(value = "/reputation", method = RequestMethod.POST)
+    @ResponseBody
+    public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint, HttpSession session) {
+        log.info("REPUTATION POINT {}", reputationPoint);
+        log.info("User ID {}", user.getUserId());
+
+        int reviewCount = user.getReviewerCount() + 1;
+        double currentReputation = (reputationPoint + user.getReputationPoint() * 5) / reviewCount;
+
+        user.setReputationPoint(currentReputation);
+        user.setReviewerCount(reviewCount);
+        userService.updateUser(user, user.getUserId());
+    }
 
 }
