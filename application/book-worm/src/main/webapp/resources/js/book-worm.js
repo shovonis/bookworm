@@ -2,13 +2,20 @@
  * Created by rifatul.islam on 8/7/14.
  */
 
+window.onload=function(){
+    index = 0;
+};
 
-function onExchangeBookClick(id) {
-    alert(id);
-    var newRowElement = '<tr>' + '<td><input type="text" th:field="${exchangeBook.bookTitle}"/></td>' +
-        '<td><input type="text" th:field="${exchangeBook.bookAuthor}"/></td>' + '</tr>';
-    $("#exchangeBookListTable  tr:last").after(newRowElement);
+function onExchangeBookClick() {
 
+    var newRowElement = '<tr>' +
+        '                <td><input type="text" name = "exchangeBooks['+index+'].title"/> </td>'+
+                        '<td><input type="text" name = "exchangeBooks['+index+'].author"/> </td>' +
+        '                </tr>';
+
+     $("#exchangeBookListTable  tbody").append(newRowElement);
+
+    index++;
 
 }
 

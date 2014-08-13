@@ -1,11 +1,14 @@
 package net.therap.domain;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,9 +19,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book")
-public class Book {
+public class Book  implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "title")
@@ -62,7 +65,7 @@ public class Book {
     private User user;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<ExchangeBook> exchangeBooks;
+    private List<ExchangeBook> exchangeBooks;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Notification> notifications;
@@ -155,11 +158,11 @@ public class Book {
         this.user = user;
     }
 
-    public Set<ExchangeBook> getExchangeBooks() {
+    public List<ExchangeBook> getExchangeBooks() {
         return exchangeBooks;
     }
 
-    public void setExchangeBooks(Set<ExchangeBook> exchangeBooks) {
+    public void setExchangeBooks(List<ExchangeBook> exchangeBooks) {
         this.exchangeBooks = exchangeBooks;
     }
 

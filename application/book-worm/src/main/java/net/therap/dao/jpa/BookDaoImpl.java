@@ -29,6 +29,9 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void addBook(Book book) {
         entityManager.persist(book);
+        entityManager.flush();
+        int bookId = book.getId();
+
     }
 
     @Override

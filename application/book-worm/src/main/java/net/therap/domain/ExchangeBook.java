@@ -1,6 +1,9 @@
 package net.therap.domain;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author shakhawat.hossain
@@ -9,50 +12,64 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "book_exchange")
-public class ExchangeBook {
+public class ExchangeBook implements Serializable{
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "title")
-    private String bookTitle;
+    private String title;
 
     @Column(name = "author")
-    private String bookAuthor;
+    private String author;
 
+    @NotNull
     @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    public String getBookTitle() {
-        return bookTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public void setTitle(String bookTitle) {
+        this.title = bookTitle;
     }
 
-    public String getBookAuthor() {
-        return bookAuthor;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor;
-    }
-
-    public Book getBook() {
-        return book;
+    public void setAuthor(String bookAuthor) {
+        this.author = bookAuthor;
     }
 
     public void setUser(User user) {
         this.book = book;
     }
 
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "WishedBook{" +
-                "bookTitle='" + bookTitle + '\'' +
-                ", bookAuthor='" + bookAuthor + '\'' +
+                "bookTitle='" + title + '\'' +
+                ", bookAuthor='" + author + '\'' +
                 ", book=" + book +
                 '}';
     }
