@@ -21,15 +21,22 @@
 
 
                 <div class="no-tablet-portrait">
+
                     <div class="element place-right">
                         <a class="dropdown-toggle" href="#">
                             <span class="icon-cog"></span>
                         </a>
                         <ul class="dropdown-menu dark place-right" data-role="dropdown">
-                            <li><a href="/login" th:href="@{/login}">Sign In</a></li>
-                            <li><a href="registration" th:href="@{/registration}">Register</a></li>
+                            <li><a href="login" th:href="@{/login}" th:if="${session.isLoggedIn} == null">Sign In</a>
+                            </li>
+                            <li><a href="registration" th:href="@{/registration}" th:if="${session.isLoggedIn} == null">Register</a>
+                            </li>
+                            <li><a href="logout" th:href="@{/logout}"
+                                   th:if="${session.isLoggedIn} != null">Logout</a>
+                            </li>
                         </ul>
                     </div>
+
                     <span class="element-divider place-right"></span>
 
                     <div th:if="${session.isLoggedIn} != null">
