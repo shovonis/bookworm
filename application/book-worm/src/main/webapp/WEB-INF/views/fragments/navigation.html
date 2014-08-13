@@ -1,27 +1,20 @@
 <html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
-
 <body>
 <div th:fragment="navigation">
     <nav class="navigation-bar dark">
         <div class="navigation-bar-content container">
             <a href="/home" th:href="@{/home}" class="element">Bookworm</a>
             <span class="element-divider"></span>
-
             <ul class="element-menu">
                 <div class="element input-element">
                     <form th:action="@{/search}" method="GET">
-
                         <div class="input-control text">
                             <input type="text" name="query" placeholder="Search..."/>
                             <button class="btn-search"></button>
                         </div>
                     </form>
-
                 </div>
-
-
                 <div class="no-tablet-portrait">
-
                     <div class="element place-right">
                         <a class="dropdown-toggle" href="#">
                             <span class="icon-cog"></span>
@@ -36,9 +29,7 @@
                             </li>
                         </ul>
                     </div>
-
                     <span class="element-divider place-right"></span>
-
                     <div th:if="${session.isLoggedIn} != null">
                         <a class="element image-button image-left place-right"
                            th:href="@{/notification/} + ${session.user.userId}">
@@ -46,19 +37,12 @@
                                  th:href="@{/resources/images/information.png}"/>
                         </a>
                     </div>
-
-
                     <span class="element-divider place-right"></span>
-                    <button class="element image-button image-left place-right">
-                        Mr.Xyx
-                        <img src="/resources/images/me.jpg" th:href="@{/resources/images/me.jpg}"/>
+                    <button class="element image-button image-left place-right" th:if="${session.isLoggedIn} != null">
+                        <a th:text="${session.user.firstName}"></a>
+                        <img th:src="@{/getProfilePicture}" width="20px" height="20px"/>
                     </button>
-
-                    <span class="element-divider place-right"></span>
-                    <button class="element image-button image-left place-right">
-                        <a href="/home" th:href="@{/home}">Home</a>
-                    </button>
-
+                    <a href="/home" class="element image-button image-left place-right" th:href="@{/home}">Home</a>
                 </div>
             </ul>
         </div>
