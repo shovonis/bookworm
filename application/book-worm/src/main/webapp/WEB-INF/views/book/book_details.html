@@ -63,7 +63,32 @@
                 <label th:text=" 'Publisher : ' + ${bookDetails.publisher}"></label>
                 <label th:text=" 'Edition  '    + ${bookDetails.edition}"></label>
                 <label th:text=" 'Price : '     + ${bookDetails.price}"></label>
-                <label th:text=" 'Exchangeable Book List : ' "></label>
+                <br/>
+                <h4 class="fg-darkCyan"> <strong> Exchangeable Book List </strong>  </h4>
+                <table class="table striped" id="exchangeBookListTable">
+                    <thead>
+                    <tr>
+                        <th class="text-left">Title</th>
+                        <th class="text-left">Author</th>
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(bookDetails.exchangeBooks)}" >
+                        <td colspan="3">
+                            No Books in Exchange List
+                        </td>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr th:each="exchangeBook : ${bookDetails.exchangeBooks}">
+                        <td th:text="${exchangeBook.title}">Title</td>
+                        <td th:text="${exchangeBook.author}" class="right">author</td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+
             </div>
 
             <div th:if="${session.isLoggedIn} != null and ${bookDetails.user.userId} != ${session.user.userId}" >
