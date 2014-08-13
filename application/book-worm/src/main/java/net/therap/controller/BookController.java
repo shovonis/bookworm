@@ -70,11 +70,17 @@ public class BookController {
             User user = (User) session.getAttribute("user");
             book.setUser(user);
             book.setPhoto(imageByte);
-        } catch (IOException e) {
+
+            for(ExchangeBook exchangeBook : book.getExchangeBooks()){
+               exchangeBook.setBook(book);
+            }
+
+         } catch (IOException e) {
             e.printStackTrace();
         }
+        log.info("book post... exchange list : {}"+book.getExchangeBooks().get(0).toString());
         bookService.addBook(book);
-        return "redirect:home";
+        return "redirect:/addbook";
     }
 
     @RequestMapping(value = "/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

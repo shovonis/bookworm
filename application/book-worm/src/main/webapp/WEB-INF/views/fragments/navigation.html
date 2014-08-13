@@ -24,6 +24,9 @@
                             </li>
                             <li><a href="registration" th:href="@{/registration}" th:if="${session.isLoggedIn} == null">Register</a>
                             </li>
+                            <li><a href="logout" th:href="@{/profile}"
+                                   th:if="${session.isLoggedIn} != null">Profile</a>
+                            </li>
                             <li><a href="logout" th:href="@{/logout}"
                                    th:if="${session.isLoggedIn} != null">Logout</a>
                             </li>
@@ -39,7 +42,7 @@
                     </div>
                     <span class="element-divider place-right"></span>
                     <button class="element image-button image-left place-right" th:if="${session.isLoggedIn} != null">
-                        <a th:text="${session.user.firstName}"></a>
+                        <a th:text="${session.user.firstName}" th:href="@{/profile}"></a>
                         <img th:src="@{/getProfilePicture}" width="20px" height="20px"/>
                     </button>
                     <a href="/home" class="element image-button image-left place-right" th:href="@{/home}">Home</a>

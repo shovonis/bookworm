@@ -56,7 +56,10 @@ public class ProfileController {
 
     @RequestMapping("/getProfilePicture")
     @ResponseBody
-    public byte[] getProfilePicture() {
+    public byte[] getProfilePicture(HttpSession httpSession) {
+        if(user == null){
+            user = (User) httpSession.getAttribute("user");
+        }
         return user.getProfilePicture();
     }
 
