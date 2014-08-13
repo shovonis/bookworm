@@ -14,45 +14,57 @@
                 <legend>Notifications</legend>
                 <div th:if="${not #lists.isEmpty(notificationList)}">
 
-                    <div class="notice bg-grayLighter fg-grayDarker" th:each="notification : ${notificationList}">
-                        <img height="50px" width="50px"
-                             th:src="@{/getSenderImage/} + ${notification.sender.userId}"/>
-                        <a th:href="@{/getUser/} + ${notification.sender.userId}"
-                           th:text="${notification.sender.firstName} ">[Name]</a>
-                        <label style="float: right">Date and Time</label>
+                    <div th:each="notification : ${notificationList}">
 
-                        <p th:if="${notification.type.ordinal()} == 0" th:text="#{notification.exchangeNotification}">
-                            [Notification
-                            Message]</p>
+                        <div class="notice bg-grayLighter fg-grayDarker" th:id="${notification.id}">
+                            <img height="50px" width="50px"
+                                 th:src="@{/getSenderImage/} + ${notification.sender.userId}"/>
+                            <a th:href="@{/getUser/} + ${notification.sender.userId}"
+                               th:text="${notification.sender.firstName} ">[Name]</a>
+                            <label style="float: right">Date and Time</label>
 
-                        <p th:if="${notification.type.ordinal()} == 1" th:text="#{notification.purchaseNotification}">
-                            [Notification
-                            Message]</p>
+                            <p th:if="${notification.type.ordinal()} == 0"
+                               th:text="#{notification.exchangeNotification}">
+                                [Notification
+                                Message]</p>
 
-                        <p th:if="${notification.type.ordinal()} == 2" th:text="#{notification.approveNotification}">
-                            [Notification
-                            Message]</p>
+                            <p th:if="${notification.type.ordinal()} == 1"
+                               th:text="#{notification.purchaseNotification}">
+                                [Notification
+                                Message]</p>
 
-                        <p th:text="#{notification.bookDetails}">[Book Details]</p>
+                            <p th:if="${notification.type.ordinal()} == 2"
+                               th:text="#{notification.approveNotification}">
+                                [Notification
+                                Message]</p>
 
-                        <a th:href="@{/bookDetails/} + ${notification.book.id}"
-                           th:text="${notification.book.title} ">[Book Name]</a>
-                        <span style="float:right" th:text="${notification.dateTime}"> [Date] </span> <br/>
+                            <p th:if="${notification.type.ordinal()} == 3"
+                               th:text="#{notification.ignoreNotification }">
+                                [Notification
+                                Message]</p>
 
-                        <form th:action="@{/sendNotification}" th:method="post">
-                            <input name="receiverId" type="hidden" th:value="${notification.sender.userId}"/>
-                            <input name="bookId" type="hidden" th:value="${notification.book.id}"/>
-                            <input id="typeField" name="type" type="hidden" value="0"/>
+                            <p th:text="#{notification.bookDetails}">[Book Details]</p>
 
-                            <button th:if="${notification.type.ordinal()} != 2" class="small success"
-                                    onclick="onClickOfApproveButton()">Approve
-                            </button>
-                            <button th:if="${notification.type.ordinal()} != 2" class="small warning"
-                                    onclick="onClickOfIgnoreButton()">Ignore
-                            </button>
-                        </form>
+                            <a th:href="@{/bookDetails/} + ${notification.book.id}"
+                               th:text="${notification.book.title} ">[Book Name]</a>
+                            <span style="float:right" th:text="${notification.dateTime}"> [Date] </span> <br/>
 
+                            <div>
+                                <input name="receiverId" type="text" style="display: none"
+                                       th:value="${notification.sender.userId}"/>
+                                <input name="bookId" type="text" style="display: none"
+                                       th:value="${notification.book.id}"/>
+                                <input id="typeField" name="type" type="text" style="display: none" value="0"/>
+                                <input id="isSeenField" name="isSeen" type="text" style="display: none" value="false"/>
 
+                                <button th:if="${notification.type.ordinal()} != 2" class="approve small success">
+                                    Approve
+                                </button>
+
+                                <button th:if="${notification.type.ordinal()} != 2" class="deny small warning">Ignore
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

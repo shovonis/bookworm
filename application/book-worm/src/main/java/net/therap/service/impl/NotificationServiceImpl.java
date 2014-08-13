@@ -38,7 +38,8 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void addNewNotification(int senderId, int receiverId, int bookId, int type) {
+    public void addNewNotification(int senderId, int receiverId, int bookId, int type, boolean isSeen) {
+
         User sender = userService.getUserById(senderId);
         User receiver = userService.getUserById(receiverId);
         Book book = bookService.getBookById(bookId);
@@ -48,6 +49,8 @@ public class NotificationServiceImpl implements NotificationService {
         notification.setReceiver(receiver);
         NotificationType notificationType = NotificationType.values[type];
         notification.setType(notificationType);
+//        notification.setIsSeen(isSeen);
+
         notificationDao.addNewNotification(notification);
     }
 }

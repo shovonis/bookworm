@@ -26,7 +26,9 @@ public class NotificationDaoImpl implements NotificationDao {
     @Override
     public List<Notification> getAllNotification(int receiverId) {
         Query query = entityManager.createQuery("SELECT notifications from Notification notifications " +
-                "WHERE notifications.receiver.userId =:receiverId ORDER BY notifications.dateTime", Notification.class);
+                "WHERE notifications.receiver.userId =:receiverId " +
+                "AND notifications.isSeen = false ORDER BY notifications.dateTime DESC ", Notification.class);
+
         query.setParameter("receiverId", receiverId);
         return query.getResultList();
     }

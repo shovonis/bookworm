@@ -66,15 +66,16 @@
                 <label th:text=" 'Exchangeable Book List : ' "></label>
             </div>
 
-            <form th:action="@{/sendNotification}" th:method="post" th:if="${session.isLoggedIn} != null">
-                <input name="receiverId" type="hidden" th:value="${bookDetails.user.userId}"/>
-                <input name="bookId" type="hidden" th:value="${bookDetails.id}"/>
-                <input id="typeField" name="type" type="hidden" value="0"/>
+            <div th:if="${session.isLoggedIn} != null">
+                <input name="receiverId" type="text" style="display: none" th:value="${bookDetails.user.userId}"/>
+                <input name="bookId" type="text" style="display: none" th:value="${bookDetails.id}"/>
+                <input id="typeField" name="type" type="text" style="display: none" value="0"/>
+                <input id="isSeenField" name="isSeen" type="text" style="display: none" value="false"/>
 
-                <button class="large success icon-dollar-2 margin5" onclick="onClickOfPurchaseButton()"> Purchase
+                <button class="purchase large success icon-dollar-2 margin5"> Purchase
                 </button>
-                <button class="large info icon-book margin5" onclick="onClickOfExchangeButton()"> Exchange</button>
-            </form>
+                <button class="exchange large info icon-book margin5"> Exchange</button>
+            </div>
 
             <div th:if="${session.isLoggedIn} == null">
                 <a th:href="@{/login}">

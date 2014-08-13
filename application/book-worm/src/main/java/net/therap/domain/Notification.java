@@ -87,6 +87,11 @@ public class Notification {
         return isSeen;
     }
 
+    public void setIsSeen(boolean isSeen) {
+        this.isSeen = isSeen;
+    }
+
+
     public void setSeen(boolean isSeen) {
         this.isSeen = isSeen;
     }
