@@ -56,11 +56,19 @@ public class NotificationController {
     //TODO : Fix this
     @RequestMapping(value = "/updateNotification", method = RequestMethod.POST)
     @ResponseBody
-    public void updateNotification(@RequestParam("receiverId") int receiverId, @RequestParam("bookId") int bookId
-            , @RequestParam("type") int type, @RequestParam("isSeen") boolean isSeen, HttpSession session) {
+    public void updateNotification(@RequestParam("id") int notificationId, @RequestParam("receiverId") int receiverId,
+                                   @RequestParam("bookId") int bookId, @RequestParam("type") int type,
+                                   @RequestParam("isSeen") boolean isSeen, HttpSession session) {
 
         User user = (User) session.getAttribute("user");
 
-        notificationService.addNewNotification(user.getUserId(), receiverId, bookId, type, isSeen);
+        System.out.println("notificationId = " + notificationId);
+        System.out.println("receiverId = " + receiverId);
+        System.out.println("bookId = " + bookId);
+        System.out.println("type = " + type);
+        System.out.println("isSeen = " + isSeen);
+
+        notificationService.updateAndInsertNotification(notificationId,
+                user.getUserId(), receiverId, bookId, type, isSeen);
     }
 }

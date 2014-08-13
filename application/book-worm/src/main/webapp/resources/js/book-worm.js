@@ -138,9 +138,9 @@ $(document).ready(function () {
         isSeen = true;
 
         $.ajax({
-            url: "/sendNotification",
+            url: "/updateNotification",
             type: "POST",
-            data: {"receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
+            data: {"id": parentDiv, "receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
 
             beforeSend: function (xhr) {
             },
@@ -162,9 +162,9 @@ $(document).ready(function () {
         isSeen = true;
 
         $.ajax({
-            url: "/sendNotification",
+            url: "/updateNotification",
             type: "POST",
-            data: {"receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
+            data: {"id": parentDiv,"receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
 
             beforeSend: function (xhr) {
             },
@@ -184,7 +184,7 @@ $(document).ready(function () {
             caption: "Purchase Request",
             content: "Your Purchase Request Has Been Successfully Sent.",
             timeout: 3000,
-            style: {background:'orange'}
+            style: {background: 'orange'}
         });
 
         receiverId = $(this).parent().find('input[name="receiverId"]').val();
@@ -215,7 +215,7 @@ $(document).ready(function () {
             caption: "Exchange Request",
             content: "Your Exchange Request Has Been Successfully Sent.",
             timeout: 3000,
-            style: {background:'orange'}
+            style: {background: 'orange'}
         });
 
         receiverId = $(this).parent().find('input[name="receiverId"]').val();

@@ -37,4 +37,14 @@ public class NotificationDaoImpl implements NotificationDao {
     public void addNewNotification(Notification notification) {
         entityManager.persist(notification);
     }
+
+    @Override
+    public void updateNotificationStatus(int notificationId) {
+
+        Notification notification = entityManager.find(Notification.class, notificationId);
+        notification.setIsSeen(true);
+        entityManager.merge(notification);
+        entityManager.flush();
+        log.info("NOTIFICATION STATUS UPDATED SUCCESSFULLY");
+    }
 }

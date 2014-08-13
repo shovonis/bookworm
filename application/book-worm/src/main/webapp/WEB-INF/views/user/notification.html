@@ -57,11 +57,11 @@
                                 <input id="typeField" name="type" type="text" style="display: none" value="0"/>
                                 <input id="isSeenField" name="isSeen" type="text" style="display: none" value="false"/>
 
-                                <button th:if="${notification.type.ordinal()} != 2" class="approve small success">
+                                <button th:if="${notification.type.ordinal() &lt; 2}" class="approve small success">
                                     Approve
                                 </button>
 
-                                <button th:if="${notification.type.ordinal()} != 2" class="deny small warning">Ignore
+                                <button th:if="${notification.type.ordinal() &lt; 2}" class="deny small warning">Ignore
                                 </button>
                             </div>
                         </div>

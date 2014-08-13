@@ -15,4 +15,7 @@ public interface NotificationService {
 
     public void addNewNotification(int senderId, int receiverId, int bookId, int notificationType,
                                    boolean isSeen);
+
+    public void updateAndInsertNotification(int notificationId, int senderId, int receiverId, int bookId,
+                                            int notificationType, boolean isSeen);
 }
