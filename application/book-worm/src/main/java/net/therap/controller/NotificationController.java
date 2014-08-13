@@ -44,10 +44,31 @@ public class NotificationController {
     }
 
     @RequestMapping(value = "/sendNotification", method = RequestMethod.POST)
-    public String sendNotification(@RequestParam("receiverId") int receiverId, @RequestParam("bookId") int bookId
-            , @RequestParam("type") int type, HttpSession session) {
+    @ResponseBody
+    public void sendNotification(@RequestParam("receiverId") int receiverId, @RequestParam("bookId") int bookId
+            , @RequestParam("type") int type, @RequestParam("isSeen") boolean isSeen, HttpSession session) {
+
         User user = (User) session.getAttribute("user");
-        notificationService.addNewNotification(user.getUserId(), receiverId, bookId, type);
-        return "redirect:home";
+
+        notificationService.addNewNotification(user.getUserId(), receiverId, bookId, type, isSeen);
+    }
+
+    //TODO : Fix this
+    @RequestMapping(value = "/updateNotification", method = RequestMethod.POST)
+    @ResponseBody
+    public void updateNotification(@RequestParam("id") int notificationId, @RequestParam("receiverId") int receiverId,
+                                   @RequestParam("bookId") int bookId, @RequestParam("type") int type,
+                                   @RequestParam("isSeen") boolean isSeen, HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+        System.out.println("notificationId = " + notificationId);
+        System.out.println("receiverId = " + receiverId);
+        System.out.println("bookId = " + bookId);
+        System.out.println("type = " + type);
+        System.out.println("isSeen = " + isSeen);
+
+        notificationService.updateAndInsertNotification(notificationId,
+                user.getUserId(), receiverId, bookId, type, isSeen);
     }
 }
