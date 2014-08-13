@@ -66,7 +66,7 @@
                 <label th:text=" 'Exchangeable Book List : ' "></label>
             </div>
 
-            <div th:if="${session.isLoggedIn} != null">
+            <div th:if="${session.isLoggedIn} != null and ${bookDetails.user.userId} != ${session.user.userId}" >
                 <input name="receiverId" type="text" style="display: none" th:value="${bookDetails.user.userId}"/>
                 <input name="bookId" type="text" style="display: none" th:value="${bookDetails.id}"/>
                 <input id="typeField" name="type" type="text" style="display: none" value="0"/>
