@@ -40,7 +40,7 @@
             });
 
 
-                $("#updatePhoto").click(function(){
+                $("#updatePhotoButton").click(function(){
 
                    updatedPhotoStr = getBase64Image();
 
@@ -388,7 +388,7 @@
                             <div class="span2">
                                 <img width="300px" id="profilePicture" height="300px" th:src="@{/getProfilePicture}"/>
                                 <input type="file" id="profilePictureUpdateButton" style="display:block" />
-                                <input type="button" class="button mini success" id="updatePhoto" value="update image" />
+                                <input type="button" class="button mini success" id="updatePhotoButton" value="update image" />
                             </div>
                         </fieldset>
                         <div id="loadingImageUserInfo" align="center" style="display: none">
