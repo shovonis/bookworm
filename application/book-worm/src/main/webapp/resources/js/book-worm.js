@@ -2,9 +2,15 @@
  * Created by rifatul.islam on 8/7/14.
  */
 
+
 window.onload=function(){
     index = 0;
+
+    $.get( "/getNotificationCounter", function( data ) {
+        document.getElementById("notificationCounter").innerHTML = "("+data+")";
+    });
 };
+
 
 function onExchangeBookClick() {
 

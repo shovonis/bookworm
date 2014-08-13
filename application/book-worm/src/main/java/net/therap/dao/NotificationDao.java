@@ -15,4 +15,6 @@ public interface NotificationDao {
     public void addNewNotification(Notification notification);
 
     public void updateNotificationStatus(int notificationId);
+
+    public long getUnseenNotification(int userId);
 }

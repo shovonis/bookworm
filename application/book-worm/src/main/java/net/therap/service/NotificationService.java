@@ -18,4 +18,6 @@ public interface NotificationService {
 
     public void updateAndInsertNotification(int notificationId, int senderId, int receiverId, int bookId,
                                             int notificationType, boolean isSeen);
+
+    public long getUnseenNotification(int userId);
 }

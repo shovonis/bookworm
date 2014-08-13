@@ -53,7 +53,7 @@ public class NotificationController {
         notificationService.addNewNotification(user.getUserId(), receiverId, bookId, type, isSeen);
     }
 
-    //TODO : Fix this
+
     @RequestMapping(value = "/updateNotification", method = RequestMethod.POST)
     @ResponseBody
     public void updateNotification(@RequestParam("id") int notificationId, @RequestParam("receiverId") int receiverId,
@@ -71,4 +71,14 @@ public class NotificationController {
         notificationService.updateAndInsertNotification(notificationId,
                 user.getUserId(), receiverId, bookId, type, isSeen);
     }
+
+    @RequestMapping(value = "/getNotificationCounter", method = RequestMethod.GET)
+    @ResponseBody
+    public long getNotificationCounter(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        long total = notificationService.getUnseenNotification(user.getUserId());
+        System.out.println("total = " + total);
+        return total;
+    }
+
 }
