@@ -1,6 +1,7 @@
 package net.therap.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author rifatul.islam
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "area")
-public class Area {
+public class Area implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "area_code")

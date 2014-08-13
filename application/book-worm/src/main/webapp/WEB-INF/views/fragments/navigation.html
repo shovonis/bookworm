@@ -42,9 +42,9 @@
 
 
                     <span class="element-divider place-right"></span>
-                    <button class="element image-button image-left place-right">
-                        Mr.Xyx
-                        <img src="/resources/images/me.jpg" th:href="@{/resources/images/me.jpg}"/>
+                    <button class="element image-button image-left place-right" th:if="${session.isLoggedIn} != null" >
+                        <a th:text ="${session.user.firstName}"  ></a>
+                        <img th:src="@{/getProfilePicture}"  width="20px" height="20px"/>
                     </button>
 
                     <span class="element-divider place-right"></span>
