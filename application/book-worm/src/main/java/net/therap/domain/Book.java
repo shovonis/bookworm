@@ -3,6 +3,7 @@ package net.therap.domain;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
@@ -53,8 +54,9 @@ public class Book {
     @Column(name = "post_timestamp")
     private Timestamp postDateTime = new java.sql.Timestamp(new Date().getTime());
 
+    @NotNull
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean isActive = true;
 
     @ManyToOne
     private User user;

@@ -73,34 +73,34 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession){
+    public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         userService.updateUser(updatedUser, user.getUserId());
     }
 
     @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
     @ResponseBody
-    public void updateProfilePicture(@RequestParam("updatedPhotoStr") String  updateEncodedPhoto, HttpSession httpSession){
+    public void updateProfilePicture(@RequestParam("updatedPhotoStr") String updateEncodedPhoto, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
-        byte[] imageBytes = Base64.decodeBase64(updateEncodedPhoto .getBytes());
+        byte[] imageBytes = Base64.decodeBase64(updateEncodedPhoto.getBytes());
         System.out.println("Updated encoded photo. isvalid  " + updateEncodedPhoto);
         userService.updateProfilePicture(user.getUserId(), imageBytes);
 
     }
 
-    //TODO: Complete user reputation
+
     @RequestMapping(value = "/reputation", method = RequestMethod.POST)
     @ResponseBody
     public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint, HttpSession session) {
         log.info("REPUTATION POINT {}", reputationPoint);
         log.info("User ID {}", user.getUserId());
 
-        int reviewCount = user.getReviewerCount() + 1;
-        double currentReputation = (reputationPoint + user.getReputationPoint() * 5) / reviewCount;
+        int reviewCount = user.getReviewerCount();
+        double currentReputation = (reputationPoint + user.getReputationPoint() * reviewCount) / (reviewCount + 1);
 
         user.setReputationPoint(currentReputation);
-        user.setReviewerCount(reviewCount);
-        userService.updateUser(user, user.getUserId());
+        user.setReviewerCount(reviewCount + 1);
+
     }
 
 }
