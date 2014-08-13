@@ -9,14 +9,79 @@
 
         $(document).ready(function () {
 
-            firstNameField = $("#firstName");
-            lastNameField = $("#lastName");
-            emailField = $("#email");
-            phoneNumberField = $("#phone");
-            areaSelectorDropdown = $("#areaSelector");
-            profilePictureUpdateButton = $("#profilePictureUpdateButton");
+            function readURL(input) {
+                if (input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#profilePicture').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+
+            function getBase64Image(){
+                var imageSrc;
+                var canvas = document.createElement("canvas");
+                var img1 = document.createElement("img");
+
+                imageSrc = document.getElementById("profilePicture").src;
+                img1.setAttribute('src', imageSrc);
+                canvas.width = img1.width;
+                canvas.height = img1.height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img1, 0, 0);
+                return canvas.toDataURL("image/png");
+            }
+
+
+            $("#profilePictureUpdateButton").change(function(){
+                 readURL(this);
+            });
+
+
+                $("#updatePhoto").click(function(){
+
+                   updatedPhotoStr = getBase64Image();
+
+                    $.ajax({
+//                        $("#userInfo").attr("action")
+                        url: "/profile/updatePhoto",
+                        data: {"updatedPhotoStr" : updatedPhotoStr},
+                        type: "POST",
+
+                        beforeSend: function (xhr) {
+                            alert(updatedPhotoStr);
+                             $('#loadingImageUserInfo').show();
+                        },
+
+                        success: function () {
+                            $('#loadingImageUserInfo').hide();
+
+                        },
+                        error: function (data, status, er) {
+                            alert("error: " + data + " status: " + status + " er:" + er);
+                        }
+
+
+                    });
+
+
+
+                });
+
+
+
+
 
             $("#updateSaveButton").click(function () {
+
+                firstNameField = $("#firstName");
+                lastNameField = $("#lastName");
+                emailField = $("#email");
+                phoneNumberField = $("#phone");
+                areaSelectorDropdown = $("#areaSelector");
+                profilePictureUpdateButton = $("#profilePictureUpdateButton");
 
                 updateSave = $(this).val();
 
@@ -26,23 +91,21 @@
                     emailField.prop("disabled", false);
                     phoneNumberField.prop("disabled", false);
                     areaSelectorDropdown.prop("disabled", false);
-                    profilePictureUpdateButton.css('display', 'block')
 
                     $(this).val("save");
                 } else {
+
                     firstNameField.prop("disabled", true);
                     lastNameField.prop("disabled", true);
                     emailField.prop("disabled", true);
                     phoneNumberField.prop("disabled", true);
                     areaSelectorDropdown.prop("disabled", true);
-                    profilePictureUpdateButton.css('display', 'none')
 
                     firstName = firstNameField.val();
                     lastName = lastNameField.val();
                     email = emailField.val();
                     phoneNumber = phoneNumberField.val();
                     area = areaSelectorDropdown.val();
-                    profilePicture = $("#profilePictureUpdateButton").val();
 
                     var json = { "firstName": firstName, "lastName": lastName, "email": email,"phoneNumber" : phoneNumber, "area": {"areaCode": area, "areaName": ""} };
 
@@ -89,7 +152,7 @@
 
                     success: function (addedWishedBookId) {
                         removeButton= '<input type="button" value="remove" class = "removeWishedBook button mini danger" />';
-                        $("#wishedBookTable  tr:last").after
+                        $("#wishedBookTable  tbody").append
                         ("<tr id=" + addedWishedBookId + ">" +
                                 " <td>" + title + "</td>" +
                                  " <td class = "+'right'+" >" + author + "</td>" +
@@ -146,7 +209,6 @@
                         });
                         $('#loadingImagePostedBook').hide();
                     }
-
                 });
 
 
@@ -218,15 +280,17 @@
                         <div class="span6">
                             <table class="table striped" id="wishedBookTable">
                                 <thead>
-                                <tr th:if="${not #lists.isEmpty(wishedBooks)}">
+                                <tr>
                                     <th class="text-left">Title</th>
                                     <th class="text-left">Author</th>
                                     <th class="text-left">Action</th>
                                 </tr>
 
-                                <div th:if="${#lists.isEmpty(wishedBooks)}" id="wishedBooksEmpty">
+                                <tr th:if="${#lists.isEmpty(wishedBooks)}" id="wishedBooksEmpty">
+                                    <td colspan="3">
                                     No Books in wished List
-                                </div>
+                                    </td>
+                                </tr>
 
                                 </thead>
                                 <tbody>
@@ -323,7 +387,8 @@
                             <legend>Profile Picture</legend>
                             <div class="span2">
                                 <img width="300px" id="profilePicture" height="300px" th:src="@{/getProfilePicture}"/>
-                                <input type="file" id="profilePictureUpdateButton" style="display:none" value="update"/>
+                                <input type="file" id="profilePictureUpdateButton" style="display:block" />
+                                <input type="button" class="button mini success" id="updatePhoto" value="update image" />
                             </div>
                         </fieldset>
                         <div id="loadingImageUserInfo" align="center" style="display: none">

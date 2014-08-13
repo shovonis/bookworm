@@ -5,6 +5,7 @@ import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
 import net.therap.service.UserService;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,15 +73,19 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void updateProfile(@RequestBody User updatedUser, HttpSession httpSession) {
+    public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
+        userService.updateUser(updatedUser, user.getUserId());
+    }
 
-        updatedUser.setUserId(user.getUserId());
-        updatedUser.setReputationPoint(user.getReputationPoint());
-        updatedUser.setPassword(user.getPassword());
+    @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
+    @ResponseBody
+    public void updateProfilePicture(@RequestParam("updatedPhotoStr") String updateEncodedPhoto, HttpSession httpSession) {
+        user = (User) httpSession.getAttribute("user");
+        byte[] imageBytes = Base64.decodeBase64(updateEncodedPhoto.getBytes());
+        System.out.println("Updated encoded photo. isvalid  " + updateEncodedPhoto);
+        userService.updateProfilePicture(user.getUserId(), imageBytes);
 
-        System.out.println("updating user ... " + updatedUser.toString());
-        userService.updateUser(updatedUser);
     }
 
 
@@ -95,7 +100,7 @@ public class ProfileController {
 
         user.setReputationPoint(currentReputation);
         user.setReviewerCount(reviewCount + 1);
-        userService.updateUser(user);
+
     }
 
 }

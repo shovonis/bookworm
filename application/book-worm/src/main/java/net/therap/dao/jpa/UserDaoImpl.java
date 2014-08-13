@@ -97,7 +97,30 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    public void updateUser(User updatedUser) {
-        entityManager.merge(updatedUser);
+    public void updateUserInfo(User updatedUser, int userId) {
+        Query query = entityManager.createQuery("UPDATE User user SET user.firstName = :firstName," +
+                " user.lastName = :lastName, user.email = :email, user.phoneNumber = :phoneNumber," +
+                " user.area.areaCode = :areaCode" +
+                " WHERE user.userId = :userId");
+
+        query.setParameter("userId", userId);
+        query.setParameter("firstName", updatedUser.getFirstName());
+        query.setParameter("lastName", updatedUser.getLastName());
+        query.setParameter("email", updatedUser.getEmail());
+        query.setParameter("phoneNumber", updatedUser.getPhoneNumber());
+        query.setParameter("areaCode", updatedUser.getArea().getAreaCode());
+
+        query.executeUpdate();
+    }
+
+    @Override
+    public void updateProfilePicture(int userId, byte[] imageBytes) {
+        Query query = entityManager.createQuery("UPDATE User user SET user.profilePicture = :profilePicture " +
+                "WHERE user.userId = :userId");
+
+        query.setParameter("profilePicture", imageBytes);
+        query.setParameter("userId", userId);
+
+        query.executeUpdate();
     }
 }
