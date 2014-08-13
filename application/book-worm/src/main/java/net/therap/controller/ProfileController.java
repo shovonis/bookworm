@@ -83,18 +83,18 @@ public class ProfileController {
         userService.updateUser(updatedUser);
     }
 
-    //TODO: Complete user reputation
+
     @RequestMapping(value = "/reputation", method = RequestMethod.POST)
     @ResponseBody
     public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint, HttpSession session) {
         log.info("REPUTATION POINT {}", reputationPoint);
         log.info("User ID {}", user.getUserId());
 
-        int reviewCount = user.getReviewerCount() + 1;
-        double currentReputation = (reputationPoint + user.getReputationPoint() * 5) / reviewCount;
+        int reviewCount = user.getReviewerCount();
+        double currentReputation = (reputationPoint + user.getReputationPoint() * reviewCount) / (reviewCount + 1);
 
         user.setReputationPoint(currentReputation);
-        user.setReviewerCount(reviewCount);
+        user.setReviewerCount(reviewCount + 1);
         userService.updateUser(user);
     }
 
