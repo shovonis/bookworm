@@ -18,27 +18,33 @@
 
             <div class="span8">
 
-                <div class="notice bg-white " th:each="matchedBook, row: ${matchedBooks}">
-                    <p class="fg-gray" th:text="${matchedBook.title}">Title : title </p>
-                    <img width="50px" height="50px" th:src="@{/search/getPhoto/}+${row.index}"/>
-                    <br/>
-                    <span style="float:left" th:text="${matchedBook.author}"> Author : author </span> <br/>
-                    <span style="float:right" th:text="${matchedBook.postDateTime}"> 24/7/2014 10.16am </span> <br/>
-                    <a th:href="@{/getUser/}+${matchedBook.user.userId}" th:text="${matchedBook.user.firstName}" style="float: right"> </a>
-                    <a style="float:left" th:href="@{/bookDetails/}+${matchedBook.id}" class="button small success">details</a>
-                    <br/>
-                </div>
+                    <table>
 
-                <div class="notice bg-white " style="margin-top:2px">
-                    <p>Title : title </p>
-                    <img src="/resources/images/live2.jpg"/>
-                    <br/>
-                    <span style="float:left"> Author : author </span> <br/>
-                    <span style="float:right"> 24/7/2014 10.16am </span> <br/>
-                    <span style="float:right"> Posted By : shovon </span>
-                    <button style="float:left" class="small success">details</button>
-                    <br/>
-                </div>
+                    <tr th:each="matchedBook, row: ${matchedBooks}" >
+                        <td>
+                            <img width="50px" height="50px" th:src="@{/search/getPhoto/}+${row.index}"/>
+                        </td>
+
+                        <td width="70%">
+                          <strong> Title :</strong> <a th:text="${matchedBook.title}" class="fg-black">Title</a>     <br/>
+                          <strong> Author :</strong> <a th:text="${matchedBook.author}" class="fg-black">author </a>    <br/>
+                            <strong> Edition : </strong> <a  th:text="${matchedBook.edition}" class="fg-black">edition</a>     <br/>
+                            <a style="float:left" th:href="@{/bookDetails/}+${matchedBook.id}" class="button small success">details</a>
+
+                        </td>
+
+                        <td>
+                            <p th:text="${matchedBook.postDateTime}">date</p>
+                            Posted By <a th:href="@{/getUser/}+${matchedBook.user.userId}" th:text="${matchedBook.user.firstName}"> </a> <br/>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+
+
 
             </div>
             <div class="span3">

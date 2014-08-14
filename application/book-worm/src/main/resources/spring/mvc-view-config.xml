@@ -28,8 +28,6 @@
         <property name="cacheable" value="false"/>
     </bean>
 
-    <!-- Resolves localized messages*.properties and application.properties
-		files in the application to allow for internationalization.-->
     <bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           id="messageSource" p:basenames="WEB-INF/i18n/messages"
           p:fallbackToSystemLocale="false" />
