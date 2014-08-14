@@ -16,6 +16,7 @@ import java.util.List;
  * @author rifatul.islam
  * @since 8/12/14.
  */
+
 @Controller
 public class NotificationController {
     @Autowired
@@ -26,10 +27,8 @@ public class NotificationController {
 
     @RequestMapping(value = "/notification/{receiverId}", method = RequestMethod.GET)
     public ModelAndView showAllNotification(@PathVariable int receiverId) {
-        System.out.print("Receiver ID " + receiverId);
 
         List<Notification> notificationList = notificationService.getAllNotification(receiverId);
-
         ModelAndView modelAndView = new ModelAndView("user/notification");
         modelAndView.addObject("notificationList", notificationList);
 
@@ -49,7 +48,6 @@ public class NotificationController {
             , @RequestParam("type") int type, @RequestParam("isSeen") boolean isSeen, HttpSession session) {
 
         User user = (User) session.getAttribute("user");
-
         notificationService.addNewNotification(user.getUserId(), receiverId, bookId, type, isSeen);
     }
 
@@ -61,13 +59,6 @@ public class NotificationController {
                                    @RequestParam("isSeen") boolean isSeen, HttpSession session) {
 
         User user = (User) session.getAttribute("user");
-
-        System.out.println("notificationId = " + notificationId);
-        System.out.println("receiverId = " + receiverId);
-        System.out.println("bookId = " + bookId);
-        System.out.println("type = " + type);
-        System.out.println("isSeen = " + isSeen);
-
         notificationService.updateAndInsertNotification(notificationId,
                 user.getUserId(), receiverId, bookId, type, isSeen);
     }
@@ -80,5 +71,4 @@ public class NotificationController {
         System.out.println("total = " + total);
         return total;
     }
-
 }

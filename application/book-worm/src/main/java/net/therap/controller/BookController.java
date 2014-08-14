@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class BookController {
     private BookService bookService;
 
     private Book book;
-    private List<Book> matchedBooks ;
+    private List<Book> matchedBooks;
 
     @RequestMapping(value = "/bookDetails/{bookId}", method = RequestMethod.GET)
     public ModelAndView showBookDetails(@PathVariable int bookId) {
@@ -60,10 +61,10 @@ public class BookController {
     }
 
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
-    public String addBook(@ModelAttribute("book") Book book, BindingResult result,
+    public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult result,
                           @RequestParam(value = "bookImage") MultipartFile bookImage, HttpSession session) {
         if (result.hasErrors()) {
-            return "redirect:/addbook";
+            return "book/book_form";
         }
         try {
             byte[] imageByte = bookImage.getBytes();
@@ -71,16 +72,18 @@ public class BookController {
             book.setUser(user);
             book.setPhoto(imageByte);
 
-            for(ExchangeBook exchangeBook : book.getExchangeBooks()){
-               exchangeBook.setBook(book);
+            if (book.getExchangeBooks() != null) {
+                for (ExchangeBook exchangeBook : book.getExchangeBooks()) {
+                    exchangeBook.setBook(book);
+                }
             }
 
-         } catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        log.info("book post... exchange list : {}"+book.getExchangeBooks().get(0).toString());
+
         bookService.addBook(book);
-        return "redirect:/addbook";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = "/profile/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -109,19 +112,19 @@ public class BookController {
         bookService.removePostedBookById(postedBookId);
     }
 
-    @RequestMapping (value = "/search", method = RequestMethod.GET)
-    public ModelAndView searchBook(ModelAndView modelAndView, @RequestParam("query") String searchKey){
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ModelAndView searchBook(ModelAndView modelAndView, @RequestParam("query") String searchKey) {
         log.info("searching books for query {}", searchKey);
 
         matchedBooks = bookService.getBooksBySearchKey(searchKey);
 
         modelAndView.addObject("bookForm", new Book());
         modelAndView.setViewName("book/book_search");
-        modelAndView.addObject("matchedBooks",matchedBooks);
-        return  modelAndView;
+        modelAndView.addObject("matchedBooks", matchedBooks);
+        return modelAndView;
     }
 
-    @RequestMapping ("/search/getPhoto/{index}")
+    @RequestMapping("/search/getPhoto/{index}")
     @ResponseBody
     public byte[] getBookPhoto(@PathVariable("index") int index) {
         return matchedBooks.get(index).getPhoto();

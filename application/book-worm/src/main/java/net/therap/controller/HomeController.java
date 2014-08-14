@@ -17,6 +17,7 @@ import java.util.List;
  * @author rifatul.islam
  * @since 8/5/14 9:17 AM
  */
+
 @Controller
 public class HomeController {
 
@@ -38,5 +39,4 @@ public class HomeController {
     public byte[] getBookPhoto(@PathVariable("index") int index) {
         return recentlyPostedBooks.get(index).getPhoto();
     }
-
 }

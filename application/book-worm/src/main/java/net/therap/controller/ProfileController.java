@@ -27,8 +27,8 @@ import java.util.Collection;
 
 @Controller
 public class ProfileController {
-
     private static final Logger log = LoggerFactory.getLogger(ProfileController.class);
+
     @Autowired
     private UserService userService;
 
@@ -64,7 +64,6 @@ public class ProfileController {
         return user.getProfilePicture();
     }
 
-
     @RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
     public ModelAndView getUser(@PathVariable int userId) {
         user = userService.getUserById(userId);
@@ -84,7 +83,8 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
     @ResponseBody
-    public void updateProfilePicture(@RequestParam(value = "fileToUpload") MultipartFile profilePicture, HttpSession httpSession) {
+    public void updateProfilePicture(@RequestParam(value = "fileToUpload") MultipartFile profilePicture,
+                                     HttpSession httpSession) {
         try {
 
             byte[] imageBytes = profilePicture.getBytes();
@@ -100,7 +100,7 @@ public class ProfileController {
 
     @RequestMapping(value = "/reputation", method = RequestMethod.POST)
     @ResponseBody
-    public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint, HttpSession session) {
+    public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint) {
 
         log.info("REPUTATION POINT {}", reputationPoint);
         log.info("User ID {}", user.getUserId());
@@ -113,5 +113,4 @@ public class ProfileController {
         userService.updateUser(user);
 
     }
-
 }

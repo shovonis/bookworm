@@ -2,8 +2,6 @@ package net.therap.controller;
 
 import net.therap.domain.User;
 import net.therap.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes({"user", "isLoggedIn"})
 public class LoginController {
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private UserService userService;

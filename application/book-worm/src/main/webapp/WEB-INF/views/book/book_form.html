@@ -28,12 +28,14 @@
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{title}" placeholder="Title" th:attr="value=*{title}"/>
                         <button class="btn-clear" tabindex="-1"></button>
+                        <span class="fg-red" th:errors="*{title}">[error]</span>
                     </div>
                     <label style="float: left">Author</label>
 
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{author}" placeholder="Author" th:attr="value=*{author}"/>
                         <button class="btn-clear" tabindex="-1"></button>
+                        <span class="fg-red" th:errors="*{author}">[error]</span>
                     </div>
                 </div>
             </div>
@@ -69,6 +71,7 @@
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{publisher}" placeholder="Publisher"/>
                         <button class="btn-clear" tabindex="-1"></button>
+                        <span class="fg-red" th:errors="*{publisher}">[error]</span>
                     </div>
 
 
@@ -77,6 +80,7 @@
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{edition}" placeholder="year/edition"/>
                         <button class="btn-clear" tabindex="-1"></button>
+                        <span class="fg-red" th:errors="*{edition}">[error]</span>
                     </div>
                 </div>
             </div>

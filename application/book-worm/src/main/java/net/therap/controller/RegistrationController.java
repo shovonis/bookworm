@@ -1,9 +1,8 @@
 package net.therap.controller;
 
+import net.therap.domain.Area;
 import net.therap.domain.User;
 import net.therap.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,8 +21,6 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-    private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
-
     @Autowired
     private UserService userService;
 
@@ -34,10 +31,15 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
-        System.out.println(user);
+
         if (result.hasErrors()) {
             return "user/registration";
         }
+
+        Area area = new Area();
+        area.setAreaCode(Area.DEFAULT_AREA_CODE);
+        user.setArea(area);
+
         userService.addUser(user);
         return "redirect:login";
     }

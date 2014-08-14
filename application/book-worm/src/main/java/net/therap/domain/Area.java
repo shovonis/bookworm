@@ -2,6 +2,7 @@ package net.therap.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author rifatul.islam
@@ -10,7 +11,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "area")
-public class Area implements Serializable{
+public class Area implements Serializable {
+    public static final int DEFAULT_AREA_CODE = 1;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "area_code")
@@ -19,8 +22,8 @@ public class Area implements Serializable{
     @Column(name = "area_name")
     private String areaName;
 
-    @OneToOne(mappedBy = "area")
-    private User user;
+    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<User> user;
 
     public int getAreaCode() {
         return areaCode;
@@ -38,11 +41,11 @@ public class Area implements Serializable{
         this.areaName = areaName;
     }
 
-    public User getUser() {
+    public List<User> getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(List<User> user) {
         this.user = user;
     }
 
@@ -51,7 +54,6 @@ public class Area implements Serializable{
         return "Area{" +
                 "areaCode=" + areaCode +
                 ", areaName='" + areaName + '\'' +
-                ", user=" + user +
                 '}';
     }
 }

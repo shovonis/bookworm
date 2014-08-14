@@ -30,8 +30,6 @@ public class BookDaoImpl implements BookDao {
     public void addBook(Book book) {
         entityManager.persist(book);
         entityManager.flush();
-        int bookId = book.getId();
-
     }
 
     @Override
@@ -44,12 +42,11 @@ public class BookDaoImpl implements BookDao {
     public List<Category> getAllCategory() {
         List<Category> categoryList = null;
         String queryString = "SELECT category FROM Category category";
-
-        log.info("Executing first time");
-
         TypedQuery<Category> query = entityManager.createQuery(queryString, Category.class);
+
         try {
             categoryList = query.getResultList();
+            log.info("Book Category Query Executed");
         } catch (NoResultException | NonUniqueResultException exp) {
             log.error("Error in Executing Query" + exp);
         }

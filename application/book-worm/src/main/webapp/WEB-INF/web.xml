@@ -1,9 +1,9 @@
 <web-app version="2.4"
-	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+         xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-	<display-name>BookWorm</display-name>
+    <display-name>BookWorm</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -34,26 +34,8 @@
         <location>/resourceNotFound</location>
     </error-page>
 
-
-    <!--&lt;!&ndash; Dandelion servlet definition and mapping &ndash;&gt;-->
-    <!--<servlet>-->
-        <!--<servlet-name>dandelionServlet</servlet-name>-->
-        <!--<servlet-class>com.github.dandelion.core.web.DandelionServlet</servlet-class>-->
-        <!--<load-on-startup>2</load-on-startup>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>dandelionServlet</servlet-name>-->
-        <!--<url-pattern>/dandelion-assets/*</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--&lt;!&ndash; Dandelion filter definition and mapping &ndash;&gt;-->
-    <!--<filter>-->
-        <!--<filter-name>dandelionFilter</filter-name>-->
-        <!--<filter-class>com.github.dandelion.core.web.DandelionFilter</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-        <!--<filter-name>dandelionFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
-    <!--</filter-mapping>-->
+    <session-config>
+        <session-timeout>20</session-timeout>
+    </session-config>
 
 </web-app>

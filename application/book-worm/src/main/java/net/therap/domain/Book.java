@@ -1,12 +1,12 @@
 package net.therap.domain;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -19,30 +19,38 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book")
-public class Book  implements Serializable{
+public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "title")
-    @NotEmpty(message = "Title Cannot Be Empty")
+    @NotNull(message = "Title Canno be Null")
+    @NotEmpty(message = "Author name cannot be empty")
     private String title;
 
     @Column(name = "author")
+    @NotNull(message = "Title Canno be Null")
     @NotEmpty(message = "Author name cannot be empty")
     private String author;
 
+    @NotNull(message = "Title Canno be Null")
+    @NotEmpty(message = "Author name cannot be empty")
     @Column(name = "edition")
     private String edition;
 
+    @NotNull(message = "Title Canno be Null")
+    @NotEmpty(message = "Author name cannot be empty")
     @Column(name = "publisher")
     private String publisher;
 
     @Column(name = "category_id")
     private int categoryId;
 
+
     @Column(name = "quality")
     private int quality;
+
 
     @Column(name = "price")
     private double price;

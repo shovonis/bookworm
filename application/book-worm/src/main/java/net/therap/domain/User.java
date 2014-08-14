@@ -52,8 +52,7 @@ public class User implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToOne
-    @JoinColumn(name = "area_code")
+    @ManyToOne
     private Area area;
 
     @Lob

@@ -19,12 +19,14 @@ import java.util.Date;
 public class AuthenticationInterceptor implements HandlerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(HandlerInterceptor.class);
 
+    private HttpSession session;
+    private String requestedUri;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        HttpSession session = request.getSession();
-        String requestedUri = request.getRequestURI();
+        session = request.getSession();
+        requestedUri = request.getRequestURI();
         if ((session == null || session.getAttribute("user") == null) &&
                 (requestedUri.contains("profile") || requestedUri.contains("logout") ||
                         requestedUri.contains("notification") || requestedUri.contains("addbook") ||
