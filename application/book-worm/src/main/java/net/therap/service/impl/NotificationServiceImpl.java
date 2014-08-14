@@ -56,10 +56,13 @@ public class NotificationServiceImpl implements NotificationService {
     public void updateAndInsertNotification(int notificationId, int senderId, int receiverId, int bookId,
                                             int notificationType, boolean isSeen) {
 
-        addNewNotification(senderId, receiverId, bookId, notificationType, isSeen); // Add  New Notification
-        // For Receiver
+        if (notificationType == NotificationType.CLOSE) {
+            notificationDao.updateNotificationStatus(notificationId);
+        } else {
+            addNewNotification(senderId, receiverId, bookId, notificationType, isSeen); // Add  New Notification
+            notificationDao.updateNotificationStatus(notificationId);          // Update the isSeen Property
+        }
 
-        notificationDao.updateNotificationStatus(notificationId);          // Update the isSeen Property
     }
 
     @Override
