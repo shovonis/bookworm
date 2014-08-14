@@ -11,7 +11,7 @@ public enum NotificationType {
     PURCHASE,
     APPROVAL,
     IGNORE;
+    public static final int CLOSE = 4;
 
     public static final NotificationType values[] = values();
-
 }

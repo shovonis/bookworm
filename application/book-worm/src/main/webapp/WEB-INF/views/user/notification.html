@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <div th:include="fragments/header :: header"></div>
@@ -65,7 +65,8 @@
                                     Ignore
                                 </button>
 
-                                <button th:if="${notification.type.ordinal() == 2 or notification.type.ordinal() == 3 }" class=" close small danger">
+                                <button th:if="${notification.type.ordinal() == 2 or notification.type.ordinal() == 3 }"
+                                        class=" close small danger">
                                     Close
                                 </button>
 

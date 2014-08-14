@@ -24,7 +24,7 @@ public class HomeController {
     private BookService bookService;
     private List<Book> recentlyPostedBooks;
 
-    @RequestMapping (value = {"/home", "/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/home", "/"}, method = RequestMethod.GET)
     public String getHomePage(ModelMap modelMap) {
         recentlyPostedBooks = bookService.getRecentlyPostedBooks();
         modelMap.addAttribute("recentBookPosts", recentlyPostedBooks);
@@ -32,7 +32,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping ("/getBookPhoto/{index}")
+    @RequestMapping("/getBookPhoto/{index}")
     @ResponseBody
     public byte[] getBookPhoto(@PathVariable("index") int index) {
         return recentlyPostedBooks.get(index).getPhoto();
