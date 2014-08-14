@@ -5,7 +5,6 @@ import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
 import net.therap.service.UserService;
-import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
@@ -33,7 +34,7 @@ public class ProfileController {
 
     private User user;
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @RequestMapping (value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         int userId = user.getUserId();
@@ -54,17 +55,17 @@ public class ProfileController {
         return modelAndView;
     }
 
-    @RequestMapping("/getProfilePicture")
+    @RequestMapping ("/getProfilePicture")
     @ResponseBody
     public byte[] getProfilePicture(HttpSession httpSession) {
-        if(user == null){
+        if (user == null) {
             user = (User) httpSession.getAttribute("user");
         }
         return user.getProfilePicture();
     }
 
 
-    @RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
+    @RequestMapping (value = "/getUser/{userId}", method = RequestMethod.GET)
     public ModelAndView getUser(@PathVariable int userId) {
         user = userService.getUserById(userId);
         ModelAndView modelAndView = new ModelAndView("user/user_summary");
@@ -74,27 +75,32 @@ public class ProfileController {
     }
 
 
-    @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping (value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         userService.updateUser(updatedUser, user.getUserId());
     }
 
-    @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
+    @RequestMapping (value = "/profile/updatePhoto", method = RequestMethod.POST)
     @ResponseBody
-    public void updateProfilePicture(@RequestParam("updatedPhotoStr") String updateEncodedPhoto, HttpSession httpSession) {
-        user = (User) httpSession.getAttribute("user");
-        byte[] imageBytes = Base64.decodeBase64(updateEncodedPhoto.getBytes());
-        System.out.println("Updated encoded photo. isvalid  " + updateEncodedPhoto);
-        userService.updateProfilePicture(user.getUserId(), imageBytes);
+    public void updateProfilePicture(@RequestParam (value = "fileToUpload") MultipartFile profilePicture, HttpSession httpSession) {
+        try {
+
+            byte[] imageBytes = profilePicture.getBytes();
+
+            user = (User) httpSession.getAttribute("user");
+            userService.updateProfilePicture(user.getUserId(), imageBytes);
+            user.setProfilePicture(imageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-
-    @RequestMapping(value = "/reputation", method = RequestMethod.POST)
+    @RequestMapping (value = "/reputation", method = RequestMethod.POST)
     @ResponseBody
-    public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint, HttpSession session) {
+    public void rateUserReputation(@RequestParam ("reputationPoint") int reputationPoint, HttpSession session) {
         log.info("REPUTATION POINT {}", reputationPoint);
         log.info("User ID {}", user.getUserId());
 
