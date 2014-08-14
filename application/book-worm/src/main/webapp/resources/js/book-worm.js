@@ -189,6 +189,32 @@ $(document).ready(function () {
 
     });
 
+
+    $(".close").click(function () {
+        parentDiv = $(this).parent().parent().attr("id");
+        $('#' + parentDiv).fadeOut("slow");
+
+        receiverId = $(this).parent().find('input[name="receiverId"]').val();
+        bookId = $(this).parent().find('input[name="bookId"]').val();
+        type = 4;
+        isSeen = true;
+
+        $.ajax({
+            url: "/updateNotification",
+            type: "POST",
+            data: {"id": parentDiv,"receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
+
+            beforeSend: function (xhr) {
+            },
+            success: function () {
+            }
+
+        });
+
+
+    });
+
+
     $(".purchase").click(function () {
 //        parentDiv = $(this).parent().parent().attr("id");
 //        $('#' + parentDiv).fadeOut("slow");
