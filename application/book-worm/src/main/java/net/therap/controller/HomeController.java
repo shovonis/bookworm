@@ -27,6 +27,7 @@ public class HomeController {
     @RequestMapping(value = {"/home", "/"}, method = RequestMethod.GET)
     public String getHomePage(ModelMap modelMap) {
         recentlyPostedBooks = bookService.getRecentlyPostedBooks();
+
         modelMap.addAttribute("recentBookPosts", recentlyPostedBooks);
         modelMap.addAttribute("bookForm", new Book());
         return "home";

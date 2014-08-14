@@ -6,6 +6,47 @@
     <title>Add Book</title>
 
     <div th:include="fragments/header :: header"></div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+           $("#addToWishListButton").click(function(){
+               title = $("#title").html();
+               author = $("#author").html();
+
+               author = author.substr(author.indexOf(":")+1);
+
+               json = { "title": title, "author": author};
+
+               $.ajax({
+                   url: "/profile/addWishedBook",
+                   data: JSON.stringify(json),
+                   type: "POST",
+
+                   beforeSend: function (xhr) {
+                       xhr.setRequestHeader("Accept", "application/json");
+                       xhr.setRequestHeader("Content-Type", "application/json");
+                   },
+
+                   success: function (addedWishedBookId) {
+                       $('#addToWishListButton').hide();
+
+                       $.Notify({
+                           caption: "WISHED BOOKS",
+                           content: title+" by "+author+" is added to wished book list",
+                           timeout: 3000,
+                           style: {background: 'orange'}
+                       });
+                   }
+
+               });
+
+           })
+        });
+
+    </script>
+
 </head>
 
 <body class="metro">
@@ -24,14 +65,14 @@
             <img style="height: 100%" th:src="@{/getBookImage}"/>
 
             <div class="overlay-fluid">
-                <button class="large  warning icon-box-add"> Add to WishList</button>
+                <button class="large  warning icon-box-add" id="addToWishListButton"> Add to WishList</button>
             </div>
-        </div>
 
+        </div>
 
         <div class="span7" id="bookSummary">
             <div class="padding10">
-                <h2 th:text="${bookDetails.title}"></h2>
+                <h2 th:text="${bookDetails.title}" id = "title" ></h2>
                 Posted By: <a th:href="@{/getUser/} + ${bookDetails.user.userId}"
                               th:text="${bookDetails.user.firstName} +' '+ ${bookDetails.user.lastName}">
 
@@ -59,7 +100,7 @@
 
         <div class="span7">
             <div class="padding10">
-                <label th:text=" 'Author : '    + ${bookDetails.author}"></label>
+                <label th:text=" 'Author : '    + ${bookDetails.author}" id = "author"></label>
                 <label th:text=" 'Publisher : ' + ${bookDetails.publisher}"></label>
                 <label th:text=" 'Edition  '    + ${bookDetails.edition}"></label>
                 <label th:text=" 'Price : '     + ${bookDetails.price}"></label>

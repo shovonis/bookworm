@@ -83,7 +83,7 @@ public class BookController {
         return "redirect:/addbook";
     }
 
-    @RequestMapping(value = "/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/profile/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public int addWishedBook(@RequestBody WishedBook wishedBook, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
