@@ -9,7 +9,7 @@
 
         $(document).ready(function () {
 
-            function readURL(input) {
+            function showSelectedProfilePicture(input) {
                 if (input.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
@@ -19,53 +19,31 @@
                 }
             }
 
-
-            function getBase64Image(){
-                var imageSrc;
-                var canvas = document.createElement("canvas");
-                var img1 = document.createElement("img");
-
-                imageSrc = document.getElementById("profilePicture").src;
-                img1.setAttribute('src', imageSrc);
-                canvas.width = img1.width;
-                canvas.height = img1.height;
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img1, 0, 0);
-                return canvas.toDataURL("image/png");
-            }
-
-
-            $("#profilePictureUpdateButton").change(function(){
-                 readURL(this);
+            $("#profilePictureInputButton").change(function(){
+                 showSelectedProfilePicture(this);
             });
 
 
                 $("#updatePhotoButton").click(function(){
 
-                   updatedPhotoStr = getBase64Image();
+                    var fd = new FormData();
+                    fd.append("fileToUpload", $("#profilePictureInputButton")[0].files[0]);
 
                     $.ajax({
-//                        $("#userInfo").attr("action")
-                        url: "/profile/updatePhoto",
-                        data: {"updatedPhotoStr" : updatedPhotoStr},
+                        url: $("#updateProfilePictureForm").attr("action"),
                         type: "POST",
-
+                        data: fd,
+                        processData: false,
+                        contentType: false,
                         beforeSend: function (xhr) {
-                            alert(updatedPhotoStr);
                              $('#loadingImageUserInfo').show();
                         },
-
-                        success: function () {
+                        success: function() {
                             $('#loadingImageUserInfo').hide();
-
-                        },
-                        error: function (data, status, er) {
-                            alert("error: " + data + " status: " + status + " er:" + er);
+                            $("#profilePictureUpdateNotice").show(1000);
+                            $("#profilePictureUpdateNotice").hide(2000);
                         }
-
-
                     });
-
 
 
                 });
@@ -81,7 +59,7 @@
                 emailField = $("#email");
                 phoneNumberField = $("#phone");
                 areaSelectorDropdown = $("#areaSelector");
-                profilePictureUpdateButton = $("#profilePictureUpdateButton");
+                profilePictureUpdateButton = $("#profilePictureInputButton");
 
                 updateSave = $(this).val();
 
@@ -123,6 +101,8 @@
 
                         success: function () {
                             $('#loadingImageUserInfo').hide();
+                            $("#profileInfoUpdateNotice").show(1000);
+                            $("#profileInfoUpdateNotice").hide(2000);
 
                         }
 
@@ -343,6 +323,8 @@
                             <form id="userInfo" th:action="@{/profile/update}" method="post">
                                 <fieldset>
                                     <legend>Basic Info</legend>
+                                    <p id ="profileInfoUpdateNotice" class = "fg-lime" style="display: none">  <strong> profile info updated </strong></p>
+                                    <br/>
                                     <lable>First Name</lable>
                                     <div class="input-control text" data-role="input-control">
                                         <input id="firstName" type="text" disabled="disabled"
@@ -385,10 +367,13 @@
                         <div class="span1"></div>
                         <fieldset>
                             <legend>Profile Picture</legend>
+                            <p id ="profilePictureUpdateNotice" class = "fg-lime" style="display: none">  <strong> profile picture updated </strong></p>
                             <div class="span2">
+                                <form th:action="@{/profile/updatePhoto}" method="POST" id="updateProfilePictureForm" >
                                 <img width="300px" id="profilePicture" height="300px" th:src="@{/getProfilePicture}"/>
-                                <input type="file" id="profilePictureUpdateButton" style="display:block" />
-                                <input type="button" class="button mini success" id="updatePhotoButton" value="update image" />
+                                <input type="file" name="profilePicture" id="profilePictureInputButton" style="display:block" />
+                                <input type="button" class="button success" id="updatePhotoButton" value="update photo" />
+                                </form>
                             </div>
                         </fieldset>
                         <div id="loadingImageUserInfo" align="center" style="display: none">
