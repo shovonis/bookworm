@@ -57,8 +57,13 @@ public class NotificationServiceImpl implements NotificationService {
                                             int notificationType, boolean isSeen) {
 
         addNewNotification(senderId, receiverId, bookId, notificationType, isSeen); // Add  New Notification
-                                                                                    // For Receiver
+        // For Receiver
 
         notificationDao.updateNotificationStatus(notificationId);          // Update the isSeen Property
+    }
+
+    @Override
+    public long getUnseenNotification(int userId) {
+        return notificationDao.getUnseenNotification(userId);
     }
 }

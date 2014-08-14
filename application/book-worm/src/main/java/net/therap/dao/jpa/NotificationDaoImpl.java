@@ -47,4 +47,17 @@ public class NotificationDaoImpl implements NotificationDao {
         entityManager.flush();
         log.info("NOTIFICATION STATUS UPDATED SUCCESSFULLY");
     }
+
+    @Override
+    public long getUnseenNotification(int userId) {
+
+        Query query = entityManager.createQuery("SELECT COUNT(notification.id) FROM Notification  notification " +
+                " WHERE notification.receiver.userId =:userId AND notification.isSeen = false", Long.class);
+
+        query.setParameter("userId", userId);
+        long count = (Long) query.getSingleResult();
+
+        log.info("NOTIFICATION COUNT QUERY EXECUTED {} ", count);
+        return count;
+    }
 }
