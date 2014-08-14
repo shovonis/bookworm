@@ -19,7 +19,7 @@ import java.util.Collection;
  * @since 8/6/14 12:15 PM
  */
 @Repository
-@Qualifier ("userDaoJpa")
+@Qualifier("userDaoJpa")
 public class UserDaoImpl implements UserDao {
     private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
 
@@ -111,6 +111,12 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("areaCode", updatedUser.getArea().getAreaCode());
 
         query.executeUpdate();
+    }
+
+    @Override
+    public void updateUser(User updatedUser) {
+        entityManager.merge(updatedUser);
+        entityManager.flush();
     }
 
     @Override

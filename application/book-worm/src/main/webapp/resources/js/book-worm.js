@@ -3,12 +3,11 @@
  */
 
 
-window.onload = function () {
+window.onload=function(){
     index = 0;
 
-    //For Notification Count
-    $.get("/getNotificationCounter", function (data) {
-        document.getElementById("notificationCounter").innerHTML = "(" + data + ")";
+    $.get( "/getNotificationCounter", function( data ) {
+        document.getElementById("notificationCounter").innerHTML = "("+data+")";
     });
 };
 
@@ -16,11 +15,11 @@ window.onload = function () {
 function onExchangeBookClick() {
 
     var newRowElement = '<tr>' +
-        '                <td><input type="text" name = "exchangeBooks[' + index + '].title"/> </td>' +
-        '<td><input type="text" name = "exchangeBooks[' + index + '].author"/> </td>' +
+        '                <td><input type="text" name = "exchangeBooks['+index+'].title"/> </td>'+
+                        '<td><input type="text" name = "exchangeBooks['+index+'].author"/> </td>' +
         '                </tr>';
 
-    $("#exchangeBookListTable  tbody").append(newRowElement);
+     $("#exchangeBookListTable  tbody").append(newRowElement);
 
     index++;
 
@@ -132,8 +131,15 @@ $(function () {
     });
 });
 
+function onClickOfPurchaseButton() {
+    document.getElementById("typeField").value = 1;
+}
 
-//**This functions are for notification**//
+function onClickOfExchangeButton() {
+    document.getElementById("typeField").value = 0;
+}
+
+
 $(document).ready(function () {
     $(".approve").click(function () {
         parentDiv = $(this).parent().parent().attr("id");
@@ -171,7 +177,7 @@ $(document).ready(function () {
         $.ajax({
             url: "/updateNotification",
             type: "POST",
-            data: {"id": parentDiv, "receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
+            data: {"id": parentDiv,"receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
 
             beforeSend: function (xhr) {
             },
@@ -180,33 +186,13 @@ $(document).ready(function () {
 
         });
 
-
-    });
-
-    $(".close").click(function () {
-        parentDiv = $(this).parent().parent().attr("id");
-        $('#' + parentDiv).fadeOut("slow");
-
-        receiverId = $(this).parent().find('input[name="receiverId"]').val();
-        bookId = $(this).parent().find('input[name="bookId"]').val();
-        type = 4;
-        isSeen = true;
-
-        $.ajax({
-            url: "/updateNotification",
-            type: "POST",
-            data: {"id": parentDiv, "receiverId": receiverId, "bookId": bookId, "type": type, "isSeen": isSeen},
-
-            beforeSend: function (xhr) {
-            },
-            success: function () {
-            }
-
-        });
 
     });
 
     $(".purchase").click(function () {
+//        parentDiv = $(this).parent().parent().attr("id");
+//        $('#' + parentDiv).fadeOut("slow");
+
         var not = $.Notify({
             caption: "Purchase Request",
             content: "Your Purchase Request Has Been Successfully Sent.",
@@ -231,9 +217,13 @@ $(document).ready(function () {
 
         });
 
+
     });
 
     $(".exchange").click(function () {
+//        parentDiv = $(this).parent().parent().attr("id");
+//        $('#' + parentDiv).fadeOut("slow");
+
         var not = $.Notify({
             caption: "Exchange Request",
             content: "Your Exchange Request Has Been Successfully Sent.",
@@ -257,6 +247,7 @@ $(document).ready(function () {
             }
 
         });
+
 
     });
 

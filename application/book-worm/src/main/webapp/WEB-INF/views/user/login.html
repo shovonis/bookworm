@@ -11,7 +11,7 @@
     <div class="grid">
         <div class="row">
             <div class="span4">
-                <form th:action="@{/login}" th:method = "post" th:object="${user}">
+                <form th:action="@{/login}" th:method = "post" th:object="${userForm}">
                     <fieldset>
                         <legend>Login</legend>
                         <p class="fg-red" th:if="${loginFailedMsg} != null" th:text = "${loginFailedMsg}"></p>
