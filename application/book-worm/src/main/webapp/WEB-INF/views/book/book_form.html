@@ -16,6 +16,9 @@
 <div class="grid fluid">
 <div class="row">
 <div class="span7">
+
+    <h4 class="fg-green" th:if="${posted != null}"> BOOK POST SUCCESSFUL </h4>
+
     <fieldset>
         <legend>
             <h2>Add Book</h2>
@@ -44,7 +47,7 @@
                     <legend>Upload Photo</legend>
                     <div class="span4">
                         <div class="tile">
-                            <img src="/resources/images/access.png" alt="upload image"/>
+                            <img src="/resources/images/book.jpeg" alt="upload image"/>
                         </div>
                         <input type="file" class="meduim-size" name="bookImage" value="Add Image"/>
                     </div>
@@ -147,7 +150,7 @@
             </div>
             <div class="span12">
                 <button class="large warning icon-eye padding5"> Preview</button>
-                <button class="large success margin5 offset6"> Post Book</button>
+                <button class="large success margin5 offset6" id = "postBookButton"> Post Book</button>
             </div>
 
         </form>

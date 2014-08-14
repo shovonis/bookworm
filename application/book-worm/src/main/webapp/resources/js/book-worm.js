@@ -85,6 +85,7 @@ function sendAjax() {
     });
 }
 $(function () {
+
     $("#createFlatWindow").on('click', function () {
         userId = $("#urlValue").val();
         $.ajax({
@@ -141,6 +142,7 @@ function onClickOfExchangeButton() {
 
 
 $(document).ready(function () {
+
     $(".approve").click(function () {
         parentDiv = $(this).parent().parent().attr("id");
         $('#' + parentDiv).fadeOut("slow");
@@ -276,5 +278,7 @@ $(document).ready(function () {
 
 
     });
+
+    $("#bookPostMsg").hide(3000);
 
 });
