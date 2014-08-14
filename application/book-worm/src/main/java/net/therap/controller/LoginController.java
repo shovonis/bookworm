@@ -29,12 +29,12 @@ public class LoginController {
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String getLoginForm(ModelMap modelMap) {
-        modelMap.addAttribute("user", new User());
+        modelMap.addAttribute("userForm", new User());
         return "user/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@ModelAttribute User user, ModelMap modelMap) {
+    public ModelAndView login(@ModelAttribute("userForm") User user, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView();
 
         User authenticatedUser = userService.getAuthenticatedUser(user);
