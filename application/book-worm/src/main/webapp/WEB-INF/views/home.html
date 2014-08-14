@@ -23,7 +23,7 @@
 
         <div class=" tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}" >
                             <a th:href="@{/bookDetails/}+${recentBookPost.id}">
-                            <img th:src="@{/getBookPhoto/}+${row.index}" style="height:inherit; width:inherit "/>
+                            <img th:src="@{/getBookPhoto/}+${row.index}"  style="height:inherit; width:inherit "/>
                             </a>
                             <div class="overlay-fluid fg-white" >
                                 <p th:text="${recentBookPost.title}" class="fg-white" ></p>

@@ -62,8 +62,7 @@
                     <div th:if="${session.isLoggedIn} != null">
                         <a class="element image-button image-left place-right"
                            th:href="@{/notification/} + ${session.user.userId}">
-                            <!--<img src="/resources/images/information.png"-->
-                            <!--th:href="@{/resources/images/information.png}"/>-->
+
                             <div id="noti_Container">
                                 <img th:src="@{/resources/images/e_mail.png}" alt="Notification"/>
                                 <div id="notificationCounter" class="noti_bubble fg-orange"></div>
@@ -71,10 +70,13 @@
                         </a>
                     </div>
                     <span class="element-divider place-right"></span>
-                    <button class="element image-button image-left place-right" th:if="${session.isLoggedIn} != null">
-                        <a th:text="${session.user.firstName}" th:href="@{/profile}"></a>
+                    <div class="element image-button image-left place-right" th:if="${session.isLoggedIn} != null">
+                        <a th:href="@{/profile}">
                         <img th:src="@{/getProfilePicture}" width="20px" height="20px"/>
-                    </button>
+                        </a>
+                        <a th:text="${session.user.firstName}" th:href="@{/profile}"> </a>
+
+                    </div>
                     <a href="/home" class="element image-button image-left place-right" th:href="@{/home}">Home</a>
                 </div>
             </ul>

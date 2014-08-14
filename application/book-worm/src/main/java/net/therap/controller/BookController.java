@@ -63,30 +63,32 @@ public class BookController {
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
     public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult result,
                           @RequestParam(value = "bookImage") MultipartFile bookImage, HttpSession session) {
+
         if (result.hasErrors()) {
             return "book/book_form";
         }
+
         try {
-            byte[] imageByte = bookImage.getBytes();
+            byte[] imageBytes = bookImage.getBytes();
+
             User user = (User) session.getAttribute("user");
             book.setUser(user);
-            book.setPhoto(imageByte);
+            book.setPhoto(imageBytes);
 
             if (book.getExchangeBooks() != null) {
                 for (ExchangeBook exchangeBook : book.getExchangeBooks()) {
                     exchangeBook.setBook(book);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         bookService.addBook(book);
         return "redirect:/home";
     }
 
-    @RequestMapping(value = "/profile/addWishedBook", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/profile/addWishedBook", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public int addWishedBook(@RequestBody WishedBook wishedBook, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
@@ -112,22 +114,20 @@ public class BookController {
         bookService.removePostedBookById(postedBookId);
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ModelAndView searchBook(ModelAndView modelAndView, @RequestParam("query") String searchKey) {
-        log.info("searching books for query {}", searchKey);
+        @RequestMapping(value = "/search", method = RequestMethod.GET)
+        public ModelAndView searchBook (ModelAndView modelAndView, @RequestParam("query") String searchKey){
 
-        matchedBooks = bookService.getBooksBySearchKey(searchKey);
+            matchedBooks = bookService.getBooksBySearchKey(searchKey);
 
-        modelAndView.addObject("bookForm", new Book());
-        modelAndView.setViewName("book/book_search");
-        modelAndView.addObject("matchedBooks", matchedBooks);
-        return modelAndView;
+            modelAndView.addObject("bookForm", new Book());
+            modelAndView.setViewName("book/book_search");
+            modelAndView.addObject("matchedBooks", matchedBooks);
+            return modelAndView;
+        }
+
+        @RequestMapping("/search/getPhoto/{index}")
+        @ResponseBody
+        public byte[] getBookPhoto ( @PathVariable("index") int index){
+            return matchedBooks.get(index).getPhoto();
+        }
     }
-
-    @RequestMapping("/search/getPhoto/{index}")
-    @ResponseBody
-    public byte[] getBookPhoto(@PathVariable("index") int index) {
-        return matchedBooks.get(index).getPhoto();
-    }
-
-}

@@ -1,296 +1,262 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Book</title>
-
     <div th:include="fragments/header :: header"></div>
-
     <script type="text/javascript">
-
         $(document).ready(function(){
 
-           $("#addToWishListButton").click(function(){
-               title = $("#title").html();
-               author = $("#author").html();
+            $("#addToWishListButton").click(function(){
+                title = $("#title").html();
+                author = $("#author").html();
 
-               author = author.substr(author.indexOf(":")+1);
+                author = author.substr(author.indexOf(":")+1);
 
-               json = { "title": title, "author": author};
+                json = { "title": title, "author": author};
 
-               $.ajax({
-                   url: "/profile/addWishedBook",
-                   data: JSON.stringify(json),
-                   type: "POST",
+                $.ajax({
+                    url: "/profile/addWishedBook",
+                    data: JSON.stringify(json),
+                    type: "POST",
 
-                   beforeSend: function (xhr) {
-                       xhr.setRequestHeader("Accept", "application/json");
-                       xhr.setRequestHeader("Content-Type", "application/json");
-                   },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Accept", "application/json");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                    },
 
-                   success: function (addedWishedBookId) {
-                       $('#addToWishListButton').hide();
+                    statusCode: {
+                        200: function () {
+                            $('#addToWishListButton').hide();
 
-                       $.Notify({
-                           caption: "WISHED BOOKS",
-                           content: title+" by "+author+" is added to wished book list",
-                           timeout: 3000,
-                           style: {background: 'orange'}
-                       });
-                   }
+                            $.Notify({
+                                caption: "WISHED BOOKS",
+                                content: title+" by "+author+" is added to wished book list",
+                                timeout: 3000,
+                                style: {background: 'orange'}
+                            });
+                        },
+                        302: function () {
+                            $('#addToWishListButton').hide();
 
-               });
+                            $.Notify({
+                                caption: "WISHED BOOKS",
+                                content: "Please Login to add book to wished book list",
+                                timeout: 3000,
+                                style: {background: 'orange'}
+                            });
+                        }
+                    }
+                });
 
-           })
+            })
         });
 
     </script>
-
 </head>
-
 <body class="metro">
-
 <div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
 <div class="container" style="margin: 50px">
-
 <div class="grid fluid">
 <div class="row">
-<div class="span7">
-    <fieldset>
-        <legend>
-            <h2>Book Summary</h2>
-        </legend>
-        <div class=" span4 double-vertical image-container shadow ">
-            <img style="height: 100%" th:src="@{/getBookImage}"/>
-
-            <div class="overlay-fluid">
-                <button class="large  warning icon-box-add" id="addToWishListButton"> Add to WishList</button>
-            </div>
-
-        </div>
-
-        <div class="span7" id="bookSummary">
-            <div class="padding10">
-                <h2 th:text="${bookDetails.title}" id = "title" ></h2>
-                Posted By: <a th:href="@{/getUser/} + ${bookDetails.user.userId}"
-                              th:text="${bookDetails.user.firstName} +' '+ ${bookDetails.user.lastName}">
-
-            </a>
-                <input type="hidden" id="urlValue" th:value="${bookDetails.user.userId}"/>
-                <label style="float: right">Date :<label
-                        th:text="${bookDetails.postDateTime}"></label></label>
-                <br/>
-            </div>
-        </div>
-
-        <div class="span7">
-            <div class="padding10">
-                <label style="float: left">Book Quality : </label><br/>
-
-                <div class="stepper rounded" data-steps="4" th:attr="data-start=${bookDetails.quality + 1}"
-                     data-role="stepper">
-                </div>
-
-
-                <strong><label th:text="'Very Good Quality. '"></label></strong>
-            </div>
-        </div>
-
-
-        <div class="span7">
-            <div class="padding10">
-                <label th:text=" 'Author : '    + ${bookDetails.author}" id = "author"></label>
-                <label th:text=" 'Publisher : ' + ${bookDetails.publisher}"></label>
-                <label th:text=" 'Edition  '    + ${bookDetails.edition}"></label>
-                <label th:text=" 'Price : '     + ${bookDetails.price}"></label>
-                <br/>
-                <h4 class="fg-darkCyan"> <strong> Exchangeable Book List </strong>  </h4>
-                <table class="table striped" id="exchangeBookListTable">
-                    <thead>
-                    <tr>
-                        <th class="text-left">Title</th>
-                        <th class="text-left">Author</th>
-                    </tr>
-
-                    <tr th:if="${#lists.isEmpty(bookDetails.exchangeBooks)}" >
-                        <td colspan="3">
-                            No Books in Exchange List
-                        </td>
-                    </tr>
-
-                    </thead>
-                    <tbody>
-                    <tr th:each="exchangeBook : ${bookDetails.exchangeBooks}">
-                        <td th:text="${exchangeBook.title}">Title</td>
-                        <td th:text="${exchangeBook.author}" class="right">author</td>
-                    </tr>
-
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
-
-            </div>
-
-            <div th:if="${session.isLoggedIn} != null and ${bookDetails.user.userId} != ${session.user.userId}" >
-                <input name="receiverId" type="text" style="display: none" th:value="${bookDetails.user.userId}"/>
-                <input name="bookId" type="text" style="display: none" th:value="${bookDetails.id}"/>
-                <input id="typeField" name="type" type="text" style="display: none" value="0"/>
-                <input id="isSeenField" name="isSeen" type="text" style="display: none" value="false"/>
-
-                <button class="purchase large success icon-dollar-2 margin5"> Purchase
-                </button>
-                <button class="exchange large info icon-book margin5"> Exchange</button>
-            </div>
-
-            <div th:if="${session.isLoggedIn} == null">
-                <a th:href="@{/login}">
-                    <button class="large success icon-dollar-2 margin5"> Purchase</button>
-                </a>
-                <a th:href="@{/login}">
-                    <button class="large info icon-book margin5"> Exchange</button>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="span7  margin10" style="">
-            <div class="padding10">
-                <fieldset>
-                    <legend>Book Details</legend>
-                    <p th:text="${bookDetails.details}">
-
-                    </p>
-                </fieldset>
-            </div>
-        </div>
-    </fieldset>
-</div>
-<div class="span1">
-
-</div>
-<div class="span3">
-    <div class="top  bg-white border" style="width: 100% ;  float:right">
-        <form class="padding10" th:action="@{/addbook}" th:method="get" th:object="${bookForm}">
-            <fieldset>
-                <legend>Want to Sell/Exchange Book ?</legend>
-                <label>Title</label>
-
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="type title" th:field="*{title}"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-                <label>Author</label>
-
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="type author" th:field="*{author}"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-                <input type="submit" class="success" value="Post Ad"/>
-            </fieldset>
-        </form>
-
-    </div>
-
-    <div class="bottom fixed-bottom" style="width: 100% ; float:right;">
-        <br/>
+    <div class="span7">
         <fieldset>
-            <legend>Books you might like</legend>
-            <div class="tile double live" data-role="live-tile">
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
-                </div>
-
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">Book Title</span>
+            <legend>
+                <h2>Book Summary</h2>
+            </legend>
+            <div class=" span4 double-vertical image-container shadow ">
+                <img style="height: 100%" th:src="@{/getBookImage}"/>
+                <div class="overlay-fluid"  th:if="${session.isLoggedIn} != null">
+                    <button class="large  warning icon-box-add" id="addToWishListButton"> Add to WishList</button>
                 </div>
             </div>
-
-
-            <div class="tile double live" data-role="live-tile" data-effect="easeInExpo">
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
+            <div class="span7" id="bookSummary">
+                <div class="padding10">
+                    <h2 th:text="${bookDetails.title}" id = "title" ></h2>
+                    Posted By: <a th:href="@{/getUser/} + ${bookDetails.user.userId}"
+                                  th:text="${bookDetails.user.firstName} +' '+ ${bookDetails.user.lastName}">
+                               </a>
+                    <input type="hidden" id="urlValue" th:value="${bookDetails.user.userId}"/>
+                    <label style="float: right">Date :<label
+                            th:text="${bookDetails.postDateTime}"></label></label>
+                    <br/>
                 </div>
             </div>
-
-            <div class="tile double live" data-role="live-tile" data-effect="slideRight">
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
-                </div>
-
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
+            <div class="span7">
+                <div class="padding10">
+                    <label style="float: left">Book Quality : </label><br/>
+                    <div class="stepper rounded" data-steps="4" th:attr="data-start=${bookDetails.quality + 1}"
+                         data-role="stepper">
+                    </div>
+                    <strong><label th:text="'Very Good Quality. '"></label></strong>
                 </div>
             </div>
-            <div class="tile double live" data-role="live-tile">
-
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
+            <div class="span7">
+                <div class="padding10">
+                    <label th:text=" 'Author : '    + ${bookDetails.author}" id = "author"></label>
+                    <label th:text=" 'Publisher : ' + ${bookDetails.publisher}"></label>
+                    <label th:text=" 'Edition  '    + ${bookDetails.edition}"></label>
+                    <label th:text=" 'Price : '     + ${bookDetails.price}"></label>
+                    <br/>
+                    <h4 class="fg-darkCyan"> <strong> Exchangeable Book List </strong>  </h4>
+                    <table class="table striped" id="exchangeBookListTable">
+                        <thead>
+                        <tr>
+                            <th class="text-left">Title</th>
+                            <th class="text-left">Author</th>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(bookDetails.exchangeBooks)}" >
+                            <td colspan="3">
+                                No Books in Exchange List
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="exchangeBook : ${bookDetails.exchangeBooks}">
+                            <td th:text="${exchangeBook.title}">Title</td>
+                            <td th:text="${exchangeBook.author}" class="right">author</td>
+                        </tr>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
                 </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
+                <div th:if="${session.isLoggedIn} != null and ${bookDetails.user.userId} != ${session.user.userId}" >
+                    <input name="receiverId" type="text" style="display: none" th:value="${bookDetails.user.userId}"/>
+                    <input name="bookId" type="text" style="display: none" th:value="${bookDetails.id}"/>
+                    <input id="typeField" name="type" type="text" style="display: none" value="0"/>
+                    <input id="isSeenField" name="isSeen" type="text" style="display: none" value="false"/>
+                    <button class="purchase large success icon-dollar-2 margin5"> Purchase
+                    </button>
+                    <button class="exchange large info icon-book margin5"> Exchange</button>
                 </div>
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
+                <div th:if="${session.isLoggedIn} == null">
+                    <a th:href="@{/login}">
+                        <button class="large success icon-dollar-2 margin5"> Purchase</button>
+                    </a>
+                    <a th:href="@{/login}">
+                        <button class="large info icon-book margin5"> Exchange</button>
+                    </a>
                 </div>
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
+            </div>
+            <div class="span7  margin10" style="">
+                <div class="padding10">
+                    <fieldset>
+                        <legend>Book Details</legend>
+                        <p th:text="${bookDetails.details}">
+                        </p>
+                    </fieldset>
                 </div>
             </div>
         </fieldset>
     </div>
-
-</div>
-
+    <div class="span1">
+    </div>
+    <div class="span3">
+        <div class="top  bg-white border" style="width: 100% ;  float:right">
+            <form class="padding10" th:action="@{/addbook}" th:method="get" th:object="${bookForm}">
+                <fieldset>
+                    <legend>Want to Sell/Exchange Book ?</legend>
+                    <label>Title</label>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" placeholder="type title" th:field="*{title}"/>
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
+                    <label>Author</label>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" placeholder="type author" th:field="*{author}"/>
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
+                    <input type="submit" class="success" value="Post Ad"/>
+                </fieldset>
+            </form>
+        </div>
+        <div class="bottom fixed-bottom" style="width: 100% ; float:right;">
+            <br/>
+            <fieldset>
+                <legend>Books you might like</legend>
+                <div class="tile double live" data-role="live-tile">
+                    <div class="tile-content image">
+                        <img src="images/4.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/2.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/1.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/3.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/5.jpg"/>
+                    </div>
+                    <div class="tile-status bg-dark opacity">
+                        <span class="label">Book Title</span>
+                    </div>
+                </div>
+                <div class="tile double live" data-role="live-tile" data-effect="easeInExpo">
+                    <div class="tile-content image">
+                        <img src="images/1.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/2.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/3.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/4.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/5.jpg"/>
+                    </div>
+                    <div class="tile-status bg-dark opacity">
+                        <span class="label">effect: slideLeft</span>
+                    </div>
+                </div>
+                <div class="tile double live" data-role="live-tile" data-effect="slideRight">
+                    <div class="tile-content image">
+                        <img src="images/2.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/1.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/5.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/3.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/4.jpg"/>
+                    </div>
+                    <div class="tile-status bg-dark opacity">
+                        <span class="label">effect: slideLeft</span>
+                    </div>
+                </div>
+                <div class="tile double live" data-role="live-tile">
+                    <div class="tile-content image">
+                        <img src="images/2.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/3.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/4.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/5.jpg"/>
+                    </div>
+                    <div class="tile-content image">
+                        <img src="images/1.jpg"/>
+                    </div>
+                    <div class="tile-status bg-dark opacity">
+                        <span class="label">effect: slideLeft</span>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
 </div>
 <div th:include="fragments/footer :: footer"></div>
 </div>
