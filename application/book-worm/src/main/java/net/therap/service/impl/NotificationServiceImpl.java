@@ -55,11 +55,13 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void updateAndInsertNotification(int notificationId, int senderId, int receiverId, int bookId,
                                             int notificationType, boolean isSeen) {
+        if (notificationType == 4) {
+            notificationDao.updateNotificationStatus(notificationId);
+        } else {
+            addNewNotification(senderId, receiverId, bookId, notificationType, isSeen); // Add  New Notification
+            notificationDao.updateNotificationStatus(notificationId);          // Update the isSeen Property
+        }
 
-        addNewNotification(senderId, receiverId, bookId, notificationType, isSeen); // Add  New Notification
-        // For Receiver
-
-        notificationDao.updateNotificationStatus(notificationId);          // Update the isSeen Property
     }
 
     @Override

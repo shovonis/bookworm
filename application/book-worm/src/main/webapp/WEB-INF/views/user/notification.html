@@ -61,8 +61,14 @@
                                     Approve
                                 </button>
 
-                                <button th:if="${notification.type.ordinal() &lt; 2}" class="deny small warning">Ignore
+                                <button th:if="${notification.type.ordinal() &lt; 2}" class="deny small warning">
+                                    Ignore
                                 </button>
+
+                                <button th:if="${notification.type.ordinal() == 2 or notification.type.ordinal() == 3 }" class=" close small danger">
+                                    Close
+                                </button>
+
                             </div>
                         </div>
                     </div>
