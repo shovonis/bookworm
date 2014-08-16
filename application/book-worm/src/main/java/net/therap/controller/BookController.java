@@ -66,11 +66,16 @@ public class BookController {
     }
 
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
-    public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult result,
-                          @RequestParam(value = "bookImage") MultipartFile bookImage, HttpSession session) {
+    public ModelAndView addBook(@Valid @ModelAttribute("book") Book book, BindingResult result,
+                                @RequestParam(value = "bookImage") MultipartFile bookImage, HttpSession session) {
+
+        ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
         if (result.hasErrors()) {
-            return "book/book_form";
+            List<Category> categories = bookService.getAllCategory();
+            modelAndView.addObject("categories", categories);
+            modelAndView.setViewName("book/book_form");
+            return modelAndView;
         }
 
         try {
@@ -89,7 +94,7 @@ public class BookController {
             e.printStackTrace();
         }
         bookService.addBook(book);
-        return "redirect:/home";
+        return modelAndView;
     }
 
     @RequestMapping(value = "/profile/addWishedBook", method = RequestMethod.POST,
