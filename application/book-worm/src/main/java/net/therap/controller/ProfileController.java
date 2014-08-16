@@ -4,6 +4,7 @@ import net.therap.domain.Area;
 import net.therap.domain.Book;
 import net.therap.domain.User;
 import net.therap.domain.WishedBook;
+import net.therap.service.BookService;
 import net.therap.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author shakhawat.hossain
@@ -32,7 +34,11 @@ public class ProfileController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BookService bookService;
+
     private User user;
+    private List<Book> preferredBookList;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
@@ -67,9 +73,12 @@ public class ProfileController {
     @RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
     public ModelAndView getUser(@PathVariable int userId) {
         user = userService.getUserById(userId);
+        preferredBookList = bookService.getUserPreferredBookList();
+
         ModelAndView modelAndView = new ModelAndView("user/user_summary");
         modelAndView.addObject("user", user);
         modelAndView.addObject("bookForm", new Book());
+        modelAndView.addObject("preferredList", preferredBookList);
         return modelAndView;
     }
 

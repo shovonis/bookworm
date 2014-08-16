@@ -21,16 +21,19 @@
                         Recently Posted books
                     </legend>
 
-        <div class=" tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}" >
-                            <a th:href="@{/bookDetails/}+${recentBookPost.id}">
-                            <img th:src="@{/getBookPhoto/}+${row.index}"  style="height:inherit; width:inherit "/>
-                            </a>
-                            <div class="overlay-fluid fg-white" >
-                                <p th:text="${recentBookPost.title}" class="fg-white" ></p>
-                                <p th:text = "${recentBookPost.author}" class="fg-white" > </p>
-                                <p th:text = "${recentBookPost.postDateTime}" class="fg-white" > </p>
-                            </div>
+                    <div class=" tile image-container shadow" th:each="recentBookPost, row : ${recentBookPosts}">
+                        <a th:href="@{/bookDetails/}+${recentBookPost.id}">
+                            <img th:src="@{/getBookPhoto/}+${row.index}" style="height:inherit; width:inherit "/>
+                        </a>
+
+                        <div class="overlay-fluid fg-white">
+                            <p th:text="${recentBookPost.title}" class="fg-white"></p>
+
+                            <p th:text="${recentBookPost.author}" class="fg-white"></p>
+
+                            <p th:text="${recentBookPost.postDateTime}" class="fg-white"></p>
                         </div>
+                    </div>
                 </fieldset>
             </div>
             <div class="span2">
@@ -62,21 +65,19 @@
                 <div class="bottom" style="width: 100% ; float:right;">
                     <fieldset>
                         <legend>You may like these books</legend>
-                        <div class="tile ol-transparent">
-                            <img src="images/bizspark_b_2.png" style="height:inherit; width:inherit "/>
+
+                        <div class=" tile double image-container shadow" th:each="preferredBook, row : ${preferredList}">
+
+                            <a th:href="@{/bookDetails/}+${preferredBook.id}">
+                                <img th:src="@{/getbookimage/}+${row.index}" style="height:inherit; width:inherit "/>
+                            </a>
+
+                            <div class="overlay-fluid fg-white">
+                                <p th:text="${preferredBook.title}" class="fg-white"></p>
+                                <p th:text="${preferredBook.author}" class="fg-white"></p>
+                            </div>
                         </div>
-                        <div class="tile ol-transparent">
-                            <img src="images/bizspark_b_2.png" style="height:inherit; width:inherit "/>
-                        </div>
-                        <div class="tile ol-transparent">
-                            <img src="images/alchemist.jpg" style="height:inherit; width:inherit "/>
-                        </div>
-                        <div class="tile ol-transparent">
-                            <img src="images/deceptionpoint.jpg" style="height:inherit; width:inherit "/>
-                        </div>
-                        <div class="tile ol-transparent">
-                            <img src="images/deceptionpoint.jpg" style="height:inherit; width:inherit "/>
-                        </div>
+
                     </fieldset>
                 </div>
 

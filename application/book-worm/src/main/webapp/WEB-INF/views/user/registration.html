@@ -15,7 +15,7 @@
             <div class="span5">
                 <form th:action="@{/registration}" th:method="post" th:object="${user}">
                     <fieldset>
-                        <legend>Registration</legend>
+                        <legend>Registration(<p style="color: red;display: inline">All Fields are Required</p>)</legend>
                         <lable>First Name</lable>
                         <div class="input-control text" data-role="input-control">
                             <input type="text" th:field="*{firstName}" placeholder="your first name"/>

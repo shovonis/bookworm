@@ -25,22 +25,22 @@ public class Book implements Serializable {
     private int id;
 
     @Column(name = "title")
-    @NotNull(message = "Title Canno be Null")
-    @NotEmpty(message = "Author name cannot be empty")
+    @NotNull(message = "Title Cannot be Null")
+    @NotEmpty(message = "Title cannot be empty")
     private String title;
 
     @Column(name = "author")
-    @NotNull(message = "Title Canno be Null")
+    @NotNull(message = "Author Cannot be Null")
     @NotEmpty(message = "Author name cannot be empty")
     private String author;
 
-    @NotNull(message = "Title Canno be Null")
-    @NotEmpty(message = "Author name cannot be empty")
+    @NotNull(message = "Edition cannot be Null")
+    @NotEmpty(message = "Book edition cannot be empty")
     @Column(name = "edition")
     private String edition;
 
-    @NotNull(message = "Title Canno be Null")
-    @NotEmpty(message = "Author name cannot be empty")
+    @NotNull(message = "Publisher cannot be Null")
+    @NotEmpty(message = "Publisher cannot be empty")
     @Column(name = "publisher")
     private String publisher;
 

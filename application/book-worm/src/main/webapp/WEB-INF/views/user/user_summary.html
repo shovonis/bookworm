@@ -3,231 +3,165 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Book</title>
+
     <div th:include="fragments/header :: header"></div>
 </head>
 <body class="metro">
 <div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
 <div class="container" style="margin: 50px">
-<div class="grid fluid">
-<div class="row">
-<div class="span7">
-    <fieldset>
-        <legend>
-            <h2>User Summary</h2>
-        </legend>
-        <div class=" span4 double-vertical image-container shadow ">
-            <img style="height: 100%" th:src="@{/getProfilePicture}"/>
-        </div>
-        <div class="span7" id="bookSummary">
-            <div class="padding10">
-                <h2 th:text="${user.firstName} +' '+ ${user.lastName}"></h2>
-            </div>
-        </div>
-        <div class="span7">
-            <div class="padding10">
-                <label style="float: left">Reputation Point : </label><br/>
-                <div id="rating_2" class="large fg-yellow">
-                </div>
-                <form th:action="@{/reputation}" th:method="post" id="rating_form">
-                    <input id="reputation" type="hidden" th:value="${user.reputationPoint}"
-                           th:field="${user.reputationPoint}"/>
-                </form>
-                <script>
-                    $(function () {
-                        repu = $("#reputation").val();
-                        $("#rating_2").rating({
-                            static: false,
-                            score: repu,
-                            stars: 5,
-                            showHint: true,
-                            click: function (value, rating) {
-                                $("#reputation").val(value);
-                                rating.rate(value);
-                                var reputation = $("#reputation").val();
-                                $.ajax({
-                                    url: $("#rating_form").attr("action"),
-                                    data: {"reputationPoint": reputation},
-                                    type: "POST",
-                                    dataType: 'json',
+    <div class="grid fluid">
+        <div class="row">
+            <div class="span7">
+                <fieldset>
+                    <legend>
+                        <h2>User Summary</h2>
+                    </legend>
+                    <div class=" span4 double-vertical image-container shadow ">
+                        <img style="height: 100%" th:src="@{/getProfilePicture}"/>
+                    </div>
+                    <div class="span7" id="bookSummary">
+                        <div class="padding10">
+                            <h2 th:text="${user.firstName} +' '+ ${user.lastName}"></h2>
+                        </div>
+                    </div>
+                    <div class="span7">
+                        <div class="padding10">
+                            <label style="float: left">Reputation Point : </label><br/>
 
-                                    success: function () {
+                            <div id="rating_2" class="large fg-yellow">
+                            </div>
+                            <form th:action="@{/reputation}" th:method="post" id="rating_form">
+                                <input id="reputation" type="hidden" th:value="${user.reputationPoint}"
+                                       th:field="${user.reputationPoint}"/>
+                            </form>
+                            <script>
+                                $(function () {
+                                    repu = $("#reputation").val();
+                                    $("#rating_2").rating({
+                                        static: false,
+                                        score: repu,
+                                        stars: 5,
+                                        showHint: true,
+                                        click: function (value, rating) {
+                                            $("#reputation").val(value);
+                                            rating.rate(value);
+                                            var reputation = $("#reputation").val();
+                                            $.ajax({
+                                                url: $("#rating_form").attr("action"),
+                                                data: {"reputationPoint": reputation},
+                                                type: "POST",
+                                                dataType: 'json',
 
-                                    }
+                                                success: function () {
+
+                                                }
+                                            });
+                                        }
+                                    });
                                 });
-                            }
-                        });
-                    });
-                </script>
-            </div>
-        </div>
-        <div class="span7">
-            <div class="padding10">
-                <label th:text=" 'First Name : '    + ${user.firstName}"></label>
-                <label th:text=" 'Last Name : ' + ${user.lastName}"></label>
-                <label th:text=" 'Email     : '    + ${user.email}"></label>
-                <label th:text=" 'Contact Number  : +88'    + ${user.phoneNumber}"></label>
-                <label th:text=" 'Location  : '    + ${user.area.areaName}"></label>
-            </div>
-        </div>
-        <div class="span7">
-            <fieldset>
-                <legend th:text=" 'Book Posted By '    + ${user.firstName}">[Posted Book Info]</legend>
-                <table class="table striped">
-                    <thead>
-                    <tr th:if="${not #lists.isEmpty(user.postedBooks)}">
-                        <th class="text-left">Title</th>
-                        <th class="text-left">Author</th>
-                    </tr>
-                    <div th:if="${#lists.isEmpty(user.postedBooks)}">
-                        No Books in wished List
+                            </script>
+                        </div>
                     </div>
-                    </thead>
-                    <tbody>
-                    <tr th:each="wishedBook : ${user.postedBooks}">
-                        <td th:text="${wishedBook.title}">Title</td>
-                        <td th:text="${wishedBook.author}" class="right">author</td>
-                    </tr>
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
-            </fieldset>
-        </div>
-        <div class="span7">
-            <fieldset>
-                <legend th:text=" 'Book Wished By '    + ${user.firstName}">[WishedBook Info]</legend>
-                <table class="table striped">
-                    <thead>
-                    <tr th:if="${not #lists.isEmpty(user.wishedBooks)}">
-                        <th class="text-left">Title</th>
-                        <th class="text-left">Author</th>
-                    </tr>
-                    <div th:if="${#lists.isEmpty(user.wishedBooks)}" id="wishedBooksEmpty">
-                        No Books in wished List
+                    <div class="span7">
+                        <div class="padding10">
+                            <label th:text=" 'First Name : '    + ${user.firstName}"></label>
+                            <label th:text=" 'Last Name : ' + ${user.lastName}"></label>
+                            <label th:text=" 'Email     : '    + ${user.email}"></label>
+                            <label th:if="${user.phoneNumber !=null}"
+                                   th:text=" 'Contact Number  : +88'    + ${user.phoneNumber}"></label>
+                            <label th:text=" 'Location  : '    + ${user.area.areaName}"></label>
+                        </div>
                     </div>
-                    </thead>
-                    <tbody>
-                    <tr th:each="wishedBook : ${user.wishedBooks}">
-                        <td th:text="${wishedBook.title}">Title</td>
-                        <td th:text="${wishedBook.author}" class="right">author</td>
-                    </tr>
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
-            </fieldset>
+                    <div class="span7">
+                        <fieldset>
+                            <legend th:text=" 'Book Posted By '    + ${user.firstName}">[Posted Book Info]</legend>
+                            <table class="table striped">
+                                <thead>
+                                <tr th:if="${not #lists.isEmpty(user.postedBooks)}">
+                                    <th class="text-left">Title</th>
+                                    <th class="text-left">Author</th>
+                                </tr>
+                                <div th:if="${#lists.isEmpty(user.postedBooks)}">
+                                    No Books in wished List
+                                </div>
+                                </thead>
+                                <tbody>
+                                <tr th:each="wishedBook : ${user.postedBooks}">
+                                    <td th:text="${wishedBook.title}">Title</td>
+                                    <td th:text="${wishedBook.author}" class="right">author</td>
+                                </tr>
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div class="span7">
+                        <fieldset>
+                            <legend th:text=" 'Book Wished By '    + ${user.firstName}">[WishedBook Info]</legend>
+                            <table class="table striped">
+                                <thead>
+                                <tr th:if="${not #lists.isEmpty(user.wishedBooks)}">
+                                    <th class="text-left">Title</th>
+                                    <th class="text-left">Author</th>
+                                </tr>
+                                <div th:if="${#lists.isEmpty(user.wishedBooks)}" id="wishedBooksEmpty">
+                                    No Books in wished List
+                                </div>
+                                </thead>
+                                <tbody>
+                                <tr th:each="wishedBook : ${user.wishedBooks}">
+                                    <td th:text="${wishedBook.title}">Title</td>
+                                    <td th:text="${wishedBook.author}" class="right">author</td>
+                                </tr>
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </fieldset>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="span1">
+            </div>
+            <div class="span3">
+                <div class="top  bg-white border" style="width: 100% ;  float:right">
+                    <form class="padding10" th:action="@{/addbook}" th:method="get" th:object="${bookForm}">
+                        <fieldset>
+                            <legend>Want to Sell/Exchange Book ?</legend>
+                            <label>Title</label>
+
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type title" th:field="*{title}"/>
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <label>Author</label>
+
+                            <div class="input-control text" data-role="input-control">
+                                <input type="text" placeholder="type author" th:field="*{author}"/>
+                                <button class="btn-clear" tabindex="-1"></button>
+                            </div>
+                            <input type="submit" class="success" value="Post Ad"/>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="bottom fixed-bottom" style="width: 100% ; float:right;">
+                    <br/>
+                    <fieldset>
+                        <legend>Books you might like</legend>
+                        <div class="tile double live" data-role="live-tile" th:each="i : ${#numbers.sequence(1,4)}">
+
+                            <div class="tile-content image" th:each="preferredBook, row : ${preferredList}">
+                                <a th:href="@{/bookDetails/}+${preferredBook.id}">
+                                    <img th:src="@{/getbookimage/}+${row.index}"/>
+                                </a>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
         </div>
-    </fieldset>
-</div>
-<div class="span1">
-</div>
-<div class="span3">
-    <div class="top  bg-white border" style="width: 100% ;  float:right">
-        <form class="padding10" th:action="@{/addbook}" th:method="get" th:object="${bookForm}">
-            <fieldset>
-                <legend>Want to Sell/Exchange Book ?</legend>
-                <label>Title</label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="type title" th:field="*{title}"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-                <label>Author</label>
-                <div class="input-control text" data-role="input-control">
-                    <input type="text" placeholder="type author" th:field="*{author}"/>
-                    <button class="btn-clear" tabindex="-1"></button>
-                </div>
-                <input type="submit" class="success" value="Post Ad"/>
-            </fieldset>
-        </form>
+        <div th:include="fragments/footer :: footer"></div>
     </div>
-    <div class="bottom fixed-bottom" style="width: 100% ; float:right;">
-        <br/>
-        <fieldset>
-            <legend>Books you might like</legend>
-            <div class="tile double live" data-role="live-tile">
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">Book Title</span>
-                </div>
-            </div>
-            <div class="tile double live" data-role="live-tile" data-effect="easeInExpo">
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
-            <div class="tile double live" data-role="live-tile" data-effect="slideRight">
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
-                </div>
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
-            <div class="tile double live" data-role="live-tile">
-                <div class="tile-content image">
-                    <img src="images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="images/1.jpg"/>
-                </div>
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
-        </fieldset>
-    </div>
-</div>
-</div>
-<div th:include="fragments/footer :: footer"></div>
-</div>
 </div>
 <script></script>
 </body>

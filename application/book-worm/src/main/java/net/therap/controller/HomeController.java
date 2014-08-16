@@ -23,14 +23,19 @@ public class HomeController {
 
     @Autowired
     private BookService bookService;
+
     private List<Book> recentlyPostedBooks;
+    private List<Book> preferredBookList;
 
     @RequestMapping(value = {"/home", "/"}, method = RequestMethod.GET)
     public String getHomePage(ModelMap modelMap) {
         recentlyPostedBooks = bookService.getRecentlyPostedBooks();
+        preferredBookList = bookService.getUserPreferredBookList();
 
         modelMap.addAttribute("recentBookPosts", recentlyPostedBooks);
         modelMap.addAttribute("bookForm", new Book());
+        modelMap.addAttribute("preferredList", preferredBookList);
+
         return "home";
     }
 
@@ -38,5 +43,14 @@ public class HomeController {
     @ResponseBody
     public byte[] getBookPhoto(@PathVariable("index") int index) {
         return recentlyPostedBooks.get(index).getPhoto();
+    }
+
+    @RequestMapping("/getbookimage/{rowId}")
+    @ResponseBody
+    public byte[] getBookImage(@PathVariable("rowId") int rowId) {
+        if (!preferredBookList.isEmpty()) {
+            return preferredBookList.get(rowId).getPhoto();
+        }
+        return null;
     }
 }

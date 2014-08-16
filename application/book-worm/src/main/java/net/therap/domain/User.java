@@ -47,6 +47,7 @@ public class User implements Serializable {
     private String password;
 
     @Transient
+    @NotNull(message = "Password did not matched")
     private String retypedPassword;
 
     @Column(name = "phone_number")
@@ -192,6 +193,7 @@ public class User implements Serializable {
 
     public void setRetypedPassword(String retypedPassword) {
         this.retypedPassword = retypedPassword;
+        checkPassword();
     }
 
     public Set<Book> getPostedBooks() {
@@ -202,10 +204,13 @@ public class User implements Serializable {
         this.postedBooks = postedBooks;
     }
 
-//    @AssertTrue(message = "Password did not matched")
-//    public boolean isValid() {
-//        return this.password.equals(retypedPassword);
-//    }
+    private void checkPassword() {
+        if (this.password == null || this.retypedPassword == null) {
+            return;
+        } else if (!this.password.equals(retypedPassword)) {
+            this.retypedPassword = null;
+        }
+    }
 
     @Override
     public String toString() {

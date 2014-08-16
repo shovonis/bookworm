@@ -29,4 +29,6 @@ public interface BookService {
     List<Book> getRecentlyPostedBooks();
 
     List<Book> getBooksBySearchKey(String searchKey);
+
+    public List<Book> getUserPreferredBookList();
 }

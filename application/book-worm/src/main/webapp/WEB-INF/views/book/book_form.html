@@ -21,19 +21,19 @@
 
     <fieldset>
         <legend>
-            <h2>Add Book</h2>
+            <h2>Add Book( <p style="color: red;display: inline">*</p> = required field )</h2>
         </legend>
         <form th:action="@{/addbook}" th:method="post" th:object="${book}" enctype="multipart/form-data">
             <div class="span7">
                 <div class="padding10">
-                    <label style="float: left">Book Title</label>
+                    <label style="float: left">Book Title(<p style="color: red;display: inline">*</p>)</label>
 
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{title}" placeholder="Title" th:attr="value=*{title}"/>
                         <button class="btn-clear" tabindex="-1"></button>
                         <span class="fg-red" th:errors="*{title}">[error]</span>
                     </div>
-                    <label style="float: left">Author</label>
+                    <label style="float: left">Author(<p style="color: red;display: inline">*</p>)</label>
 
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{author}" placeholder="Author" th:attr="value=*{author}"/>
@@ -46,7 +46,7 @@
             <div class="span1"></div>
             <div id="photo">
                 <fieldset>
-                    <legend>Upload Photo</legend>
+                    <legend>Upload Photo(<p style="color: red;display: inline">*</p>)</legend>
                     <div class="span4">
                         <div class="tile">
                             <img src="/resources/images/book.jpeg" alt="upload image"/>
@@ -69,7 +69,7 @@
                         </select>
                     </div>
 
-                    <label style="float: left">Publisher</label>
+                    <label style="float: left">Publisher(<p style="color: red;display: inline">*</p>)</label>
 
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{publisher}" placeholder="Publisher"/>
@@ -78,7 +78,7 @@
                     </div>
 
 
-                    <label style="float: left">Year/Edition</label>
+                    <label style="float: left">Year/Edition(<p style="color: red;display: inline">*</p>)</label>
 
                     <div class="input-control text" data-role="input-control">
                         <input type="text" th:field="*{edition}" placeholder="year/edition"/>
@@ -130,12 +130,6 @@
 
                         <label style="float: left">Exchange List</label>
 
-                        <!--<div class="input-control text" data-role="input-control">-->
-                        <!--<input type="text" placeholder="Exchange list"/>-->
-                        <!--<button class="btn-clear" tabindex="-1"></button>-->
-                        <!--</div>-->
-
-
                         <table class="table hovered" id="exchangeBookListTable">
                             <thead>
                             <tr>
@@ -148,13 +142,12 @@
 
                             <tfoot></tfoot>
                         </table>
-                        <a class="button icon-plus-2 "  onclick="onExchangeBookClick()" > Add Exchange Book</a>
+                        <a class="button icon-plus-2 " onclick="onExchangeBookClick()"> Add Exchange Book</a>
                     </fieldset>
                 </div>
             </div>
             <div class="span12">
-                <button class="large warning icon-eye padding5"> Preview</button>
-                <button class="large success margin5 offset6" id = "postBookButton"> Post Book</button>
+                <button class="large success margin5 padding5" id="postBookButton"> Post Book</button>
             </div>
 
         </form>
