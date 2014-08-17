@@ -2,12 +2,10 @@
  * Created by rifatul.islam on 8/7/14.
  */
 
-
 window.onload=function(){
     index = 0;
 
     $.get( "notification/getNotificationCounter", function( data ) {
-        aler(data);
         document.getElementById("notificationCounter").innerHTML = "("+data+")";
     });
 };
