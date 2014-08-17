@@ -40,7 +40,7 @@ public class ProfileController {
     private User user;
     private List<Book> preferredBookList;
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @RequestMapping (value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         int userId = user.getUserId();
@@ -61,16 +61,14 @@ public class ProfileController {
         return modelAndView;
     }
 
-    @RequestMapping("/getProfilePicture")
+    @RequestMapping ("/getProfilePicture")
     @ResponseBody
     public byte[] getProfilePicture(HttpSession httpSession) {
-        if (user == null) {
-            user = (User) httpSession.getAttribute("user");
-        }
+        user = (User) httpSession.getAttribute("user");
         return user.getProfilePicture();
     }
 
-    @RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
+    @RequestMapping (value = "/getUser/{userId}", method = RequestMethod.GET)
     public ModelAndView getUser(@PathVariable int userId) {
         user = userService.getUserById(userId);
         preferredBookList = bookService.getUserPreferredBookList();
@@ -83,16 +81,16 @@ public class ProfileController {
     }
 
 
-    @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping (value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         userService.updateUserInfo(updatedUser, user.getUserId());
     }
 
-    @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
+    @RequestMapping (value = "/profile/updatePhoto", method = RequestMethod.POST)
     @ResponseBody
-    public void updateProfilePicture(@RequestParam(value = "fileToUpload") MultipartFile profilePicture,
+    public void updateProfilePicture(@RequestParam (value = "fileToUpload") MultipartFile profilePicture,
                                      HttpSession httpSession) {
         try {
 
@@ -107,9 +105,9 @@ public class ProfileController {
 
     }
 
-    @RequestMapping(value = "/reputation", method = RequestMethod.POST)
+    @RequestMapping (value = "/reputation", method = RequestMethod.POST)
     @ResponseBody
-    public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint) {
+    public void rateUserReputation(@RequestParam ("reputationPoint") int reputationPoint) {
 
         log.info("REPUTATION POINT {}", reputationPoint);
         log.info("User ID {}", user.getUserId());
