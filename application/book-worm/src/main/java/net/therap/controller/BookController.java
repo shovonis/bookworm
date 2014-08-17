@@ -74,10 +74,16 @@ public class BookController {
 
         ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
-        if (result.hasErrors()) {
+        System.out.println("book image name "+bookImage.getName()+"  "+bookImage.getContentType());
+
+        if (result.hasErrors() || !bookImage.getContentType().startsWith("image/")) {
             List<Category> categories = bookService.getAllCategory();
             modelAndView.addObject("categories", categories);
             modelAndView.setViewName("book/book_form");
+
+            if(!bookImage.getContentType().equals("image/")) {
+              modelAndView.addObject("invalidImage", "please upload valid image file");
+            }
             return modelAndView;
         }
 
