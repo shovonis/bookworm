@@ -9,6 +9,13 @@
 
         $(document).ready(function () {
 
+            $(window).keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+
             function showSelectedProfilePicture(input) {
                 if (input.files[0]) {
                     var reader = new FileReader();
@@ -51,10 +58,6 @@
 
 
                 });
-
-
-
-
 
             $("#updateSaveButton").click(function () {
 
