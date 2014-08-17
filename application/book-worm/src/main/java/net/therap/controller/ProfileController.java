@@ -40,7 +40,7 @@ public class ProfileController {
     private User user;
     private List<Book> preferredBookList;
 
-    @RequestMapping (value = "/profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView getProfilePage(ModelMap modelMap, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         int userId = user.getUserId();
@@ -61,21 +61,21 @@ public class ProfileController {
         return modelAndView;
     }
 
-    @RequestMapping ("/getThumbnail")
+    @RequestMapping("/getThumbnail")
     @ResponseBody
     public byte[] getThumbnail(HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         return user.getProfilePicture();
     }
 
-    @RequestMapping ("/getProfilePicture/{id}")
+    @RequestMapping("/getProfilePicture/{id}")
     @ResponseBody
     public byte[] getProfilePicture(HttpSession httpSession, @PathVariable("id") int userId) {
-        User currentUser =  userService.getUserById(userId);
+        User currentUser = userService.getUserById(userId);
         return currentUser.getProfilePicture();
     }
 
-    @RequestMapping (value = "/getUser/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
     public ModelAndView getUser(@PathVariable int userId) {
         user = userService.getUserById(userId);
         preferredBookList = bookService.getUserPreferredBookList();
@@ -88,16 +88,16 @@ public class ProfileController {
     }
 
 
-    @RequestMapping (value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/profile/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void updateProfileInfo(@RequestBody User updatedUser, HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         userService.updateUserInfo(updatedUser, user.getUserId());
     }
 
-    @RequestMapping (value = "/profile/updatePhoto", method = RequestMethod.POST)
+    @RequestMapping(value = "/profile/updatePhoto", method = RequestMethod.POST)
     @ResponseBody
-    public void updateProfilePicture(@RequestParam (value = "fileToUpload") MultipartFile profilePicture,
+    public void updateProfilePicture(@RequestParam(value = "fileToUpload") MultipartFile profilePicture,
                                      HttpSession httpSession) {
         try {
 
@@ -112,19 +112,24 @@ public class ProfileController {
 
     }
 
-    @RequestMapping (value = "/reputation", method = RequestMethod.POST)
+    @RequestMapping(value = "/reputation", method = RequestMethod.POST)
     @ResponseBody
-    public void rateUserReputation(@RequestParam ("reputationPoint") int reputationPoint) {
+    public void rateUserReputation(@RequestParam("reputationPoint") int reputationPoint,
+                                   @RequestParam("userId") int userId) {
 
+        User currentUser = userService.getUserById(userId);
         log.info("REPUTATION POINT {}", reputationPoint);
-        log.info("User ID {}", user.getUserId());
+        log.info("User ID {}", currentUser.getUserId());
 
-        int reviewCount = user.getReviewerCount();
-        double currentReputation = (reputationPoint + user.getReputationPoint() * reviewCount) / (reviewCount + 1);
 
-        user.setReputationPoint(currentReputation);
-        user.setReviewerCount(reviewCount + 1);
-        userService.updateUser(user);
+
+        int reviewCount = currentUser.getReviewerCount();
+        double currentReputation = (reputationPoint + currentUser.getReputationPoint() * reviewCount) / (reviewCount + 1);
+
+        currentUser.setReputationPoint(currentReputation);
+        currentUser.setReviewerCount(reviewCount + 1);
+//        currentUser.setRetypedPassword(currentUser.getPassword());
+        userService.updateUser(currentUser);
 
     }
 }

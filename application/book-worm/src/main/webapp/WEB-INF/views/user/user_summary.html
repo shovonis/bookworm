@@ -33,10 +33,12 @@
                             <form th:action="@{/reputation}" th:method="post" id="rating_form">
                                 <input id="reputation" type="hidden" th:value="${user.reputationPoint}"
                                        th:field="${user.reputationPoint}"/>
+                                <input id="userId" type="hidden" th:value="${user.userId}"/>
                             </form>
                             <script>
                                 $(function () {
                                     repu = $("#reputation").val();
+                                    id = $("#userId").val();
                                     $("#rating_2").rating({
                                         static: false,
                                         score: repu,
@@ -48,7 +50,7 @@
                                             var reputation = $("#reputation").val();
                                             $.ajax({
                                                 url: $("#rating_form").attr("action"),
-                                                data: {"reputationPoint": reputation},
+                                                data: {"reputationPoint": reputation, "userId":id},
                                                 type: "POST",
                                                 dataType: 'json',
 
