@@ -26,9 +26,12 @@ public interface BookService {
 
     void removeWishedBookById(int wishedBookId);
 
-    List<Book> getRecentlyPostedBooks();
+    public List<Book> getRecentlyPostedBooks();
 
-    List<Book> getBooksBySearchKey(String searchKey);
+    public List<Book> getBooksBySearchKey(String searchKey);
+
+    public List<Book> getBooksByAuthorOrTitle(String title, String author);
 
     public List<Book> getUserPreferredBookList();
+
 }

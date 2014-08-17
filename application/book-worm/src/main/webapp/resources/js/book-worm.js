@@ -5,7 +5,7 @@
 window.onload=function(){
     index = 0;
 
-    $.get( "/getNotificationCounter", function( data ) {
+    $.get( "notification/getNotificationCounter", function( data ) {
         document.getElementById("notificationCounter").innerHTML = "("+data+")";
     });
 };

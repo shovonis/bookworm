@@ -63,7 +63,7 @@ public class NotificationController {
                 user.getUserId(), receiverId, bookId, type, isSeen);
     }
 
-    @RequestMapping(value = "/getNotificationCounter", method = RequestMethod.GET)
+    @RequestMapping(value = "/notification/getNotificationCounter", method = RequestMethod.GET)
     @ResponseBody
     public long getNotificationCounter(HttpSession session) {
         User user = (User) session.getAttribute("user");
