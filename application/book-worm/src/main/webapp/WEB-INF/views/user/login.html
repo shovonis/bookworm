@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <div th:include="fragments/header :: header"></div>
     <title>::.Login</title>
@@ -11,13 +11,15 @@
     <div class="grid">
         <div class="row">
             <div class="span4">
-                <form th:action="@{/login}" th:method = "post" th:object="${userForm}">
+                <form th:action="@{/login}" th:method="post" th:object="${userForm}">
                     <fieldset>
-                        <legend>Login</legend>
-                        <p class="fg-red" th:if="${loginFailedMsg} != null" th:text = "${loginFailedMsg}"></p>
+                        <legend>Login<p style="display: inline;color: green" th:if="${registrationSuccess !=null}"
+                                        th:text="${registrationSuccess}">[SUCCESS]</p></legend>
+
+                        <p class="fg-red" th:if="${loginFailedMsg} != null" th:text="${loginFailedMsg}"></p>
                         <lable> Email</lable>
                         <div class="input-control text" data-role="input-control">
-                            <input type="text" th:field="*{email}" placeholder="user email" />
+                            <input type="text" th:field="*{email}" placeholder="user email"/>
                             <button class="btn-clear" tabindex="-1"></button>
                         </div>
                         <lable>password</lable>

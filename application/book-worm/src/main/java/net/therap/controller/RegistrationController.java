@@ -21,6 +21,8 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
+    private static final String REG_SUCCESS_MSG = "Congratulation! Your Registration is Complete. Please Login.";
+
     @Autowired
     private UserService userService;
 
@@ -30,10 +32,12 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+    public ModelAndView registerUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+        ModelAndView modelAndView = new ModelAndView("redirect:login");
 
         if (result.hasErrors()) {
-            return "user/registration";
+            modelAndView.setViewName("user/registration");
+            return modelAndView;
         }
 
         Area area = new Area();
@@ -41,6 +45,7 @@ public class RegistrationController {
         user.setArea(area);
 
         userService.addUser(user);
-        return "redirect:login";
+        modelAndView.addObject("registrationSuccess", REG_SUCCESS_MSG);
+        return modelAndView;
     }
 }
