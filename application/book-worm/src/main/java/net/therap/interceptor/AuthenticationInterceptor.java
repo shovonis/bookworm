@@ -30,7 +30,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         if ((session == null || session.getAttribute("user") == null) &&
                 (requestedUri.contains("profile") || requestedUri.contains("logout") ||
                         requestedUri.contains("notification") || requestedUri.contains("addbook") ||
-                        requestedUri.contains("reputation") || requestedUri.contains("getNotificationCounter"))) {
+                        requestedUri.contains("reputation"))) {
 
             response.sendRedirect("/login");
             log.info("User attempts to login without authorization {} ", new Date());

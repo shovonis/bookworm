@@ -11,4 +11,14 @@
            diskPersistent="false"
            diskExpiryThreadIntervalSeconds="1"
            memoryStoreEvictionPolicy="LRU"/>
+
+    <cache name="PreferredBook"
+           timeToLiveSeconds="60"
+           maxElementsInMemory="100"
+           eternal="false"
+           overflowToDisk="false"
+           maxElementsOnDisk="10000000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="1"
+           memoryStoreEvictionPolicy="LRU"/>
 </ehcache>

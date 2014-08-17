@@ -34,20 +34,24 @@ public class BookController {
     private Book book;
     private List<Book> matchedBooks;
     private List<Book> similarBooksByTitleOrAuthor;
+    private List<Book> preferredBookList;
 
     @RequestMapping (value = "/bookDetails/{bookId}", method = RequestMethod.GET)
     public ModelAndView showBookDetails(@PathVariable int bookId) {
         book = bookService.getBookById(bookId);
+        preferredBookList = bookService.getUserPreferredBookList();
+
         ModelAndView modelAndView = new ModelAndView("book/book_details");
         modelAndView.addObject("bookDetails", book);
         modelAndView.addObject("bookForm", new Book());
+        modelAndView.addObject("preferredList", preferredBookList);
 
         return modelAndView;
     }
 
     @RequestMapping ("/getBookImage")
     @ResponseBody
-    public byte[] getProfilePicture() {
+    public byte[] getBookImage() {
         return book.getPhoto();
     }
 
@@ -65,11 +69,16 @@ public class BookController {
     }
 
     @RequestMapping (value = "/addbook", method = RequestMethod.POST)
-    public String addBook(@Valid @ModelAttribute ("book") Book book, BindingResult result,
-                          @RequestParam (value = "bookImage") MultipartFile bookImage, HttpSession session) {
+    public ModelAndView addBook(@Valid @ModelAttribute ("book") Book book, BindingResult result,
+                                @RequestParam (value = "bookImage") MultipartFile bookImage, HttpSession session) {
+
+        ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
         if (result.hasErrors()) {
-            return "book/book_form";
+            List<Category> categories = bookService.getAllCategory();
+            modelAndView.addObject("categories", categories);
+            modelAndView.setViewName("book/book_form");
+            return modelAndView;
         }
 
         try {
@@ -88,7 +97,7 @@ public class BookController {
             e.printStackTrace();
         }
         bookService.addBook(book);
-        return "redirect:/home";
+        return modelAndView;
     }
 
     @RequestMapping (value = "/profile/addWishedBook", method = RequestMethod.POST,
@@ -123,8 +132,9 @@ public class BookController {
         matchedBooks = bookService.getBooksBySearchKey(searchKey);
 
         modelAndView.addObject("bookForm", new Book());
-        modelAndView.setViewName("book/book_search");
         modelAndView.addObject("matchedBooks", matchedBooks);
+        modelAndView.setViewName("book/book_search");
+
         return modelAndView;
     }
 
@@ -137,7 +147,7 @@ public class BookController {
     @RequestMapping (value = "/addBook/getBookPhoto/{index}", method = RequestMethod.GET)
     @ResponseBody
     public byte[] getSimilarBookPhoto(@PathVariable ("index") int index) {
-        System.out.println("request for image "+index+"   "+similarBooksByTitleOrAuthor.get(index).getPhoto().length);
+        System.out.println("request for image " + index + "   " + similarBooksByTitleOrAuthor.get(index).getPhoto().length);
         return similarBooksByTitleOrAuthor.get(index).getPhoto();
     }
 

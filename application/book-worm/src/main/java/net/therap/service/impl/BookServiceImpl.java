@@ -1,6 +1,7 @@
 package net.therap.service.impl;
 
 import net.therap.dao.BookDao;
+import net.therap.dao.UserPreferenceDao;
 import net.therap.domain.Book;
 import net.therap.domain.Category;
 import net.therap.domain.WishedBook;
@@ -20,8 +21,12 @@ import java.util.List;
 @Service
 @Transactional("transactionManager")
 public class BookServiceImpl implements BookService {
+
     @Autowired
     private BookDao bookDao;
+
+    @Autowired
+    private UserPreferenceDao userPreferenceDao;
 
     @Override
     public void addBook(Book book) {
@@ -45,18 +50,19 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void removeWishedBookById(int wishedBookId) {
-       bookDao.removeWishedBookById(wishedBookId);
+        bookDao.removeWishedBookById(wishedBookId);
     }
 
     @Override
     public List<Book> getRecentlyPostedBooks() {
-       return bookDao.getRecentlyPostedBooks();
+        return bookDao.getRecentlyPostedBooks();
     }
 
     @Override
     public List<Book> getBooksBySearchKey(String searchKey) {
-       return bookDao.getBooksBySearchKey(searchKey);
+        return bookDao.getBooksBySearchKey(searchKey);
     }
+
 
     @Override
     public List<Book> getBooksByAuthorOrTitle(String title, String author) {
@@ -65,6 +71,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public int addWishedBookAndGetId(WishedBook wishedBook) {
-       return bookDao.addWishedBookAndGetId(wishedBook);
+        return bookDao.addWishedBookAndGetId(wishedBook);
+    }
+
+    @Override
+    public List<Book> getUserPreferredBookList() {
+        return userPreferenceDao.getUserPreferredBookList();
     }
 }
