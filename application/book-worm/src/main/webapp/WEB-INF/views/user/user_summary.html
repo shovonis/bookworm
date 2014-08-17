@@ -17,7 +17,7 @@
                         <h2>User Summary</h2>
                     </legend>
                     <div class=" span4 double-vertical image-container shadow ">
-                        <img style="height: 100%" th:src="@{/getProfilePicture}"/>
+                        <img style="height: 100%" th:src="@{/getProfilePicture/}+${user.userId}"/>
                     </div>
                     <div class="span7" id="bookSummary">
                         <div class="padding10">

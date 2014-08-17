@@ -72,7 +72,7 @@
                     <span class="element-divider place-right"></span>
                     <div class="element image-button image-left place-right" th:if="${session.isLoggedIn} != null">
                         <a th:href="@{/profile}">
-                        <img th:src="@{/getProfilePicture}" width="20px" height="20px"/>
+                        <img th:src="@{/getThumbnail}" width="20px" height="20px"/>
                         </a>
                         <a th:text="${session.user.firstName}" th:href="@{/profile}"> </a>
 

@@ -61,11 +61,18 @@ public class ProfileController {
         return modelAndView;
     }
 
-    @RequestMapping ("/getProfilePicture")
+    @RequestMapping ("/getThumbnail")
     @ResponseBody
-    public byte[] getProfilePicture(HttpSession httpSession) {
+    public byte[] getThumbnail(HttpSession httpSession) {
         user = (User) httpSession.getAttribute("user");
         return user.getProfilePicture();
+    }
+
+    @RequestMapping ("/getProfilePicture/{id}")
+    @ResponseBody
+    public byte[] getProfilePicture(HttpSession httpSession, @PathVariable("id") int userId) {
+        User currentUser =  userService.getUserById(userId);
+        return currentUser.getProfilePicture();
     }
 
     @RequestMapping (value = "/getUser/{userId}", method = RequestMethod.GET)
