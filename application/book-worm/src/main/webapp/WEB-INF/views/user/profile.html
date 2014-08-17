@@ -374,7 +374,7 @@
                             <p id ="profilePictureUpdateNotice" class = "fg-lime" style="display: none">  <strong> PROFILE PICTURE UPDATED </strong></p>
                             <div class="span2">
                                 <form th:action="@{/profile/updatePhoto}" method="POST" id="updateProfilePictureForm" >
-                                <img width="300px" id="profilePicture" height="300px" th:src="@{/getProfilePicture}"/>
+                                <img width="300px" id="profilePicture" height="300px" th:src="@{/getThumbnail}"/>
                                 <input type="file" name="profilePicture" id="profilePictureInputButton" style="display:block" />
                                 <input type="button" class="button success" id="updatePhotoButton" value="update photo" />
                                 </form>
