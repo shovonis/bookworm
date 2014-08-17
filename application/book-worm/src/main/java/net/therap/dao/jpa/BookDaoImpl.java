@@ -33,6 +33,7 @@ public class BookDaoImpl implements BookDao {
         entityManager.flush();
     }
 
+    @Cacheable(value = "Book",key = "#bookId")
     @Override
     public Book getBookById(int bookId) {
         return entityManager.find(Book.class, bookId);
