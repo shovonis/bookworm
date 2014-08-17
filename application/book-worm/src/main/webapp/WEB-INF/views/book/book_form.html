@@ -47,6 +47,7 @@
             <div id="photo">
                 <fieldset>
                     <legend>Upload Photo(<p style="color: red;display: inline">*</p>)</legend>
+                    <h5 class="fg-red" th:if="${invalidImage != null}" th:text = "${invalidImage}"> </h5>
                     <div class="span4">
                         <div class="tile">
                             <img src="/resources/images/book.jpeg" alt="upload image"/>
@@ -54,6 +55,7 @@
                         <input type="file" class="meduim-size" name="bookImage" value="Add Image"/>
                     </div>
                 </fieldset>
+
             </div>
 
             <div class="span7">
