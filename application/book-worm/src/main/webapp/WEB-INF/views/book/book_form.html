@@ -170,142 +170,19 @@
         <br/>
         <fieldset>
             <legend>Similar Books</legend>
-            <div class="tile double live" data-role="live-tile">
-                <div class="tile-content image">
-                    <img src="/resources/images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/3.jpg"/>
-                </div>
 
-                <div class="tile-content image">
-                    <img src="/resources/images/5.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">Book Title</span>
+            <div class=" tile image-container shadow" th:each="similarBook, row : ${similarBooks}" >
+                <a th:href="@{/bookDetails/}+${similarBook.id}">
+                    <img th:src="@{/addBook/getBookPhoto/}+${row.index}"  style="height:inherit; width:inherit "/>
+                </a>
+                <div class="overlay-fluid fg-white" >
+                    <p th:text="${similarBook.title}" class="fg-white" ></p>
+                    <p th:text = "${similarBook.author}" class="fg-white" > </p>
+                    <p th:text = "${similarBook.postDateTime}" class="fg-white" > </p>
                 </div>
             </div>
 
 
-            <div class="tile double live" data-role="live-tile" data-effect="easeInExpo">
-                <div class="tile-content image">
-                    <img src="/resources/images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/5.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
-
-            <div class="tile double live" data-role="live-tile" data-effect="slideRight">
-                <div class="tile-content image">
-                    <img src="/resources/images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/1.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/4.jpg"/>
-                </div>
-
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
-            <div class="tile double live" data-role="live-tile">
-
-                <div class="tile-content image">
-                    <img src="/resources/images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/1.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
-
-            <div class="tile double live" data-role="live-tile">
-
-                <div class="tile-content image">
-                    <img src="/resources/images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/1.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
-
-            <div class="tile double live" data-role="live-tile">
-
-                <div class="tile-content image">
-                    <img src="/resources/images/2.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/3.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/4.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/5.jpg"/>
-                </div>
-                <div class="tile-content image">
-                    <img src="/resources/images/1.jpg"/>
-                </div>
-
-                <div class="tile-status bg-dark opacity">
-                    <span class="label">effect: slideLeft</span>
-                </div>
-            </div>
         </fieldset>
     </div>
 

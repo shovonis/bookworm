@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * @author rifatul.islam
+ * @author shakhawat.hossain
  * @since 8/7/14.
  */
 
@@ -82,10 +83,15 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> getBooksBySearchKey(String searchKey) {
+        return getBooksByAuthorOrTitle(searchKey, searchKey);
+    }
+
+    @Override
+    public List<Book> getBooksByAuthorOrTitle(String title, String author) {
         Query query = entityManager.createQuery("SELECT book FROM Book book WHERE book.isActive = true " +
                 "AND ( book.title LIKE :title OR book.author LIKE :author )");
-        query.setParameter("title",  "%" + searchKey + "%");
-        query.setParameter("author", "%" + searchKey + "%");
+        query.setParameter("title",  "%" + author + "%");
+        query.setParameter("author", "%" + title + "%");
 
         return query.getResultList();
     }
