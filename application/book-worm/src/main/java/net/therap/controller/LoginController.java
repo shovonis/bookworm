@@ -5,10 +5,7 @@ import net.therap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,8 +22,10 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    public String getLoginForm(ModelMap modelMap) {
+    public String getLoginForm(ModelMap modelMap,
+                               @RequestParam(value = "registrationSuccess", required = false) String message) {
         modelMap.addAttribute("userForm", new User());
+        modelMap.addAttribute("registrationSuccess", message);
         return "user/login";
     }
 

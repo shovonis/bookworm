@@ -25,6 +25,10 @@
 
 
                 $("#updatePhotoButton").click(function(){
+                    var fileName = $("#profilePictureInputButton").val();
+                    if(!fileName) {
+                        return;
+                    }
 
                     var fd = new FormData();
                     fd.append("fileToUpload", $("#profilePictureInputButton")[0].files[0]);

@@ -13,8 +13,9 @@
             <div class="span4">
                 <form th:action="@{/login}" th:method="post" th:object="${userForm}">
                     <fieldset>
-                        <legend>Login<p style="display: inline;color: green" th:if="${registrationSuccess !=null}"
-                                        th:text="${registrationSuccess}">[SUCCESS]</p></legend>
+                        <legend>Login <p style="display: inline;color: green" th:if="${registrationSuccess !=null}"
+                                         th:text="${registrationSuccess}">[SUCCESS]</p>
+                        </legend>
 
                         <p class="fg-red" th:if="${loginFailedMsg} != null" th:text="${loginFailedMsg}"></p>
                         <lable> Email</lable>
