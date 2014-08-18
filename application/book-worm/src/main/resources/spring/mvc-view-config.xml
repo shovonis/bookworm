@@ -16,8 +16,8 @@
     <mvc:resources location="/resources/css/" mapping="/css/**"/>
     <mvc:resources location="/resources/js/" mapping="/js/**"/>
 
-    <mvc:view-controller path="/resourceNotFound" view-name="resource_not_found" />
-    <mvc:view-controller path="/uncaughtException" view-name="uncaught_exception" />
+    <mvc:view-controller path="/resourceNotFound" view-name="error/resource_not_found" />
+    <mvc:view-controller path="/uncaughtException" view-name="error/uncaught_exception" />
 
 
     <bean id="templateResolver"
