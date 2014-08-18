@@ -18,32 +18,34 @@
 
             <div class="span8">
 
-                    <table>
-
-                    <tr th:each="matchedBook, row: ${matchedBooks}" >
+                <table>
+                    <tbody class="striped">
+                    <tr th:each="matchedBook, row: ${matchedBooks}">
                         <td>
                             <img width="50px" height="50px" th:src="@{/search/getPhoto/}+${row.index}"/>
                         </td>
 
                         <td width="70%">
-                          <strong> Title :</strong> <a th:text="${matchedBook.title}" class="fg-black">Title</a>     <br/>
-                          <strong> Author :</strong> <a th:text="${matchedBook.author}" class="fg-black">author </a>    <br/>
-                            <strong> Edition : </strong> <a  th:text="${matchedBook.edition}" class="fg-black">edition</a>     <br/>
-                            <a style="float:left" th:href="@{/bookDetails/}+${matchedBook.id}" class="button small success">details</a>
+                            <strong> Title :</strong> <a th:text="${matchedBook.title}" class="fg-black">Title</a> <br/>
+                            <strong> Author :</strong> <a th:text="${matchedBook.author}" class="fg-black">author </a>
+                            <br/>
+                            <strong> Edition : </strong> <a th:text="${matchedBook.edition}"
+                                                            class="fg-black">edition</a> <br/>
+                            <a style="float:left" th:href="@{/bookDetails/}+${matchedBook.id}"
+                               class="button mini success">details</a>
 
                         </td>
 
                         <td>
                             <p th:text="${matchedBook.postDateTime}">date</p>
-                            Posted By <a th:href="@{/getUser/}+${matchedBook.user.userId}" th:text="${matchedBook.user.firstName}"> </a> <br/>
+                            Posted By <a th:href="@{/getUser/}+${matchedBook.user.userId}"
+                                         th:text="${matchedBook.user.firstName}"> </a> <br/>
 
                         </td>
 
                     </tr>
-
+                    </tbody>
                 </table>
-
-
 
 
             </div>
