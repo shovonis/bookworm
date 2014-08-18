@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Add Book</title>
 
@@ -13,189 +13,191 @@
 <div th:include="fragments/navigation :: navigation" class="bg-dark"></div>
 
 <div class="container" style="margin: 50px">
-<div class="grid fluid">
-<div class="row">
-<div class="span7">
-
-    <h4 class="fg-green" th:if="${posted != null}"> BOOK POST SUCCESSFUL </h4>
-
-    <fieldset>
-        <legend>
-            <h2>Add Book( <p style="color: red;display: inline">*</p> = required field )</h2>
-        </legend>
-        <form th:action="@{/addbook}" th:method="post" th:object="${book}" enctype="multipart/form-data">
+    <div class="grid fluid">
+        <div class="row">
             <div class="span7">
-                <div class="padding10">
-                    <label style="float: left">Book Title(<p style="color: red;display: inline">*</p>)</label>
 
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" th:field="*{title}" placeholder="Title" th:attr="value=*{title}"/>
-                        <button class="btn-clear" tabindex="-1"></button>
-                        <span class="fg-red" th:errors="*{title}">[error]</span>
-                    </div>
-                    <label style="float: left">Author(<p style="color: red;display: inline">*</p>)</label>
+                <h4 class="fg-green" th:if="${posted != null}"> BOOK POST SUCCESSFUL </h4>
 
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" th:field="*{author}" placeholder="Author" th:attr="value=*{author}"/>
-                        <button class="btn-clear" tabindex="-1"></button>
-                        <span class="fg-red" th:errors="*{author}">[error]</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="span1"></div>
-            <div id="photo">
                 <fieldset>
-                    <legend>Upload Photo(<p style="color: red;display: inline">*</p>)</legend>
-                    <h5 class="fg-red" th:if="${invalidImage != null}" th:text = "${invalidImage}"> </h5>
-                    <div class="span4">
-                            <img src="/resources/images/book.jpeg" alt="upload image"/>
-                        <input type="file" class="meduim-size" name="bookImage" value="Add Image"/>
-                    </div>
-                </fieldset>
+                    <legend>
+                        <h2>Add Book( <p style="color: red;display: inline">*</p> = required field )</h2>
+                    </legend>
+                    <form th:action="@{/addbook}" th:method="post" th:object="${book}" enctype="multipart/form-data">
+                        <div class="span7">
+                            <div class="padding10">
+                                <label style="float: left">Book Title(<p style="color: red;display: inline">*</p>
+                                    )</label>
 
-            </div>
+                                <div class="input-control text" data-role="input-control">
+                                    <input type="text" th:field="*{title}" placeholder="Title"
+                                           th:attr="value=*{title}"/>
+                                    <button class="btn-clear" tabindex="-1"></button>
+                                    <span class="fg-red" th:errors="*{title}">[error]</span>
+                                </div>
+                                <label style="float: left">Author(<p style="color: red;display: inline">*</p>)</label>
 
-            <div class="span7">
-                <div class="padding10">
-                    <label style="float: left">Category</label>
-
-                    <div class="input-control select">
-                        <select th:field="*{categoryId}">
-                            <option th:each="category : ${categories}"
-                                    th:value="${category.id}"
-                                    th:text="${category.name}">Category
-                            </option>
-                        </select>
-                    </div>
-
-                    <label style="float: left">Publisher(<p style="color: red;display: inline">*</p>)</label>
-
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" th:field="*{publisher}" placeholder="Publisher"/>
-                        <button class="btn-clear" tabindex="-1"></button>
-                        <span class="fg-red" th:errors="*{publisher}">[error]</span>
-                    </div>
-
-
-                    <label style="float: left">Year/Edition(<p style="color: red;display: inline">*</p>)</label>
-
-                    <div class="input-control text" data-role="input-control">
-                        <input type="text" th:field="*{edition}" placeholder="year/edition"/>
-                        <button class="btn-clear" tabindex="-1"></button>
-                        <span class="fg-red" th:errors="*{edition}">[error]</span>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="spn4"></div>-->
-            <div id="quality_description" class="span3 notice offset8" style="position: relative ; top: 100px">
-                Readable
-            </div>
-
-            <div class="span7">
-                <div class="padding10">
-
-                    <label style="float: left">Book Quality</label>
-                    <br/>
-
-                    <div class="stepper rounded" data-steps="4"
-                         data-role="stepper" id="demo_stepper_methods">
-                        <input id="stepper_value" type="hidden" value="0"
-                               th:field="*{quality}"/>
-                    </div>
-
-                    <div class="actions">
-                        <a class="button" onclick="onclickOfPrior('#demo_stepper_methods')">Prior</a>
-                        <a class="button" onclick="onclickOfNext('#demo_stepper_methods')">Next</a>
-                    </div>
-                    <br/>
-                    <label style="float: left">Book Details</label>
-
-                    <div class="input-control textarea">
-                        <textarea th:field="*{details}">Books details</textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="span7  margin10">
-                <div class="padding10">
-                    <fieldset>
-                        <legend><h2>Exchange Option</h2></legend>
-                        <label style="float: left">Price</label>
-
-                        <div class="input-control text" data-role="input-control">
-                            <input type="text" th:field="*{price}" placeholder="Price"/>
-                            <button class="btn-clear" tabindex="-1"></button>
+                                <div class="input-control text" data-role="input-control">
+                                    <input type="text" th:field="*{author}" placeholder="Author"
+                                           th:attr="value=*{author}"/>
+                                    <button class="btn-clear" tabindex="-1"></button>
+                                    <span class="fg-red" th:errors="*{author}">[error]</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <label style="float: left">Exchange List</label>
 
-                        <table class="table hovered" id="exchangeBookListTable">
-                            <thead>
-                            <tr>
-                                <th class="text-left">Title</th>
-                                <th class="text-left">Author</th>
-                            </tr>
-                            </thead>
+                        <div id="photo" style="float: right" class="span5">
+                            <fieldset>
+                                <legend>Upload Photo(<p style="color: red;display: inline">*</p>)</legend>
+                                <h5 class="fg-red" th:if="${invalidImage != null}" th:text="${invalidImage}"></h5>
 
-                            <tbody></tbody>
+                                <div class="span4">
+                                    <div>
+                                        <img src="/resources/images/book.jpeg" alt="upload image"/>
+                                        <input type="file" class="meduim-size" name="bookImage" value="Add Image"/>
+                                    </div>
+                                </div>
+                            </fieldset>
 
-                            <tfoot></tfoot>
-                        </table>
-                        <a class="button icon-plus-2 " onclick="onExchangeBookClick()"> Add Exchange Book</a>
+                        </div>
+
+                        <div class="span7">
+                            <div class="padding10">
+                                <label style="float: left">Category</label>
+
+                                <div class="input-control select">
+                                    <select th:field="*{categoryId}">
+                                        <option th:each="category : ${categories}"
+                                                th:value="${category.id}"
+                                                th:text="${category.name}">Category
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <label style="float: left">Publisher(<p style="color: red;display: inline">*</p>
+                                    )</label>
+
+                                <div class="input-control text" data-role="input-control">
+                                    <input type="text" th:field="*{publisher}" placeholder="Publisher"/>
+                                    <button class="btn-clear" tabindex="-1"></button>
+                                    <span class="fg-red" th:errors="*{publisher}">[error]</span>
+                                </div>
+
+
+                                <label style="float: left">Year/Edition(<p style="color: red;display: inline">*</p>
+                                    )</label>
+
+                                <div class="input-control text" data-role="input-control">
+                                    <input type="text" th:field="*{edition}" placeholder="year/edition"/>
+                                    <button class="btn-clear" tabindex="-1"></button>
+                                    <span class="fg-red" th:errors="*{edition}">[error]</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="spn4"></div>-->
+                        <div id="quality_description" class="span3 notice offset8"
+                             style="position: relative ; top: 100px">
+                            Readable
+                        </div>
+
+                        <div class="span7">
+                            <div class="padding10">
+
+                                <label style="float: left">Book Quality</label>
+                                <br/>
+
+                                <div class="stepper rounded" data-steps="4"
+                                     data-role="stepper" id="demo_stepper_methods">
+                                    <input id="stepper_value" type="hidden" value="0"
+                                           th:field="*{quality}"/>
+                                </div>
+
+                                <div class="actions">
+                                    <a class="button" onclick="onclickOfPrior('#demo_stepper_methods')">Prior</a>
+                                    <a class="button" onclick="onclickOfNext('#demo_stepper_methods')">Next</a>
+                                </div>
+                                <br/>
+                                <label style="float: left">Book Details</label>
+
+                                <div class="input-control textarea">
+                                    <textarea th:field="*{details}">Books details</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span7  margin10">
+                            <div class="padding10">
+                                <fieldset>
+                                    <legend><h2>Exchange Option</h2></legend>
+                                    <label style="float: left">Price</label>
+
+                                    <div class="input-control text" data-role="input-control">
+                                        <input type="text" th:field="*{price}" placeholder="Price"/>
+                                        <button class="btn-clear" tabindex="-1"></button>
+                                    </div>
+
+                                    <label style="float: left">Exchange List</label>
+
+                                    <table class="table hovered" id="exchangeBookListTable">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-left">Title</th>
+                                            <th class="text-left">Author</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody></tbody>
+
+                                        <tfoot></tfoot>
+                                    </table>
+                                    <a class="button icon-plus-2 " onclick="onExchangeBookClick()"> Add Exchange
+                                        Book</a>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="span12">
+                            <button class="large success margin5 padding5" id="postBookButton"> Post Book</button>
+                        </div>
+
+                    </form>
+                </fieldset>
+            </div>
+
+            <div class="span1">
+
+            </div>
+
+            <div class="span3">
+                <div class="bottom" style="width: 100% ; float:right;">
+                    <br/>
+                    <fieldset>
+                        <legend>Similar Books</legend>
+
+                        <div class=" tile image-container shadow" th:each="similarBook, row : ${similarBooks}">
+                            <a th:href="@{/bookDetails/}+${similarBook.id}">
+                                <img th:src="@{/addBook/getBookPhoto/}+${row.index}"
+                                     style="height:inherit; width:inherit "/>
+                            </a>
+
+                            <div class="overlay-fluid fg-white">
+                                <p th:text="${similarBook.title}" class="fg-white"></p>
+
+                                <p th:text="${similarBook.author}" class="fg-white"></p>
+
+                                <p th:text="${similarBook.postDateTime}" class="fg-white"></p>
+                            </div>
+                        </div>
+
+
                     </fieldset>
                 </div>
+
             </div>
-            <div class="span12">
-                <button class="large success margin5 padding5" id="postBookButton"> Post Book</button>
-            </div>
-
-        </form>
-    </fieldset>
-</div>
-
-<div class="span1">
-
-</div>
-
-<div class="span3">
-    <div class="bottom" style="width: 100% ; float:right;">
-        <br/>
-        <fieldset>
-            <legend>Similar Books</legend>
-
-            <div class=" tile image-container shadow" th:each="similarBook, row : ${similarBooks}" >
-                <a th:href="@{/bookDetails/}+${similarBook.id}">
-                    <img th:src="@{/addBook/getBookPhoto/}+${row.index}"  style="height:inherit; width:inherit "/>
-                </a>
-                <div class="overlay-fluid fg-white" >
-                    <p th:text="${similarBook.title}" class="fg-white" ></p>
-                    <p th:text = "${similarBook.author}" class="fg-white" > </p>
-                    <p th:text = "${similarBook.postDateTime}" class="fg-white" > </p>
-                </div>
-            </div>
-
-
-        </fieldset>
+        </div>
     </div>
 
-</div>
-</div>
-</div>
-<!--<div class="span12 border-top">-->
-<!--<footer style="margin-top: 30px" class="page-footer">-->
-<!--<div class="bottom-menu-wrapper">-->
-<!--<ul class="horizontal-menu compact">-->
-<!--<li>&copy; 2014 M. Shakhwat Hossain and Rifatul Islam</li>-->
-<!--<li><a href="#">Privacy</a></li>-->
-<!--<li><a href="#">Legal</a></li>-->
-<!--<li><a href="#">Contact Us</a></li>-->
-<!--<li><a href="#">Feedback</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</footer>-->
-<!--</div>-->
-<div th:include="fragments/footer :: footer"></div>
+    <div th:include="fragments/footer :: footer"></div>
 
 </div>
 </body>
