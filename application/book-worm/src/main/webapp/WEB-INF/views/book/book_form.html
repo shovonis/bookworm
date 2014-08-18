@@ -43,13 +43,13 @@
                 </div>
             </div>
 
-            <div class="span1"></div>
-            <div id="photo">
+
+            <div id="photo" style="float: right" class="span5">
                 <fieldset>
                     <legend>Upload Photo(<p style="color: red;display: inline">*</p>)</legend>
                     <h5 class="fg-red" th:if="${invalidImage != null}" th:text = "${invalidImage}"> </h5>
                     <div class="span4">
-                        <div class="tile">
+                        <div>
                             <img src="/resources/images/book.jpeg" alt="upload image"/>
                         </div>
                         <input type="file" class="meduim-size" name="bookImage" value="Add Image"/>
@@ -184,19 +184,7 @@
 </div>
 </div>
 </div>
-<!--<div class="span12 border-top">-->
-<!--<footer style="margin-top: 30px" class="page-footer">-->
-<!--<div class="bottom-menu-wrapper">-->
-<!--<ul class="horizontal-menu compact">-->
-<!--<li>&copy; 2014 M. Shakhwat Hossain and Rifatul Islam</li>-->
-<!--<li><a href="#">Privacy</a></li>-->
-<!--<li><a href="#">Legal</a></li>-->
-<!--<li><a href="#">Contact Us</a></li>-->
-<!--<li><a href="#">Feedback</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</footer>-->
-<!--</div>-->
+
 <div th:include="fragments/footer :: footer"></div>
 
 </div>
